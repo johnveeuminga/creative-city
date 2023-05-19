@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
 export async function GET(
@@ -8,15 +9,13 @@ export async function GET(
     params: { id: string }
   }
 ) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      return resolve(NextResponse.json({
-        data: {
-          id: params.id,
-        }
-      }, {
-        status: 200,
-      }))
-    }, 3000);
+  const user = await prisma.user.findFirst({
+    where: {
+      id: parseInt(params.id),
+    }
+  });
+
+  return NextResponse.json(user, {
+    status: 200,
   });
 }
