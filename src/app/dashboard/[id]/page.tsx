@@ -1,13 +1,28 @@
-export default async function Page({ params }: { params: { id: string } }) {
-  const res = await fetch(`http://localhost:3000/api/test/${params.id}`, {
-    next: {
-      revalidate: 10,
-    }
-  });
+import { Suspense } from "react";
 
-  const data = await res.json();
+export default async function Page({ params }: { params: { id: number } }) {
+  async function Content({ id } : { id: number }) {
+    const res = await fetch(`http://localhost:3000/api/test/${id}`, {
+      next: {
+        revalidate: 10,
+      }
+    });
+
+    const data = await res.json();
+    return (
+      <>
+        <p>Hello, { data.id }</p> 
+      </>
+    )
+  };
 
   return (
-    <p>Hello, { data.data.id }!</p>
+    <>
+      <p>Creative City</p>
+      <Suspense fallback={<p>This is a test...</p>}>
+        {/* @ts-expect-error Server Component */}
+        <Content id={params.id}/>
+      </Suspense>
+    </>
   )
 }
