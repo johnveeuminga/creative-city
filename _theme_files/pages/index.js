@@ -1,23 +1,25 @@
 import Link from "next/link";
 import React, { useState } from "react";
+import Slider from "react-slick";
 import dynamic from "next/dynamic";
 
-const Counter = dynamic(() => import("@/components/Counter"), {
+const Counter = dynamic(() => import("../src/components/Counter"), {
   ssr: false,
 });
 
-import Layout from "@/components/layout/Layout";
+import VideoPopup from "../src/components/VideoPopup";
+import Layout from "../src/layouts/Layout";
 import {
   ClientSliderOne,
   ListingSliderOne,
   PlaceSliderOne,
-} from "@/lib/sliderProps";
-import SlickSlider from "@/components/SlickSlider";
+} from "../src/sliderProps";
 
 const Index = () => {
-  // const [video, setVideo] = useState(false);
+  const [video, setVideo] = useState(false);
   return (
     <Layout>
+      {video && <VideoPopup close={setVideo} />}
       {/* <!--====== Start Hero Section ======--> */}
       <section className="hero-area">
         <div className="hero-wrapper-one">
@@ -35,7 +37,7 @@ const Index = () => {
                     className="hero-search-wrapper wow fadeInUp"
                     wow-data-delay="70ms"
                   >
-                    <form>
+                    <form onSubmit={(e) => e.preventDefault()}>
                       <div className="row">
                         <div className="col-lg-5 col-md-4 col-sm-12">
                           <div className="form_group">
@@ -98,8 +100,10 @@ const Index = () => {
                     </div>
                     <h6>Museums</h6>
                   </div>
-                  <Link href="/" legacyBehavior>
-                    <i className="ti-arrow-right"></i>
+                  <Link href="/">
+                    <a className="category-btn">
+                      <i className="ti-arrow-right"></i>
+                    </a>
                   </Link>
                 </div>
               </div>
@@ -111,10 +115,10 @@ const Index = () => {
                     </div>
                     <h6>Restaurant</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
+                  <Link href="/">
+                    <a className="category-btn">
+                      <i className="ti-arrow-right"></i>
+                    </a>
                   </Link>
                 </div>
               </div>
@@ -126,10 +130,10 @@ const Index = () => {
                     </div>
                     <h6>Game Field</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
+                  <Link href="/">
+                    <a className="category-btn">
+                      <i className="ti-arrow-right"></i>
+                    </a>
                   </Link>
                 </div>
               </div>
@@ -141,10 +145,10 @@ const Index = () => {
                     </div>
                     <h6>Job & Feed</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
+                  <Link href="/">
+                    <a className="category-btn">
+                      <i className="ti-arrow-right"></i>
+                    </a>
                   </Link>
                 </div>
               </div>
@@ -156,10 +160,10 @@ const Index = () => {
                     </div>
                     <h6>Party Center</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
+                  <Link href="/">
+                    <a className="category-btn">
+                      <i className="ti-arrow-right"></i>
+                    </a>
                   </Link>
                 </div>
               </div>
@@ -171,10 +175,10 @@ const Index = () => {
                     </div>
                     <h6>Fitness Zone</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
+                  <Link href="/">
+                    <a className="category-btn">
+                      <i className="ti-arrow-right"></i>
+                    </a>
                   </Link>
                 </div>
               </div>
@@ -221,7 +225,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      Food Corner
+                      <a>Food Corner</a>
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -297,7 +301,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      Central History
+                      <a>Central History</a>
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -373,7 +377,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      Xtream Gym
+                      <a>Xtream Gym</a>
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -449,7 +453,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      Mega Agency
+                      <a>Mega Agency</a>
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -525,7 +529,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      Central Plaza
+                      <a>Central Plaza</a>
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -665,8 +669,8 @@ const Index = () => {
                 <div className="cta-content-box text-center wow fadeInUp">
                   <img src="assets/images/icon-1.png" alt="offer icon" />
                   <h2>Splash Yourself Bigger Offer on Everyday</h2>
-                  <Link href="/how-work" className="main-btn icon-btn">
-                    Explore Now
+                  <Link href="/how-work">
+                    <a className="main-btn icon-btn">Explore Now</a>
                   </Link>
                 </div>
               </div>
@@ -764,8 +768,8 @@ const Index = () => {
               </div>
             </div>
           </div>
-          <SlickSlider
-            sliderOptions={PlaceSliderOne}
+          <Slider
+            {...PlaceSliderOne}
             className="place-slider-one wow fadeInDown"
           >
             <div className="place-item place-item-one">
@@ -775,10 +779,10 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid" className="arrow-btn" legacyBehavior>
-
-                      <i className="ti-arrow-right"></i>
-
+                    <Link href="/listing-grid">
+                      <a className="arrow-btn">
+                        <i className="ti-arrow-right"></i>
+                      </a>
                     </Link>
                   </div>
                 </div>
@@ -791,10 +795,10 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid" className="arrow-btn" legacyBehavior>
-
-                      <i className="ti-arrow-right"></i>
-
+                    <Link href="/listing-grid">
+                      <a className="arrow-btn">
+                        <i className="ti-arrow-right"></i>
+                      </a>
                     </Link>
                   </div>
                 </div>
@@ -807,10 +811,10 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid" className="arrow-btn" legacyBehavior>
-
-                      <i className="ti-arrow-right"></i>
-
+                    <Link href="/listing-grid">
+                      <a className="arrow-btn">
+                        <i className="ti-arrow-right"></i>
+                      </a>
                     </Link>
                   </div>
                 </div>
@@ -823,10 +827,10 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid" className="arrow-btn" legacyBehavior>
-
-                      <i className="ti-arrow-right"></i>
-
+                    <Link href="/listing-grid">
+                      <a className="arrow-btn">
+                        <i className="ti-arrow-right"></i>
+                      </a>
                     </Link>
                   </div>
                 </div>
@@ -839,16 +843,16 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid" className="arrow-btn" legacyBehavior>
-
-                      <i className="ti-arrow-right"></i>
-
+                    <Link href="/listing-grid">
+                      <a className="arrow-btn">
+                        <i className="ti-arrow-right"></i>
+                      </a>
                     </Link>
                   </div>
                 </div>
               </div>
             </div>
-          </SlickSlider>
+          </Slider>
         </div>
       </section>
       {/* <!--====== End Place Section ======--> */}
@@ -874,8 +878,8 @@ const Index = () => {
                   </p>
                   <ul className="button wow fadeInDown">
                     <li>
-                      <Link href="/" className="app-btn" legacyBehavior>
-                        <div>
+                      <Link href="/">
+                        <a className="app-btn">
                           <div className="icon">
                             <i className="ti-android"></i>
                           </div>
@@ -883,12 +887,12 @@ const Index = () => {
                             <span>get it on</span>
                             <h6>Goole Play</h6>
                           </div>
-                        </div>
+                        </a>
                       </Link>
                     </li>
                     <li>
-                      <Link href="/" className="app-btn" legacyBehavior>
-                        <div>
+                      <Link href="/">
+                        <a className="app-btn">
                           <div className="icon">
                             <i className="ti-apple"></i>
                           </div>
@@ -896,7 +900,7 @@ const Index = () => {
                             <span>get it on</span>
                             <h6>App Store</h6>
                           </div>
-                        </div>
+                        </a>
                       </Link>
                     </li>
                   </ul>
@@ -958,7 +962,7 @@ const Index = () => {
               </div>
             </div>
           </div>
-          {/* <Slider
+          <Slider
             {...ListingSliderOne}
             className="listing-slider-one wow fadeInDown"
           >
@@ -1205,7 +1209,7 @@ const Index = () => {
                 </div>
               </div>
             </div>
-          </Slider> */}
+          </Slider>
         </div>
       </section>
       {/* <!--====== End Popular Listing Section ======--> */}
@@ -1214,46 +1218,50 @@ const Index = () => {
         <div
           className="intro-wrapper-one bg_cover pt-115"
           style={{ backgroundImage: `url(assets/images/bg/video-bg-1.jpg)` }}
-      >
-        <div className="container">
-          <div className="row align-items-center">
-            <div className="col-lg-5">
-              <div className="play-content play-content-one text-center wow fadeInLeft">
-                <a
-                  href="#"
-                  className="video-popup"
-                >
-                  <i className="flaticon-play-button"></i>
-                </a>
-                <h5>Play Video</h5>
-              </div>
-            </div>
-            <div className="col-lg-7">
-              <div className="intro-content-box intro-content-box-one wow fadeInRight">
-                <div className="section-title section-title-left section-title-white mb-35">
-                  <span className="sub-title">Checkout List</span>
-                  <h2>Professional planners for your vacation</h2>
+        >
+          <div className="container">
+            <div className="row align-items-center">
+              <div className="col-lg-5">
+                <div className="play-content play-content-one text-center wow fadeInLeft">
+                  <a
+                    href="#"
+                    className="video-popup"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setVideo(true);
+                    }}
+                  >
+                    <i className="flaticon-play-button"></i>
+                  </a>
+                  <h5>Play Video</h5>
                 </div>
-                <p>
-                  Risus urnas Iaculis per amet vestibulum luctus tincidunt
-                  ultricies aenean quam eros eleifend sodales cubilia mattis
-                  quam.
-                </p>
-                <Link href="/listing-grid" legacyBehavior>
-                  <i className="main-btn icon-btn">Explore List</i>
-                </Link>
+              </div>
+              <div className="col-lg-7">
+                <div className="intro-content-box intro-content-box-one wow fadeInRight">
+                  <div className="section-title section-title-left section-title-white mb-35">
+                    <span className="sub-title">Checkout List</span>
+                    <h2>Professional planners for your vacation</h2>
+                  </div>
+                  <p>
+                    Risus urnas Iaculis per amet vestibulum luctus tincidunt
+                    ultricies aenean quam eros eleifend sodales cubilia mattis
+                    quam.
+                  </p>
+                  <Link href="/listing-grid">
+                    <a className="main-btn icon-btn">Explore List</a>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    {/* <!--====== End Intro Video Section ======--> */}
-    {/* <!--====== Start Newsletter Section ======--> */}
-    <section className="newsletter-area">
-      <div className="container">
-        <div
-          className="newsletter-wrapper newsletter-wrapper-one bg_cover"
+      </section>
+      {/* <!--====== End Intro Video Section ======--> */}
+      {/* <!--====== Start Newsletter Section ======--> */}
+      <section className="newsletter-area">
+        <div className="container">
+          <div
+            className="newsletter-wrapper newsletter-wrapper-one bg_cover"
             style={{
               backgroundImage: `url(assets/images/bg/newsletter-bg-1.jpg)`,
             }}
@@ -1293,7 +1301,7 @@ const Index = () => {
       <section className="client-area pt-120">
         <div className="client-wrapper-one pb-120">
           <div className="container">
-            {/* <Slider
+            <Slider
               {...ClientSliderOne}
               className="client-slider-one wow fadeInDown"
             >
@@ -1332,7 +1340,7 @@ const Index = () => {
                   </a>
                 </div>
               </div>
-            </Slider> */}
+            </Slider>
           </div>
         </div>
       </section>
@@ -1355,13 +1363,13 @@ const Index = () => {
                 data-wow-delay="10ms"
               >
                 <div className="post-thumbnail">
-                  <Link href="/blog-details" legacyBehavior>
-
-                    <img
-                      src="assets/images/blog/blog-1.jpg"
-                      alt="Blog Image"
-                    />
-
+                  <Link href="/blog-details">
+                    <a>
+                      <img
+                        src="assets/images/blog/blog-1.jpg"
+                        alt="Blog Image"
+                      />
+                    </a>
                   </Link>
                   <div className="post-date">
                     <a href="#">
@@ -1375,7 +1383,7 @@ const Index = () => {
                   </a>
                   <h3 className="title">
                     <Link href="/blog-details">
-                      Duis nonummy socios mattis tempus penatibus
+                      <a>Duis nonummy socios mattis tempus penatibus</a>
                     </Link>
                   </h3>
                   <div className="post-meta">
@@ -1403,13 +1411,13 @@ const Index = () => {
                 data-wow-delay="20ms"
               >
                 <div className="post-thumbnail">
-                  <Link href="/blog-details" legacyBehavior>
-
-                    <img
-                      src="assets/images/blog/blog-2.jpg"
-                      alt="Blog Image"
-                    />
-
+                  <Link href="/blog-details">
+                    <a>
+                      <img
+                        src="assets/images/blog/blog-2.jpg"
+                        alt="Blog Image"
+                      />
+                    </a>
                   </Link>
                   <div className="post-date">
                     <a href="#">
@@ -1423,7 +1431,7 @@ const Index = () => {
                   </a>
                   <h3 className="title">
                     <Link href="/blog-details">
-                      Litora phasellus in phasellus curabitur porta eun
+                      <a>Litora phasellus in phasellus curabitur porta eun</a>
                     </Link>
                   </h3>
                   <div className="post-meta">
@@ -1451,13 +1459,13 @@ const Index = () => {
                 data-wow-delay="310ms"
               >
                 <div className="post-thumbnail">
-                  <Link href="/blog-details" legacyBehavior>
-
-                    <img
-                      src="assets/images/blog/blog-3.jpg"
-                      alt="Blog Image"
-                    />
-
+                  <Link href="/blog-details">
+                    <a>
+                      <img
+                        src="assets/images/blog/blog-3.jpg"
+                        alt="Blog Image"
+                      />
+                    </a>
                   </Link>
                   <div className="post-date">
                     <a href="#">
@@ -1471,7 +1479,7 @@ const Index = () => {
                   </a>
                   <h3 className="title">
                     <Link href="/blog-details">
-                      Mattis parturent tortor lectus lestie sapien Dapus
+                      <a>Mattis parturent tortor lectus lestie sapien Dapus</a>
                     </Link>
                   </h3>
                   <div className="post-meta">
@@ -1497,8 +1505,8 @@ const Index = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="button text-center mt-40">
-                <Link href="/blog" className="main-btn icon-btn">
-                  View Blog
+                <Link href="/blog">
+                  <a className="main-btn icon-btn">View Blog</a>
                 </Link>
               </div>
             </div>

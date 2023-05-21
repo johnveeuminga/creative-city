@@ -79,7 +79,7 @@ const Footer = () => {
                         </span>
                         <h6 className="title">
                           <Link href="/blog-details">
-                            <a>Facilisis a ultricies quis dictumst fredom...</a>
+                            Facilisis a ultricies quis dictumst fredom...
                           </Link>
                         </h6>
                       </div>
@@ -91,7 +91,7 @@ const Footer = () => {
                         </span>
                         <h6 className="title">
                           <Link href="/blog-details">
-                            <a>Facilisis a ultricies quis dictumst fredom...</a>
+                            Facilisis a ultricies quis dictumst fredom...
                           </Link>
                         </h6>
                       </div>
