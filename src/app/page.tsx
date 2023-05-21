@@ -98,7 +98,7 @@ const Index = () => {
                     </div>
                     <h6>Museums</h6>
                   </div>
-                  <Link href="/">
+                  <Link href="/" legacyBehavior>
                     <i className="ti-arrow-right"></i>
                   </Link>
                 </div>
@@ -111,10 +111,10 @@ const Index = () => {
                     </div>
                     <h6>Restaurant</h6>
                   </div>
-                  <Link href="/">
-                    <a className="category-btn">
-                      <i className="ti-arrow-right"></i>
-                    </a>
+                  <Link href="/" className="category-btn">
+
+                    <i className="ti-arrow-right"></i>
+
                   </Link>
                 </div>
               </div>
@@ -126,10 +126,10 @@ const Index = () => {
                     </div>
                     <h6>Game Field</h6>
                   </div>
-                  <Link href="/">
-                    <a className="category-btn">
-                      <i className="ti-arrow-right"></i>
-                    </a>
+                  <Link href="/" className="category-btn">
+
+                    <i className="ti-arrow-right"></i>
+
                   </Link>
                 </div>
               </div>
@@ -141,10 +141,10 @@ const Index = () => {
                     </div>
                     <h6>Job & Feed</h6>
                   </div>
-                  <Link href="/">
-                    <a className="category-btn">
-                      <i className="ti-arrow-right"></i>
-                    </a>
+                  <Link href="/" className="category-btn">
+
+                    <i className="ti-arrow-right"></i>
+
                   </Link>
                 </div>
               </div>
@@ -156,10 +156,10 @@ const Index = () => {
                     </div>
                     <h6>Party Center</h6>
                   </div>
-                  <Link href="/">
-                    <a className="category-btn">
-                      <i className="ti-arrow-right"></i>
-                    </a>
+                  <Link href="/" className="category-btn">
+
+                    <i className="ti-arrow-right"></i>
+
                   </Link>
                 </div>
               </div>
@@ -171,10 +171,10 @@ const Index = () => {
                     </div>
                     <h6>Fitness Zone</h6>
                   </div>
-                  <Link href="/">
-                    <a className="category-btn">
-                      <i className="ti-arrow-right"></i>
-                    </a>
+                  <Link href="/" className="category-btn">
+
+                    <i className="ti-arrow-right"></i>
+
                   </Link>
                 </div>
               </div>
@@ -221,7 +221,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      <a>Food Corner</a>
+                      Food Corner
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -297,7 +297,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      <a>Central History</a>
+                      Central History
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -373,7 +373,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      <a>Xtream Gym</a>
+                      Xtream Gym
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -449,7 +449,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      <a>Mega Agency</a>
+                      Mega Agency
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -525,7 +525,7 @@ const Index = () => {
                 <div className="listing-content">
                   <h3 className="title">
                     <Link href="/listing-details-1">
-                      <a>Central Plaza</a>
+                      Central Plaza
                     </Link>
                   </h3>
                   <div className="ratings">
@@ -665,8 +665,8 @@ const Index = () => {
                 <div className="cta-content-box text-center wow fadeInUp">
                   <img src="assets/images/icon-1.png" alt="offer icon" />
                   <h2>Splash Yourself Bigger Offer on Everyday</h2>
-                  <Link href="/how-work">
-                    <a className="main-btn icon-btn">Explore Now</a>
+                  <Link href="/how-work" className="main-btn icon-btn">
+                    Explore Now
                   </Link>
                 </div>
               </div>
@@ -775,10 +775,10 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid">
-                      <a className="arrow-btn">
-                        <i className="ti-arrow-right"></i>
-                      </a>
+                    <Link href="/listing-grid" className="arrow-btn">
+
+                      <i className="ti-arrow-right"></i>
+
                     </Link>
                   </div>
                 </div>
@@ -791,10 +791,10 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid">
-                      <a className="arrow-btn">
-                        <i className="ti-arrow-right"></i>
-                      </a>
+                    <Link href="/listing-grid" className="arrow-btn">
+
+                      <i className="ti-arrow-right"></i>
+
                     </Link>
                   </div>
                 </div>
@@ -807,10 +807,10 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid">
-                      <a className="arrow-btn">
-                        <i className="ti-arrow-right"></i>
-                      </a>
+                    <Link href="/listing-grid" className="arrow-btn">
+
+                      <i className="ti-arrow-right"></i>
+
                     </Link>
                   </div>
                 </div>
@@ -823,10 +823,10 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid">
-                      <a className="arrow-btn">
-                        <i className="ti-arrow-right"></i>
-                      </a>
+                    <Link href="/listing-grid" className="arrow-btn">
+
+                      <i className="ti-arrow-right"></i>
+
                     </Link>
                   </div>
                 </div>
@@ -839,10 +839,10 @@ const Index = () => {
                   <div className="place-content text-center">
                     <span className="listing">10 Listing</span>
                     <h3 className="title">Australia</h3>
-                    <Link href="/listing-grid">
-                      <a className="arrow-btn">
-                        <i className="ti-arrow-right"></i>
-                      </a>
+                    <Link href="/listing-grid" className="arrow-btn">
+
+                      <i className="ti-arrow-right"></i>
+
                     </Link>
                   </div>
                 </div>
@@ -874,29 +874,29 @@ const Index = () => {
                   </p>
                   <ul className="button wow fadeInDown">
                     <li>
-                      <Link href="/">
-                        <a className="app-btn">
-                          <div className="icon">
-                            <i className="ti-android"></i>
-                          </div>
-                          <div className="info">
-                            <span>get it on</span>
-                            <h6>Goole Play</h6>
-                          </div>
-                        </a>
+                      <Link href="/" className="app-btn">
+
+                        <div className="icon">
+                          <i className="ti-android"></i>
+                        </div>
+                        <div className="info">
+                          <span>get it on</span>
+                          <h6>Goole Play</h6>
+                        </div>
+
                       </Link>
                     </li>
                     <li>
-                      <Link href="/">
-                        <a className="app-btn">
-                          <div className="icon">
-                            <i className="ti-apple"></i>
-                          </div>
-                          <div className="info">
-                            <span>get it on</span>
-                            <h6>App Store</h6>
-                          </div>
-                        </a>
+                      <Link href="/" className="app-btn">
+
+                        <div className="icon">
+                          <i className="ti-apple"></i>
+                        </div>
+                        <div className="info">
+                          <span>get it on</span>
+                          <h6>App Store</h6>
+                        </div>
+
                       </Link>
                     </li>
                   </ul>
@@ -1214,46 +1214,46 @@ const Index = () => {
         <div
           className="intro-wrapper-one bg_cover pt-115"
           style={{ backgroundImage: `url(assets/images/bg/video-bg-1.jpg)` }}
-        >
-          <div className="container">
-            <div className="row align-items-center">
-              <div className="col-lg-5">
-                <div className="play-content play-content-one text-center wow fadeInLeft">
-                  <a
-                    href="#"
-                    className="video-popup"
-                  >
-                    <i className="flaticon-play-button"></i>
-                  </a>
-                  <h5>Play Video</h5>
-                </div>
+      >
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-lg-5">
+              <div className="play-content play-content-one text-center wow fadeInLeft">
+                <a
+                  href="#"
+                  className="video-popup"
+                >
+                  <i className="flaticon-play-button"></i>
+                </a>
+                <h5>Play Video</h5>
               </div>
-              <div className="col-lg-7">
-                <div className="intro-content-box intro-content-box-one wow fadeInRight">
-                  <div className="section-title section-title-left section-title-white mb-35">
-                    <span className="sub-title">Checkout List</span>
-                    <h2>Professional planners for your vacation</h2>
-                  </div>
-                  <p>
-                    Risus urnas Iaculis per amet vestibulum luctus tincidunt
-                    ultricies aenean quam eros eleifend sodales cubilia mattis
-                    quam.
-                  </p>
-                  <Link href="/listing-grid">
-                    <i className="main-btn icon-btn">Explore List</i>
-                  </Link>
+            </div>
+            <div className="col-lg-7">
+              <div className="intro-content-box intro-content-box-one wow fadeInRight">
+                <div className="section-title section-title-left section-title-white mb-35">
+                  <span className="sub-title">Checkout List</span>
+                  <h2>Professional planners for your vacation</h2>
                 </div>
+                <p>
+                  Risus urnas Iaculis per amet vestibulum luctus tincidunt
+                  ultricies aenean quam eros eleifend sodales cubilia mattis
+                  quam.
+                </p>
+                <Link href="/listing-grid" legacyBehavior>
+                  <i className="main-btn icon-btn">Explore List</i>
+                </Link>
               </div>
             </div>
           </div>
         </div>
-      </section>
-      {/* <!--====== End Intro Video Section ======--> */}
-      {/* <!--====== Start Newsletter Section ======--> */}
-      <section className="newsletter-area">
-        <div className="container">
-          <div
-            className="newsletter-wrapper newsletter-wrapper-one bg_cover"
+      </div>
+    </section>
+    {/* <!--====== End Intro Video Section ======--> */}
+    {/* <!--====== Start Newsletter Section ======--> */}
+    <section className="newsletter-area">
+      <div className="container">
+        <div
+          className="newsletter-wrapper newsletter-wrapper-one bg_cover"
             style={{
               backgroundImage: `url(assets/images/bg/newsletter-bg-1.jpg)`,
             }}
@@ -1356,12 +1356,12 @@ const Index = () => {
               >
                 <div className="post-thumbnail">
                   <Link href="/blog-details">
-                    <a>
-                      <img
-                        src="assets/images/blog/blog-1.jpg"
-                        alt="Blog Image"
-                      />
-                    </a>
+
+                    <img
+                      src="assets/images/blog/blog-1.jpg"
+                      alt="Blog Image"
+                    />
+
                   </Link>
                   <div className="post-date">
                     <a href="#">
@@ -1375,7 +1375,7 @@ const Index = () => {
                   </a>
                   <h3 className="title">
                     <Link href="/blog-details">
-                      <a>Duis nonummy socios mattis tempus penatibus</a>
+                      Duis nonummy socios mattis tempus penatibus
                     </Link>
                   </h3>
                   <div className="post-meta">
@@ -1404,12 +1404,12 @@ const Index = () => {
               >
                 <div className="post-thumbnail">
                   <Link href="/blog-details">
-                    <a>
-                      <img
-                        src="assets/images/blog/blog-2.jpg"
-                        alt="Blog Image"
-                      />
-                    </a>
+
+                    <img
+                      src="assets/images/blog/blog-2.jpg"
+                      alt="Blog Image"
+                    />
+
                   </Link>
                   <div className="post-date">
                     <a href="#">
@@ -1423,7 +1423,7 @@ const Index = () => {
                   </a>
                   <h3 className="title">
                     <Link href="/blog-details">
-                      <a>Litora phasellus in phasellus curabitur porta eun</a>
+                      Litora phasellus in phasellus curabitur porta eun
                     </Link>
                   </h3>
                   <div className="post-meta">
@@ -1452,12 +1452,12 @@ const Index = () => {
               >
                 <div className="post-thumbnail">
                   <Link href="/blog-details">
-                    <a>
-                      <img
-                        src="assets/images/blog/blog-3.jpg"
-                        alt="Blog Image"
-                      />
-                    </a>
+
+                    <img
+                      src="assets/images/blog/blog-3.jpg"
+                      alt="Blog Image"
+                    />
+
                   </Link>
                   <div className="post-date">
                     <a href="#">
@@ -1471,7 +1471,7 @@ const Index = () => {
                   </a>
                   <h3 className="title">
                     <Link href="/blog-details">
-                      <a>Mattis parturent tortor lectus lestie sapien Dapus</a>
+                      Mattis parturent tortor lectus lestie sapien Dapus
                     </Link>
                   </h3>
                   <div className="post-meta">
@@ -1497,8 +1497,8 @@ const Index = () => {
           <div className="row">
             <div className="col-lg-12">
               <div className="button text-center mt-40">
-                <Link href="/blog">
-                  <a className="main-btn icon-btn">View Blog</a>
+                <Link href="/blog" className="main-btn icon-btn">
+                  View Blog
                 </Link>
               </div>
             </div>
