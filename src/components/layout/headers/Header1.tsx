@@ -47,7 +47,7 @@ const Header1 = () => {
                 <p>
                   We Have Special Offers Every{" "}
                   <Link href="/">
-                    <a>Find your offer</a>
+                    Find your offer
                   </Link>
                 </p>
               </div>
@@ -57,26 +57,26 @@ const Header1 = () => {
                 <ul className="d-flex">
                   <li>
                     <Link href="/">
-                      <a>
+                      <div>
                         <i className="ti-search"></i>
                         <span>Search here</span>
-                      </a>
+                      </div>
                     </Link>
                   </li>
                   <li>
                     <Link href="/">
-                      <a>
+                      <div>
                         <i className="ti-heart"></i>
                         <span>Wishlist</span>
-                      </a>
+                      </div>
                     </Link>
                   </li>
                   <li>
                     <Link href="/">
-                      <a>
+                      <div>
                         <i className="ti-shopping-cart"></i>
                         <span>Cart</span>
-                      </a>
+                      </div>
                     </Link>
                   </li>
                 </ul>
@@ -91,13 +91,13 @@ const Header1 = () => {
             <div className="row">
               <div className="col-lg-2 col-5">
                 <div className="site-branding">
-                  <Link href="/">
-                    <a className="brand-logo">
-                      <img
-                        src="assets/images/logo/logo-1.png"
-                        alt="Brand Logo"
-                      />
-                    </a>
+                  <Link href="/" className="brand-logo">
+
+                    <img
+                      src="assets/images/logo/logo-1.png"
+                      alt="Brand Logo"
+                    />
+
                   </Link>
                 </div>
               </div>
@@ -110,7 +110,7 @@ const Header1 = () => {
                     <ul>
                       <li className="menu-item has-children">
                         <Link href="/">
-                          <a>Home</a>
+                          Home
                         </Link>
                         <ul className="sub-menu">
                           <Home />
@@ -137,8 +137,8 @@ const Header1 = () => {
                       </li>
                       <Contact />
                       <li className="nav-btn">
-                        <Link href="/add-listing">
-                          <a className="main-btn icon-btn">Add Listing</a>
+                        <Link href="/add-listing" className="main-btn icon-btn">
+                          Add Listing
                         </Link>
                       </li>
                     </ul>
@@ -149,15 +149,15 @@ const Header1 = () => {
                 <div className="header-right-nav">
                   <ul className="d-flex align-items-center">
                     <li className="user-btn">
-                      <Link href="/">
-                        <a className="icon">
-                          <i className="flaticon-avatar"></i>
-                        </a>
+                      <Link href="/" className="icon">
+
+                        <i className="flaticon-avatar"></i>
+
                       </Link>
                     </li>
                     <li className="hero-nav-btn">
-                      <Link href="/add-listing">
-                        <a className="main-btn icon-btn">Add Listing</a>
+                      <Link href="/add-listing" className="main-btn icon-btn">
+                        Add Listing
                       </Link>
                     </li>
                     <li className="nav-toggle-btn">
