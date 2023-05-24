@@ -149,7 +149,7 @@ const Header1 = () => {
                 <div className="header-right-nav">
                   <ul className="d-flex align-items-center">
                     <li className="user-btn">
-                      <Link href="/" className="icon">
+                      <Link href="/api/auth/login" className="icon">
 
                         <i className="flaticon-avatar"></i>
 
