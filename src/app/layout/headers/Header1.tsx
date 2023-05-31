@@ -1,8 +1,9 @@
 import Link from "next/link";
 import React from "react";
 import { About, Blog, Contact, Home, Listing, Pages } from "../Menu";
+import { getServerSession } from "@/lib/server/auth";
 
-const Header1 = () => {
+const Header1 = async () => {
   return (
     <header className="header-area header-area-one d-none d-xl-block">
       <div className="header-top">

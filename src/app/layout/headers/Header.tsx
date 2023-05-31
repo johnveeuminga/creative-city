@@ -1,12 +1,16 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Header1 from "./Header1";
 import Header2 from "./Header2";
 import Header3 from "./Header3";
+import { getServerSession } from "@/lib/server/auth";
 
-const Header = ({ header }: any) => {
+function Header({ header }: any) {
+  // const user = await getServerSession();
+
   const getHeader = () => {
     switch (header) {
       case 1:
+        // @ts-expect-error Server Component
         return <Header1 />;
       case 2:
         return <Header2 />;
@@ -14,6 +18,7 @@ const Header = ({ header }: any) => {
         return <Header3 />;
 
       default:
+        // @ts-expect-error Server Component
         return <Header1 />;
     }
   };
