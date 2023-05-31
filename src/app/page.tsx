@@ -6,16 +6,15 @@ const Counter = dynamic(() => import("@/components/Counter"), {
   ssr: false,
 });
 
-import Layout from "@/components/layout/Layout";
 import {
   ClientSliderOne,
   ListingSliderOne,
   PlaceSliderOne,
 } from "@/lib/sliderProps";
 import SlickSlider from "@/components/SlickSlider";
+import Layout from "./layout/Layout";
 
-const Index = () => {
-  // const [video, setVideo] = useState(false);
+const Index = async () => {
   return (
     <Layout>
       {/* <!--====== Start Hero Section ======--> */}
