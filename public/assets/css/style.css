@@ -94,7 +94,7 @@ h1 {
   font-size: 90px;
   line-height: 90px;
 }
-
+.header-area .header-navigation .header-right-nav ul li .icon
 h2 {
   font-size: 48px;
   line-height: 55px;
@@ -956,7 +956,7 @@ button {
     display: none;
   }
 }
-.header-area .header-navigation .header-right-nav ul li .icon {
+.header-area .header-navigation .header-right-nav ul li > .icon {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -973,7 +973,7 @@ button {
   border-radius: 50%;
 }
 @media (max-width: 991px) {
-  .header-area .header-navigation .header-right-nav ul li .icon {
+  .header-area .header-navigation .header-right-nav ul li > .icon {
     width: 40px;
     height: 40px;
   }

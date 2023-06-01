@@ -1,6 +1,4 @@
-'use client';
-
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 import ImageView from "../../components/ImageView";
 import { activeNavMenu, animation, niceSelect, stickyNav } from "../../lib/utils";
 import Footer from "./Footer";
@@ -12,20 +10,18 @@ const Layout = ({ children, header } : {
   children?: any,
   header?: any,
 }) => {
-  useEffect(() => {
-    animation();
-    niceSelect();
-    activeNavMenu();
-    window.addEventListener("scroll", stickyNav);
-  }, []);
-
-  const [state, setState] = useState();
+  // useEffect(() => {
+  //   animation();
+  //   niceSelect();
+  //   activeNavMenu();
+  //   window.addEventListener("scroll", stickyNav);
+  // }, []);
 
   return (
     <Fragment>
       <ImageView />
       <MobileMenu />
-      <Header header={header} />
+      <Header />
       {children} 
       <Footer />
       <ScrollTop />

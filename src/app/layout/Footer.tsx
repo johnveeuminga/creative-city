@@ -136,7 +136,7 @@ const Footer = () => {
                   <p>
                     Caoreet massa torto pon interdum sestibulum suscipit duis.
                   </p>
-                  <form onSubmit={(e) => e.preventDefault()}>
+                  <form>
                     <div className="form_group">
                       <input
                         type="email"

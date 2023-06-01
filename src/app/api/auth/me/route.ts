@@ -1,26 +1,18 @@
-import { cookies } from 'next/headers';
+import { decodeToken, getServerSession } from '@/lib/server/auth';
+import { cookies } from 'next/dist/client/components/headers';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(req: NextRequest) {
-  const token = req.cookies.get('authToken');
-  console.log(token)
-
-  if(!token) 
-    return NextResponse.json('Unauthorized', { status: 401 });
-
   try {
-    const req = await fetch(`${process.env.COGNITO_BASE_URL}/oauth2/userInfo`, {
-      headers: {
-        'Authorization': `Bearer ${token.value}`
-      }
-    });
+    const user = await getServerSession();
 
-    const res = await req.json();
-    console.log(res);
+    if(!user?.isAuthenticated) {
+      throw('Unauthorized')
+    }
 
-    return NextResponse.json(res);
+    return NextResponse.json(user)
   } catch(err) {
-    console.log(err);
+    console.log(err)
     return NextResponse.json('Unauthorized', { status: 401 })
   }
 }

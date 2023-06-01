@@ -1,9 +1,61 @@
+import { CognitoJwtVerifier } from "aws-jwt-verify";
+import { CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
+import { cookies } from "next/dist/client/components/headers";
+
 // TODO: Typesafe this route with a user object.
 export async function getServerSession() {
-  console.log(process.env.APP_URL);
-  const req = await fetch(`${process.env.APP_URL}/api/auth/me`);
+  const token = cookies().get('authToken');
 
-  const user = req.json();
+  if(!token) 
+    throw('No token');
 
-  return user;
+  try {
+    const userInfoReq =  fetch(`${process.env.COGNITO_BASE_URL}/oauth2/userInfo`, {
+      headers: {
+        'Authorization': `Bearer ${token.value}`
+      }
+    });
+
+    const decodeTokenReq = decodeToken(token.value, "access")
+
+    const [userInfoRes, tokenDecoded] = await Promise.all([userInfoReq, decodeTokenReq])
+    const userInfo = await userInfoRes.json();
+
+    const res = {
+      user: {
+        ...userInfo,
+        groups: tokenDecoded['cognito:groups'] ?? [],
+      }, 
+      isAuthenticated: true,
+    }
+
+    return res
+  } catch(err) {
+    // throw('Unauthorized')
+    const res = {
+      user: null,
+      isAuthenticated: false,
+    }
+
+    return res
+  }
+}
+
+export async function decodeToken(token: string, tokenUse: "id" | "access" = "id"): Promise<CognitoJwtPayload> {
+  if(!process.env.COGNITO_USER_POOL_ID || !process.env.COGNITO_CLIENT_ID)
+    throw("No user pool ID or user pool ID configured")
+
+  const verifier = CognitoJwtVerifier.create({
+    userPoolId: process.env.COGNITO_USER_POOL_ID,
+    tokenUse,
+    clientId: process.env.COGNITO_CLIENT_ID,
+  })
+
+  try {
+    const payload = await verifier.verify(token);
+
+    return payload
+  } catch {
+    throw("Token is not valid")
+  }
 }
