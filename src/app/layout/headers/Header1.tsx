@@ -1,9 +1,15 @@
 import Link from "next/link";
 import React from "react";
 import { About, Blog, Contact, Home, Listing, Pages } from "../Menu";
+import { useSession } from "@/lib/client/auth";
 import { getServerSession } from "@/lib/server/auth";
+import Avatar from "react-avatar";
+import UserAvatar from "@/components/UserAvatar";
 
 const Header1 = async () => {
+  const session = await getServerSession();
+  console.log(session);
+
   return (
     <header className="header-area header-area-one d-none d-xl-block">
       <div className="header-top">
@@ -137,7 +143,8 @@ const Header1 = async () => {
                         </ul>
                       </li>
                       <Contact />
-                      <li className="nav-btn">
+                      <li 
+                        className="nav-btn">
                         <Link href="/add-listing" className="main-btn icon-btn">
                           Add Listing
                         </Link>
@@ -150,17 +157,27 @@ const Header1 = async () => {
                 <div className="header-right-nav">
                   <ul className="d-flex align-items-center">
                     <li className="user-btn">
-                      <Link href="/api/auth/login" className="icon">
+                      {
+                        !session.user &&
+                          <Link href="/api/auth/login" className="icon">
 
-                        <i className="flaticon-avatar"></i>
+                            <i className="flaticon-avatar"></i>
 
-                      </Link>
+                          </Link>
+                      }
+                      {
+                        session.user &&
+                          <UserAvatar user={session.user}></UserAvatar>
+                      }
                     </li>
-                    <li className="hero-nav-btn">
-                      <Link href="/add-listing" className="main-btn icon-btn">
-                        Add Listing
-                      </Link>
-                    </li>
+                    { session.user && session.user.groups.indexOf["artist"] !== -1 &&
+                      <li 
+                        className="hero-nav-btn">
+                        <Link href="/add-listing" className="main-btn icon-btn">
+                          Add Listing
+                        </Link>
+                      </li>
+                    }
                     <li className="nav-toggle-btn">
                       <div className="navbar-toggler">
                         <span></span>

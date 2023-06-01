@@ -1,3 +1,5 @@
+'use client'
+
 import React, { Fragment, useEffect, useRef, useState } from "react";
 
 let useClickOutside = (handler: any) => {
