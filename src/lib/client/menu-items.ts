@@ -77,8 +77,6 @@ export const AdminMenuItems: {
   ]
 }
 
-
-
 export function getMenuItems(roles: Array<string> = []): MenuItem[] {
   let items: Array<MenuItem> = []
 
@@ -133,18 +131,6 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
       icon: 'ti-power-off',
     }
   ]
-}
-
-export function isActive(
-  href: string = '',
-  segment: string | null = null, 
-  baseName: string | null = null) {
-  const parts = href.split("/");
-  console.log(parts);
-  if(baseName)
-    return segment == href || baseName == href;
-
-  return segment == href;
 }
 
 export interface MenuItem {
