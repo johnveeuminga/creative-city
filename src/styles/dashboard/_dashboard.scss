@@ -1,3 +1,4 @@
+@import "@/styles/variables";
 @import "sidebar";
 
 .dashboard {
@@ -11,6 +12,10 @@
     top: 0;
     width: 100%;
     z-index: 10;
+
+    h4 {
+      color: $primary-color;
+    }
 
     .user-avatar {
       display: flex;

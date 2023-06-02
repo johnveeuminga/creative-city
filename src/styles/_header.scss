@@ -452,6 +452,11 @@
 					}
 					& a{
 						color: $heading-color;
+            &:not(.icon) {
+              span {
+                margin-left: 0;
+              }
+            }
 						& span{
 							margin-left: 7px;
 							@media #{$lg}{

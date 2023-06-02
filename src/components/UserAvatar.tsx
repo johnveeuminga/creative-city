@@ -1,7 +1,7 @@
 'use client'
 
 import Avatar from "react-avatar"
-import styles from '@/styles/user-avatar.module.css'
+import styles from '@/styles/user-avatar.module.scss'
 
 export default function UserAvatar({ 
   user,
@@ -15,6 +15,7 @@ export default function UserAvatar({
 }) {
   return (
     <Avatar 
+      color="" 
       size={size}
       className={[className, styles.avatar].join(" ")} 
       name={user.name ?? "Creative City"}>
