@@ -7,13 +7,13 @@ export default function Artwork({
   onClick,
 }: {
   artwork: Artwork
-  onClick: OnClick
+  onClick?: OnClick
 }) {
   const [state, setState] = useState();
 
   return (
     <div 
-      onClick={async () => await onClick(artwork.id)}
+      // onClick={async () => await onClick(artwork.id)}
       className="card">
       <div className="card-header">
         <p className="card-title">{ artwork.name }</p>

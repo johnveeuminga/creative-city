@@ -13,7 +13,7 @@ export default async function ArtworksPage() {
           key={artwork.id}
           className="col-md-3">
           <Artwork 
-            onClick={handleOnClick}
+            // onClick={handleOnClick}
             artwork={artwork} />
         </div>
       ))
