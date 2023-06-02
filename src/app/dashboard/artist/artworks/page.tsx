@@ -14,7 +14,9 @@ export default async function ArtworksPage() {
 
     return (
       artworks.map((artwork: any)=> (
-        <div className="col-md-3">
+        <div 
+          key={artwork.id}
+          className="col-md-3">
           <Artwork 
             onClick={handleOnClick}
             artwork={artwork} />
