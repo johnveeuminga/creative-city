@@ -24,7 +24,7 @@ export async function GET() {
   return NextResponse.redirect(accountsUrl);
 }
 
-export function buildUrl(endpoint: string, {
+function buildUrl(endpoint: string, {
   cognitoRedirectUrl,
   cognitoAppId,
   cognitoBaseUrl,

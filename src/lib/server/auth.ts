@@ -59,7 +59,7 @@ export async function decodeToken(token: string, tokenUse: "id" | "access" = "id
     const payload = await verifier.verify(token);
 
     return payload
-  } catch {
+  } catch(err) {
     throw("Token is not valid")
   }
 }

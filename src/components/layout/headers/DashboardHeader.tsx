@@ -1,10 +1,10 @@
 import UserAvatar from "@/components/UserAvatar";
 import { getServerSession } from "@/lib/server/auth";
 import Link from "next/link";
+import { Suspense } from "react";
+import CurrentUserAvatar from "./CurrentUserAvatar";
 
 export default async function DashboardHeader() {
-  const session = await getServerSession();
-
   return(
     <header className="dashboard-header">
 
@@ -17,10 +17,10 @@ export default async function DashboardHeader() {
       </div>
       <div className="header-right">
         <div className="user-avatar d-flex">
-          <UserAvatar 
-            className='avatar'
-            user={ session.user }/>
-          <span>{session.user.name}</span>
+          <Suspense fallback={<p>Loading...</p>}>
+            {/* @ts-expect-error Server Component */}
+            <CurrentUserAvatar />
+          </Suspense>
         </div>
       </div>
     </header>

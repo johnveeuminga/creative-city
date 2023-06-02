@@ -7,9 +7,9 @@ import { About, Blog, Contact, Home, Listing, Pages } from "./Menu";
 const MobileMenu = () => {
   const [toggle, setToggle] = useState(false);
   const [activeMenu, setActiveMenu] = useState("");
-  const activeMenuSet = (value) =>
+  const activeMenuSet = (value: any) =>
       setActiveMenu(activeMenu === value ? "" : value),
-    activeLi = (value) =>
+    activeLi = (value: any) =>
       value === activeMenu ? { display: "block" } : { display: "none" };
   return (
     <header className="header-area header-area-one d-xl-none">
