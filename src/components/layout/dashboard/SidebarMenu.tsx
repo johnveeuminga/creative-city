@@ -10,7 +10,9 @@ export default async function SidebarMenu() {
   return (
     <ul className="dashboard-sidebar__menu">
     { menuItems.map(item => (
-      <SidebarMenuItem item={item} />
+      <SidebarMenuItem 
+        key={item.name}
+        item={item} />
     ))}
   </ul>
   )
