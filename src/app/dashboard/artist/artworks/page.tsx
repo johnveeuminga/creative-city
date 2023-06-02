@@ -5,7 +5,6 @@ import { getServerSession } from "@/lib/server/auth";
 import { Suspense, useState } from "react";
 
 export default async function ArtworksPage() {
-  // Export to another file
   async function ArtworkList() {
     const artworks = await prisma.artwork.findMany();
 
