@@ -11,6 +11,11 @@
     top: 0;
     width: 100%;
     z-index: 10;
+
+    .user-avatar {
+      display: flex;
+      align-items: center;
+    }
     
     .avatar {
       margin-right: 10px;
@@ -22,6 +27,7 @@
   .content {
     margin-top: 76px;
   }
+
 
   &-main-content {
     margin-top: 76px;

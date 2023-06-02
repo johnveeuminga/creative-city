@@ -12,12 +12,7 @@ const Header2 = () => {
               <div className="col-lg-2 col-5">
                 <div className="site-branding">
                   <Link href="/" className="brand-logo">
-
-                    <img
-                      src="assets/images/logo/logo-2.png"
-                      alt="Brand Logo"
-                    />
-
+                    Creative City
                   </Link>
                 </div>
               </div>
@@ -80,22 +75,6 @@ const Header2 = () => {
               <div className="col-lg-4 col-5">
                 <div className="header-right-nav">
                   <ul className="d-flex align-items-center">
-                    <li>
-                      <Link href="/">
-
-                        <i className="ti-heart"></i>
-                        <span>Wishlist</span>
-
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/">
-
-                        <i className="ti-shopping-cart"></i>
-                        <span>Cart</span>
-
-                      </Link>
-                    </li>
                     <li className="user-btn">
                       <Link href="/" className="icon">
 
