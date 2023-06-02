@@ -63,3 +63,17 @@ export async function decodeToken(token: string, tokenUse: "id" | "access" = "id
     throw("Token is not valid")
   }
 }
+
+export function buildUrl(endpoint: string, {
+  cognitoRedirectUrl,
+  cognitoAppId,
+  cognitoBaseUrl,
+}: {
+  cognitoRedirectUrl: string,
+  cognitoAppId: string,
+  cognitoBaseUrl: string,
+}): string {
+  const redirect_uri = encodeURIComponent(cognitoRedirectUrl);
+
+  return `${cognitoBaseUrl}/${endpoint}?response_type=code&client_id=${cognitoAppId}&redirect_uri=${redirect_uri}`;
+}

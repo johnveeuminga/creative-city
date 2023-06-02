@@ -117,7 +117,6 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
   }
 
   const ordered = items.sort(compare);
-  console.log(ordered);
 
   return [
     {
@@ -129,6 +128,7 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
     {
       name: 'Logout',
       icon: 'ti-power-off',
+      href: '/api/auth/logout',
     }
   ]
 }
