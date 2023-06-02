@@ -14,11 +14,13 @@ function Header({ header }: any) {
         // @ts-expect-error Server Component
         return <Header1 />;
       case 2:
+        // @ts-expect-error Server Component
         return <Header2 />;
       case 3:
         return <Header3 />;
 
       default:
+        // @ts-expect-error Server Component
         return <Header2 />;
     }
   };

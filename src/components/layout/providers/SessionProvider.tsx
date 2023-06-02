@@ -15,7 +15,7 @@ export default function SessionProvider({ children }: { children: React.ReactNod
       setUser(res);
     }
 
-    getUser();
+    // getUser();
   }, []);
 
   return (

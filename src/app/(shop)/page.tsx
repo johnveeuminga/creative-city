@@ -7,12 +7,9 @@ const Counter = dynamic(() => import("@/components/Counter"), {
 });
 
 import {
-  ClientSliderOne,
-  ListingSliderOne,
   PlaceSliderOne,
 } from "@/lib/sliderProps";
 import SlickSlider from "@/components/SlickSlider";
-import Layout from "../../components/layout/Layout";
 
 const Index = async () => {
   return <>

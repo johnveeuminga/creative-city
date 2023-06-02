@@ -6,6 +6,7 @@ export default function Layout({ children }:  {
 }) {
   return (
     <div className='dashboard'>
+      {/* @ts-expect-error Server Component */}
       <DashboardHeader />
       <div className="dashboard-content">
         <DashboardSidebar />
