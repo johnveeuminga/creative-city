@@ -13,9 +13,8 @@ export async function middleware(request: NextRequest) {
     });
 
     return response;
-  } else if (request.nextUrl.pathname.startsWith('/dashboard')) {
+  } else if (request.nextUrl.pathname.startsWith('/dashboardssss')) {
     const cookieToken = request.cookies.get('authToken');
-    const redirectUri = process.env.APP_URL ?? "/"
 
     if(!cookieToken || !cookieToken.value)
       return NextResponse.redirect(process.env.APP_URL ?? "/")
