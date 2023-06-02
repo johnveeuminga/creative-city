@@ -1,4 +1,4 @@
-import { handleOnClick } from "@/app/actions/artworks";
+import { handleOnClick } from "@/actions/artworks";
 import Artwork from "@/components/Artwork";
 import prisma from "@/lib/prisma";
 import { Suspense } from "react";
