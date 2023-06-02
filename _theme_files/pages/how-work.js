@@ -67,8 +67,8 @@ const HowWork = () => {
                           day image god their night his feed subdue so you rule
                           can.
                         </p>
-                        <Link href="/listing-grid">
-                          <a className="btn-link icon-btn">Explore List</a>
+                        <Link href="/listing-grid" className="btn-link icon-btn">
+                          Explore List
                         </Link>
                       </div>
                     </div>
@@ -100,8 +100,8 @@ const HowWork = () => {
                           day image god their night his feed subdue so you rule
                           can.
                         </p>
-                        <Link href="/listing-grid">
-                          <a className="btn-link icon-btn">Explore List</a>
+                        <Link href="/listing-grid" className="btn-link icon-btn">
+                          Explore List
                         </Link>
                       </div>
                     </div>
@@ -133,8 +133,8 @@ const HowWork = () => {
                           day image god their night his feed subdue so you rule
                           can.
                         </p>
-                        <Link href="/listing-grid">
-                          <a className="btn-link icon-btn">Explore List</a>
+                        <Link href="/listing-grid" className="btn-link icon-btn">
+                          Explore List
                         </Link>
                       </div>
                     </div>

@@ -38,8 +38,8 @@ const Pricing = () => {
                       <li>Always plan support</li>
                       <li>Visualization premise</li>
                     </ul>
-                    <Link href="/pricing">
-                      <a className="main-btn icon-btn">Get Started</a>
+                    <Link href="/pricing" className="main-btn icon-btn">
+                      Get Started
                     </Link>
                   </div>
                 </div>
@@ -61,8 +61,8 @@ const Pricing = () => {
                       <li>Always plan support</li>
                       <li>Visualization premise</li>
                     </ul>
-                    <Link href="/pricing">
-                      <a className="main-btn icon-btn">Get Started</a>
+                    <Link href="/pricing" className="main-btn icon-btn">
+                      Get Started
                     </Link>
                   </div>
                 </div>
@@ -84,8 +84,8 @@ const Pricing = () => {
                       <li>Always plan support</li>
                       <li>Visualization premise</li>
                     </ul>
-                    <Link href="/pricing">
-                      <a className="main-btn icon-btn">Get Started</a>
+                    <Link href="/pricing" className="main-btn icon-btn">
+                      Get Started
                     </Link>
                   </div>
                 </div>
@@ -140,12 +140,12 @@ const Pricing = () => {
               <div className="blog-post-item blog-post-item-one mb-40 wow fadeInUp">
                 <div className="post-thumbnail">
                   <Link href="/blog-details">
-                    <a>
-                      <img
-                        src="assets/images/blog/blog-1.jpg"
-                        alt="Blog Image"
-                      />
-                    </a>
+
+                    <img
+                      src="assets/images/blog/blog-1.jpg"
+                      alt="Blog Image"
+                    />
+
                   </Link>
                   <div className="post-date">
                     <a href="#">
@@ -160,7 +160,7 @@ const Pricing = () => {
                   </a>
                   <h3 className="title">
                     <Link href="/blog-details">
-                      <a>Duis nonummy socios mattis tempus penatibus</a>
+                      Duis nonummy socios mattis tempus penatibus
                     </Link>
                   </h3>
                   <div className="post-meta">
@@ -186,12 +186,12 @@ const Pricing = () => {
               <div className="blog-post-item blog-post-item-one mb-40 wow fadeInDown">
                 <div className="post-thumbnail">
                   <Link href="/blog-details">
-                    <a>
-                      <img
-                        src="assets/images/blog/blog-2.jpg"
-                        alt="Blog Image"
-                      />
-                    </a>
+
+                    <img
+                      src="assets/images/blog/blog-2.jpg"
+                      alt="Blog Image"
+                    />
+
                   </Link>
                   <div className="post-date">
                     <a href="#">
@@ -206,7 +206,7 @@ const Pricing = () => {
                   </a>
                   <h3 className="title">
                     <Link href="/blog-details">
-                      <a>Litora phasellus in phasellus curabitur porta eun</a>
+                      Litora phasellus in phasellus curabitur porta eun
                     </Link>
                   </h3>
                   <div className="post-meta">
@@ -232,12 +232,12 @@ const Pricing = () => {
               <div className="blog-post-item blog-post-item-one mb-40 wow fadeInUp">
                 <div className="post-thumbnail">
                   <Link href="/blog-details">
-                    <a>
-                      <img
-                        src="assets/images/blog/blog-3.jpg"
-                        alt="Blog Image"
-                      />
-                    </a>
+
+                    <img
+                      src="assets/images/blog/blog-3.jpg"
+                      alt="Blog Image"
+                    />
+
                   </Link>
                   <div className="post-date">
                     <a href="#">
@@ -251,7 +251,7 @@ const Pricing = () => {
                   </a>
                   <h3 className="title">
                     <Link href="/blog-details">
-                      <a>Mattis parturent tortor lectus lestie sapien Dapus</a>
+                      Mattis parturent tortor lectus lestie sapien Dapus
                     </Link>
                   </h3>
                   <div className="post-meta">

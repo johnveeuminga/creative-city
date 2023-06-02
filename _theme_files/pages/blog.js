@@ -27,12 +27,12 @@ const Blog = () => {
                 <div className="blog-post-item blog-post-item-four mb-50 wow fadeInUp">
                   <div className="post-thumbnail">
                     <Link href="/blog-details">
-                      <a>
-                        <img
-                          src="assets/images/blog/blog-standard-1.jpg"
-                          alt="Blog Image"
-                        />
-                      </a>
+
+                      <img
+                        src="assets/images/blog/blog-standard-1.jpg"
+                        alt="Blog Image"
+                      />
+
                     </Link>
                   </div>
                   <div className="entry-content">
@@ -63,7 +63,7 @@ const Blog = () => {
                     </div>
                     <h3 className="title">
                       <Link href="/blog-details">
-                        <a>Duis nonumer socios gem mattis</a>
+                        Duis nonumer socios gem mattis
                       </Link>
                     </h3>
                     <p>
@@ -79,12 +79,12 @@ const Blog = () => {
                 <div className="blog-post-item blog-post-item-four mb-50 wow fadeInUp">
                   <div className="post-thumbnail">
                     <Link href="/blog-details">
-                      <a>
-                        <img
-                          src="assets/images/blog/blog-standard-2.jpg"
-                          alt="Blog Image"
-                        />
-                      </a>
+
+                      <img
+                        src="assets/images/blog/blog-standard-2.jpg"
+                        alt="Blog Image"
+                      />
+
                     </Link>
                   </div>
                   <div className="entry-content">
@@ -115,7 +115,7 @@ const Blog = () => {
                     </div>
                     <h3 className="title">
                       <Link href="/blog-details">
-                        <a>Duis nonumer socios gem mattis</a>
+                        Duis nonumer socios gem mattis
                       </Link>
                     </h3>
                     <p>
@@ -131,12 +131,12 @@ const Blog = () => {
                 <div className="blog-post-item blog-post-item-four mb-50 wow fadeInUp">
                   <div className="post-thumbnail">
                     <Link href="/blog-details">
-                      <a>
-                        <img
-                          src="assets/images/blog/blog-standard-3.jpg"
-                          alt="Blog Image"
-                        />
-                      </a>
+
+                      <img
+                        src="assets/images/blog/blog-standard-3.jpg"
+                        alt="Blog Image"
+                      />
+
                     </Link>
                   </div>
                   <div className="entry-content">
@@ -167,7 +167,7 @@ const Blog = () => {
                     </div>
                     <h3 className="title">
                       <Link href="/blog-details">
-                        <a>Duis nonumer socios gem mattis</a>
+                        Duis nonumer socios gem mattis
                       </Link>
                     </h3>
                     <p>
@@ -229,12 +229,12 @@ const Blog = () => {
                 <div className="blog-post-item blog-post-item-four blog-post-video mb-50 wow fadeInUp">
                   <div className="post-thumbnail">
                     <Link href="/blog-details">
-                      <a>
-                        <img
-                          src="assets/images/blog/blog-standard-5.jpg"
-                          alt="Blog Image"
-                        />
-                      </a>
+
+                      <img
+                        src="assets/images/blog/blog-standard-5.jpg"
+                        alt="Blog Image"
+                      />
+
                     </Link>
                     <div className="play-content play-content-two text-center">
                       <a
@@ -278,7 +278,7 @@ const Blog = () => {
                     </div>
                     <h3 className="title">
                       <Link href="/blog-details">
-                        <a>Duis nonumer socios gem mattis</a>
+                        Duis nonumer socios gem mattis
                       </Link>
                     </h3>
                     <p>
@@ -399,7 +399,7 @@ const Blog = () => {
                         </span>
                         <h6>
                           <Link href="/blog-details">
-                            <a>Inceptos pharetra accusan tusto scelerisque</a>
+                            Inceptos pharetra accusan tusto scelerisque
                           </Link>
                         </h6>
                       </div>
@@ -417,7 +417,7 @@ const Blog = () => {
                         </span>
                         <h6>
                           <Link href="/blog-details">
-                            <a>Inceptos pharetra accusan tusto scelerisque</a>
+                            Inceptos pharetra accusan tusto scelerisque
                           </Link>
                         </h6>
                       </div>
@@ -435,7 +435,7 @@ const Blog = () => {
                         </span>
                         <h6>
                           <Link href="/blog-details">
-                            <a>Inceptos pharetra accusan tusto scelerisque</a>
+                            Inceptos pharetra accusan tusto scelerisque
                           </Link>
                         </h6>
                       </div>

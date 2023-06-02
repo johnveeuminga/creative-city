@@ -163,16 +163,16 @@ const ListingList = () => {
                       <ul className="filter-nav">
                         <li>
                           <Link href="/listing-grid">
-                            <a>
-                              <i className="ti-view-grid" />
-                            </a>
+
+                            <i className="ti-view-grid" />
+
                           </Link>
                         </li>
                         <li>
-                          <Link href="/listing-list">
-                            <a className="active">
-                              <i className="ti-view-list-alt" />
-                            </a>
+                          <Link href="/listing-list" className="active">
+
+                            <i className="ti-view-list-alt" />
+
                           </Link>
                         </li>
                       </ul>
@@ -202,7 +202,7 @@ const ListingList = () => {
                   <div className="listing-content">
                     <h3 className="title">
                       <Link href="/listing-details-1">
-                        <a>National Art</a>
+                        National Art
                       </Link>
                     </h3>
                     <div className="ratings">
@@ -273,7 +273,7 @@ const ListingList = () => {
                   <div className="listing-content">
                     <h3 className="title">
                       <Link href="/listing-details-1">
-                        <a>Food Corner</a>
+                        Food Corner
                       </Link>
                     </h3>
                     <div className="ratings">
@@ -344,7 +344,7 @@ const ListingList = () => {
                   <div className="listing-content">
                     <h3 className="title">
                       <Link href="/listing-details-1">
-                        <a>Central History</a>
+                        Central History
                       </Link>
                     </h3>
                     <div className="ratings">
@@ -415,7 +415,7 @@ const ListingList = () => {
                   <div className="listing-content">
                     <h3 className="title">
                       <Link href="/listing-details-1">
-                        <a>Xtream Gym</a>
+                        Xtream Gym
                       </Link>
                     </h3>
                     <div className="ratings">
@@ -486,7 +486,7 @@ const ListingList = () => {
                   <div className="listing-content">
                     <h3 className="title">
                       <Link href="/listing-details-1">
-                        <a>Mega Agency</a>
+                        Mega Agency
                       </Link>
                     </h3>
                     <div className="ratings">
@@ -557,7 +557,7 @@ const ListingList = () => {
                   <div className="listing-content">
                     <h3 className="title">
                       <Link href="/listing-details-1">
-                        <a>Central Plaza</a>
+                        Central Plaza
                       </Link>
                     </h3>
                     <div className="ratings">

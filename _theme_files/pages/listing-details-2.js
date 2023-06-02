@@ -74,15 +74,15 @@ const ListingDetails2 = () => {
                     </div>
                     <div className="col-md-4">
                       <div className="button">
-                        <Link href="/listing-grid">
-                          <a className="icon-btn">
-                            <i className="ti-heart" />
-                          </a>
+                        <Link href="/listing-grid" className="icon-btn">
+
+                          <i className="ti-heart" />
+
                         </Link>
-                        <Link href="/listing-grid">
-                          <a className="icon-btn">
-                            <i className="ti-share" />
-                          </a>
+                        <Link href="/listing-grid" className="icon-btn">
+
+                          <i className="ti-share" />
+
                         </Link>
                       </div>
                     </div>
@@ -571,7 +571,7 @@ const ListingDetails2 = () => {
                     <div className="listing-content">
                       <h3 className="title">
                         <Link href="/listing-details-1">
-                          <a>Pizza Recipe</a>
+                          Pizza Recipe
                         </Link>
                       </h3>
                       <p>Popular restaurant in california</p>
@@ -633,7 +633,7 @@ const ListingDetails2 = () => {
                     <div className="listing-content">
                       <h3 className="title">
                         <Link href="/listing-details-1">
-                          <a>Gym Ground</a>
+                          Gym Ground
                         </Link>
                       </h3>
                       <p>Popular restaurant in california</p>
@@ -696,7 +696,7 @@ const ListingDetails2 = () => {
                     <div className="listing-content">
                       <h3 className="title">
                         <Link href="/listing-details-1">
-                          <a>City Palace</a>
+                          City Palace
                         </Link>
                       </h3>
                       <p>Popular restaurant in california</p>

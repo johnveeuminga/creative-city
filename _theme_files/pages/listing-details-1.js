@@ -82,15 +82,15 @@ const ListingDetails1 = () => {
               </div>
               <div className="col-lg-3 col-md-6">
                 <div className="button">
-                  <Link href="/listing-grid">
-                    <a className="icon-btn">
-                      <i className="ti-heart" />
-                    </a>
+                  <Link href="/listing-grid" className="icon-btn">
+
+                    <i className="ti-heart" />
+
                   </Link>
-                  <Link href="/listing-grid">
-                    <a className="icon-btn">
-                      <i className="ti-share" />
-                    </a>
+                  <Link href="/listing-grid" className="icon-btn">
+
+                    <i className="ti-share" />
+
                   </Link>
                 </div>
               </div>

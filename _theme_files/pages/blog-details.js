@@ -169,24 +169,24 @@ const BlogDetails = () => {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="prev-post post-nav-item">
-                        <Link href="/blog-details">
-                          <a className="btn-link">Previous Post</a>
+                        <Link href="/blog-details" className="btn-link">
+                          Previous Post
                         </Link>
                         <h5>
                           <Link href="/blog-details">
-                            <a>Felis feugiat tellus puruse dui lectus nisi</a>
+                            Felis feugiat tellus puruse dui lectus nisi
                           </Link>
                         </h5>
                       </div>
                     </div>
                     <div className="col-md-6">
                       <div className="next-post post-nav-item">
-                        <Link href="/blog-details">
-                          <a className="btn-link">Next Post</a>
+                        <Link href="/blog-details" className="btn-link">
+                          Next Post
                         </Link>
                         <h5>
                           <Link href="/blog-details">
-                            <a>dapibus luctus do gravida feugiat fermtum</a>
+                            dapibus luctus do gravida feugiat fermtum
                           </Link>
                         </h5>
                       </div>
@@ -373,7 +373,7 @@ const BlogDetails = () => {
                         </span>
                         <h6>
                           <Link href="/blog-details">
-                            <a>Inceptos pharetra accusan tusto scelerisque</a>
+                            Inceptos pharetra accusan tusto scelerisque
                           </Link>
                         </h6>
                       </div>
@@ -391,7 +391,7 @@ const BlogDetails = () => {
                         </span>
                         <h6>
                           <Link href="/blog-details">
-                            <a>Inceptos pharetra accusan tusto scelerisque</a>
+                            Inceptos pharetra accusan tusto scelerisque
                           </Link>
                         </h6>
                       </div>
@@ -409,7 +409,7 @@ const BlogDetails = () => {
                         </span>
                         <h6>
                           <Link href="/blog-details">
-                            <a>Inceptos pharetra accusan tusto scelerisque</a>
+                            Inceptos pharetra accusan tusto scelerisque
                           </Link>
                         </h6>
                       </div>

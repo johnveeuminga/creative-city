@@ -36,8 +36,8 @@ const About = () => {
                       Congue men porttitor blandit erat to loborti lacinia
                       sapien pretium disenty
                     </p>
-                    <Link href="/how-work">
-                      <a className="btn-link icon-btn">More Details</a>
+                    <Link href="/how-work" className="btn-link icon-btn">
+                      More Details
                     </Link>
                   </div>
                 </div>
@@ -56,8 +56,8 @@ const About = () => {
                       Congue men porttitor blandit erat to loborti lacinia
                       sapien pretium disenty
                     </p>
-                    <Link href="/how-work">
-                      <a className="btn-link icon-btn">More Details</a>
+                    <Link href="/how-work" className="btn-link icon-btn">
+                      More Details
                     </Link>
                   </div>
                 </div>
@@ -76,8 +76,8 @@ const About = () => {
                       Congue men porttitor blandit erat to loborti lacinia
                       sapien pretium disenty
                     </p>
-                    <Link href="/how-work">
-                      <a className="btn-link icon-btn">More Details</a>
+                    <Link href="/how-work" className="btn-link icon-btn">
+                      More Details
                     </Link>
                   </div>
                 </div>
@@ -96,8 +96,8 @@ const About = () => {
                       Congue men porttitor blandit erat to loborti lacinia
                       sapien pretium disenty
                     </p>
-                    <Link href="/how-work">
-                      <a className="btn-link icon-btn">More Details</a>
+                    <Link href="/how-work" className="btn-link icon-btn">
+                      More Details
                     </Link>
                   </div>
                 </div>
@@ -203,8 +203,8 @@ const About = () => {
                     Pharetra venenatis ante pulvinar fermentum dignissim one
                     malesuada laoreet ridiculus fringilla quam
                   </p>
-                  <Link href="/listing-grid">
-                    <a className="main-btn icon-btn">Explore Now</a>
+                  <Link href="/listing-grid" className="main-btn icon-btn">
+                    Explore Now
                   </Link>
                 </div>
               </div>

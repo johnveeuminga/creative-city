@@ -149,17 +149,17 @@ const ListingGrid = () => {
                     <div className="filter-right">
                       <ul className="filter-nav">
                         <li>
-                          <Link href="/listing-grid">
-                            <a className="active">
-                              <i className="ti-view-grid" />
-                            </a>
+                          <Link href="/listing-grid" className="active">
+
+                            <i className="ti-view-grid" />
+
                           </Link>
                         </li>
                         <li>
                           <Link href="/listing-list">
-                            <a>
-                              <i className="ti-view-list-alt" />
-                            </a>
+
+                            <i className="ti-view-list-alt" />
+
                           </Link>
                         </li>
                       </ul>
@@ -206,7 +206,7 @@ const ListingGrid = () => {
                       <div className="listing-content">
                         <h3 className="title">
                           <Link href="/listing-details-1">
-                            <a>Pizza Recipe</a>
+                            Pizza Recipe
                           </Link>
                         </h3>
                         <p>Popular restaurant in california</p>
@@ -270,7 +270,7 @@ const ListingGrid = () => {
                       <div className="listing-content">
                         <h3 className="title">
                           <Link href="/listing-details-1">
-                            <a>Party Corner</a>
+                            Party Corner
                           </Link>
                         </h3>
                         <p>Popular restaurant in california</p>
@@ -334,7 +334,7 @@ const ListingGrid = () => {
                       <div className="listing-content">
                         <h3 className="title">
                           <Link href="/listing-details-1">
-                            <a>City Palace</a>
+                            City Palace
                           </Link>
                         </h3>
                         <p>Popular restaurant in california</p>
@@ -399,7 +399,7 @@ const ListingGrid = () => {
                       <div className="listing-content">
                         <h3 className="title">
                           <Link href="/listing-details-1">
-                            <a>Easter Plaza</a>
+                            Easter Plaza
                           </Link>
                         </h3>
                         <p>Popular restaurant in california</p>
@@ -464,7 +464,7 @@ const ListingGrid = () => {
                       <div className="listing-content">
                         <h3 className="title">
                           <Link href="/listing-details-1">
-                            <a>Gym Ground</a>
+                            Gym Ground
                           </Link>
                         </h3>
                         <p>Popular restaurant in california</p>
@@ -528,7 +528,7 @@ const ListingGrid = () => {
                       <div className="listing-content">
                         <h3 className="title">
                           <Link href="/listing-details-1">
-                            <a>Miyami Sea</a>
+                            Miyami Sea
                           </Link>
                         </h3>
                         <p>Popular restaurant in california</p>
@@ -592,7 +592,7 @@ const ListingGrid = () => {
                       <div className="listing-content">
                         <h3 className="title">
                           <Link href="/listing-details-1">
-                            <a>Gym Ground</a>
+                            Gym Ground
                           </Link>
                         </h3>
                         <p>Popular restaurant in california</p>
@@ -657,7 +657,7 @@ const ListingGrid = () => {
                       <div className="listing-content">
                         <h3 className="title">
                           <Link href="/listing-details-1">
-                            <a>Coffee Time</a>
+                            Coffee Time
                           </Link>
                         </h3>
                         <p>Popular restaurant in california</p>
