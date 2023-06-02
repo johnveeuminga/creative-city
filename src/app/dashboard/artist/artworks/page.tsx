@@ -5,7 +5,8 @@ import { Suspense } from "react";
 
 export default async function ArtworksPage() {
   async function ArtworkList() {
-    const artworks = await prisma.artwork.findMany();
+    // const artworks = await prisma.artwork.findMany();
+    const artworks: any = []
 
     return (
       artworks.map((artwork: any)=> (
