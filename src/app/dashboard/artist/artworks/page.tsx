@@ -1,8 +1,7 @@
 import { handleOnClick } from "@/app/actions/artworks";
 import Artwork from "@/components/Artwork";
 import prisma from "@/lib/prisma";
-import { getServerSession } from "@/lib/server/auth";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 
 export default async function ArtworksPage() {
   async function ArtworkList() {

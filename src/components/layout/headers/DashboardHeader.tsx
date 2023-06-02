@@ -1,5 +1,3 @@
-import UserAvatar from "@/components/UserAvatar";
-import { getServerSession } from "@/lib/server/auth";
 import Link from "next/link";
 import { Suspense } from "react";
 import CurrentUserAvatar from "./CurrentUserAvatar";

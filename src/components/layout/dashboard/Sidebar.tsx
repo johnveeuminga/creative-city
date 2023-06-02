@@ -1,8 +1,5 @@
-import UserAvatar from "@/components/UserAvatar";
-import { getMenuItems, menuItems } from "@/lib/client/menu-items";
 import React, { Suspense } from "react";
 import SidebarMenu from "./SidebarMenu";
-import { getServerSession } from "@/lib/server/auth";
 import SidebarUserAvatar from "./SidebarUserAvatar";
 
 export default async function DashboardSidebar() { 

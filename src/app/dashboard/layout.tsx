@@ -1,6 +1,5 @@
 import DashboardSidebar from '@/components/layout/dashboard/Sidebar';
 import DashboardHeader from "@/components/layout/headers/DashboardHeader"
-import { Suspense } from 'react';
 
 export default function Layout({ children }:  {
   children: React.ReactNode
