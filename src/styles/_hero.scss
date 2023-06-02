@@ -78,7 +78,7 @@
     &:after{
         width: 43.5%;
         right: 0;
-        background: url(../images/hero/hero-one-bg-2.jpg) no-repeat center center;
+        background: url(/assets/images/hero/hero-one-bg-2.jpg) no-repeat center center;
         background-size: cover;
         @media #{$xm}{
             display: none;
@@ -87,7 +87,7 @@
     &:before{
         width: 56.5%;
         left: 0;
-        background: url(../images/hero/hero-one-bg-1.jpg)no-repeat center center;
+        background: url(/assets/images/hero/hero-one-bg-1.jpg)no-repeat center center;
         background-size: cover;
         @media #{$xm}{
             width: 100%;
@@ -285,7 +285,7 @@
     }
     &:after{
         right: 0;
-        background: url(../images/bg/breadcrumbs-bg-2.jpg) no-repeat center;
+        background: url(/assets/images/bg/breadcrumbs-bg-2.jpg) no-repeat center;
         background-size: cover;
         @media #{$xm}{
             display: none;
@@ -293,7 +293,7 @@
     }
     &:before{
         left: 0;
-        background: url(../images/bg/breadcrumbs-bg-1.jpg)no-repeat center;
+        background: url(/assets/images/bg/breadcrumbs-bg-1.jpg)no-repeat center;
         background-size: cover;
         @media #{$xm}{
             width: 100%;

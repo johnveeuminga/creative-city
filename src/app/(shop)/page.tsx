@@ -12,11 +12,11 @@ import {
   PlaceSliderOne,
 } from "@/lib/sliderProps";
 import SlickSlider from "@/components/SlickSlider";
-import Layout from "./layout/Layout";
+import Layout from "../../components/layout/Layout";
 
 const Index = async () => {
   return (
-    <Layout>
+    <>
       {/* <!--====== Start Hero Section ======--> */}
       <section className="hero-area">
         <div className="hero-wrapper-one">
@@ -1505,7 +1505,7 @@ const Index = async () => {
         </div>
       </section>
       {/* <!--====== End Blog Section ======--> */}
-    </Layout>
+    </>
   );
 };
 export default Index;

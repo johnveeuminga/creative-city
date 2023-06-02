@@ -1,4 +1,4 @@
-import SessionProvider from "@/app/layout/providers/SessionProvider";
+import SessionProvider from "@/components/layout/providers/SessionProvider";
 import React from "react";
 
 export const SessionContext = React.createContext({

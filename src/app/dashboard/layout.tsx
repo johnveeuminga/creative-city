@@ -1,13 +1,19 @@
+import DashboardSidebar from '@/components/layout/dashboard/Sidebar';
+import DashboardHeader from "@/components/layout/headers/DashboardHeader"
+
 export default function Layout({ children }:  {
   children: React.ReactNode
 }) {
   return (
-    <>
-      <aside></aside>
-      <main>
-        <p> THis is your dashboard </p>
-        { children }
-      </main>
-    </>
+    <div className='dashboard'>
+      <DashboardHeader />
+      <div className="dashboard-content">
+        <DashboardSidebar />
+        <main className='dashboard-main-content'>
+          <p> THis is your dashboard </p>
+          { children }
+        </main>
+      </div>
+    </div>
   )
 }
