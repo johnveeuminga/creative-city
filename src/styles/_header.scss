@@ -469,7 +469,7 @@
                         width: 55px;
                         height: 55px;
                         background-color: $secondary-color;
-                        color: $heading-color;
+                        color: $white;
                         border-radius: 50%;
 						@media #{$xm}{
 							width: 40px;
@@ -722,7 +722,7 @@
 .header-area-two {
   .site-branding {
     .brand-logo {
-      color: $heading-color-dark;
+      color: $primary-color;
       font-size: 28px;
       font-weight: 800;
       font-family: 'Quicksand';
