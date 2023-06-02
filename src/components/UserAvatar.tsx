@@ -5,9 +5,19 @@ import styles from '@/styles/user-avatar.module.css'
 
 export default function UserAvatar({ 
   user,
-  className
-}: { user: any, className?: string}) {
+  className,
+  size="40"
+
+}: { 
+  user: any, 
+  className?: string,
+  size?: string
+}) {
   return (
-    <Avatar size="40" className={[className, styles.avatar].join(" ")} name={user.name ?? "Creative City"}></Avatar>
+    <Avatar 
+      size={size}
+      className={[className, styles.avatar].join(" ")} 
+      name={user.name ?? "Creative City"}>
+    </Avatar>
   )
 }

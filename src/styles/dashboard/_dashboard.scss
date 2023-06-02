@@ -1,0 +1,30 @@
+@import "sidebar";
+
+.dashboard {
+  .dashboard-header {
+    padding: 10px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+    
+    .avatar {
+      margin-right: 10px;
+    }
+
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,.05);
+  }
+
+  .content {
+    margin-top: 76px;
+  }
+
+  &-main-content {
+    margin-top: 76px;
+    margin-left: 340px;
+  }
+}

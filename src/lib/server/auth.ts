@@ -4,10 +4,15 @@ import { cookies } from "next/dist/client/components/headers";
 
 // TODO: Typesafe this route with a user object.
 export async function getServerSession() {
-  const token = cookies().get('authToken');
+  const token = cookies().get('authToken') ?? ''
 
-  if(!token) 
-    throw('No token');
+  const ret = {
+    user: null,
+    isAuthenticated: false,
+  }
+
+  if(!token)
+    return ret
 
   try {
     const userInfoReq =  fetch(`${process.env.COGNITO_BASE_URL}/oauth2/userInfo`, {
@@ -31,7 +36,6 @@ export async function getServerSession() {
 
     return res
   } catch(err) {
-    // throw('Unauthorized')
     const res = {
       user: null,
       isAuthenticated: false,

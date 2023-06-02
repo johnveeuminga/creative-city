@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import ImageView from "../../components/ImageView";
+import ImageView from "../ImageView";
 import { activeNavMenu, animation, niceSelect, stickyNav } from "../../lib/utils";
 import Footer from "./Footer";
 import Header from "./headers/Header";
