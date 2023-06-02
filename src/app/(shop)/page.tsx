@@ -19,48 +19,65 @@ const Index = async () => {
     <>
       {/* <!--====== Start Hero Section ======--> */}
       <section className="hero-area">
-        <div className="hero-wrapper-one">
+        <div
+          className="hero-wrapper-two bg_cover"
+          style={{ backgroundImage: "url(assets/images/hero/hero-bg-2.jpg)" }}
+        >
           <div className="container">
             <div className="row">
-              <div className="col-lg-8">
+              <div className="col-lg-12">
                 <div className="hero-content">
-                  <h1 className="wow fadeInUp" wow-data-delay="30mss">
-                    Dream Explore Discover
+                  <h1 className="wow fadeInUp" data-wow-delay="30ms">
+                    Experience The Wonder
                   </h1>
-                  <h3 className="wow fadeInDown" wow-data-delay="50ms">
+                  <h3 className="wow fadeInDown" data-wow-delay="50ms">
                     People Don’t Take,Trips Take People
                   </h3>
                   <div
                     className="hero-search-wrapper wow fadeInUp"
-                    wow-data-delay="70ms"
+                    data-wow-delay="70ms"
                   >
                     <form>
                       <div className="row">
-                        <div className="col-lg-5 col-md-4 col-sm-12">
+                        <div className="col-lg-9 col-md-7 col-sm-12">
                           <div className="form_group">
                             <input
                               type="search"
                               className="form_control"
                               placeholder="Search By Category"
                               name="search"
-                              required
+                              required=""
                             />
-                            <i className="ti-ink-pen"></i>
+                            <i className="ti-ink-pen" />
                           </div>
                         </div>
-                        <div className="col-lg-4 col-md-4 col-sm-12">
+                        {/* <div className="col-lg-3 col-md-6 col-sm-12">
+                          <div className="form_group">
+                            <select className="wide">
+                              <option value="01">Museums</option>
+                              <option value="02">Restaurant</option>
+                              <option value="03">Party Center</option>
+                              <option value="04">Fitness Zone</option>
+                              <option value="05">Game Field</option>
+                              <option value="06">Job &amp; Feeds</option>
+                              <option value="07">Shooping</option>
+                              <option value="08">Art Gallery</option>
+                            </select>
+                          </div>
+                        </div> */}
+                        {/* <div className="col-lg-3 col-md-6 col-sm-12">
                           <div className="form_group">
                             <input
                               type="text"
                               className="form_control"
                               placeholder="Location"
                               name="location"
-                              required
+                              required=""
                             />
-                            <i className="ti-location-pin"></i>
+                            <i className="ti-location-pin" />
                           </div>
-                        </div>
-                        <div className="col-lg-3 col-md-4 col-sm-12">
+                        </div> */}
+                        <div className="col-lg-3 col-md-5 col-sm-12">
                           <div className="form_group">
                             <button className="main-btn icon-btn">
                               Search Now
@@ -70,117 +87,272 @@ const Index = async () => {
                       </div>
                     </form>
                   </div>
-                  <p className="tags">
+                  {/* <p className="tags">
                     <span>Popular:</span>
                     <a href="#">Saloon</a>,<a href="#">Restaurant</a>,
                     <a href="#">Game</a>,<a href="#">Counter</a>,
                     <a href="#">Train Station</a>,<a href="#">Parking</a>,
                     <a href="#">Shooping</a>
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section> 
       {/* <!--====== End Hero Section ======--> */}
       {/* <!--====== Start Category Section ======--> */}
-      <section className="category-area">
+      <section className="category-area pt-110 pb-90">
         <div className="container">
-          <div className="category-wrapper-one wow fadeInDown">
-            <div className="row no-gutters">
-              <div className="col-lg-2 col-md-4 category-column">
-                <div className="category-item category-item-one">
-                  <div className="info text-center">
-                    <div className="icon">
-                      <i className="flaticon-government"></i>
+          <div className="row justify-content-center">
+            <div className="col-lg-6">
+              <div className="section-title section-title-two text-center mb-60 wow fadeInUp">
+                <h2>
+                  <span className="line">Destination</span> Category
+                </h2>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-3 col-md-6 col-sm-12">
+              <div
+                className="category-item category-item-two mb-25 wow fadeInUp"
+                data-wow-delay=".2s"
+              >
+                <div className="category-img">
+                  <img
+                    src="assets/images/category/cat-1.jpg"
+                    alt="Category Image"
+                  />
+                  <div className="category-overlay">
+                    <div className="category-content">
+                      <Link href="/index-2">
+                        <a>
+                          <i className="ti-link" />
+                        </a>
+                      </Link>
                     </div>
-                    <h6>Museums</h6>
                   </div>
-                  <Link href="/" legacyBehavior>
-                    <i className="ti-arrow-right"></i>
-                  </Link>
+                </div>
+                <div className="info">
+                  <div className="icon">
+                    <i className="flaticon-government" />
+                  </div>
+                  <h3 className="title">
+                    <a href="#">Museums</a>
+                  </h3>
+                  <span className="listing">15 Listing</span>
                 </div>
               </div>
-              <div className="col-lg-2 col-md-4 category-column">
-                <div className="category-item category-item-one">
-                  <div className="info text-center">
-                    <div className="icon">
-                      <i className="flaticon-serving-dish"></i>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12">
+              <div
+                className="category-item category-item-two mb-25 wow fadeInUp"
+                data-wow-delay=".25s"
+              >
+                <div className="category-img">
+                  <img
+                    src="assets/images/category/cat-2.jpg"
+                    alt="Category Image"
+                  />
+                  <div className="category-overlay">
+                    <div className="category-content">
+                      <Link href="/index-2">
+                        <a>
+                          <i className="ti-link" />
+                        </a>
+                      </Link>
                     </div>
-                    <h6>Restaurant</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
-                  </Link>
+                </div>
+                <div className="info">
+                  <div className="icon">
+                    <i className="flaticon-serving-dish" />
+                  </div>
+                  <h3 className="title">
+                    <a href="#">Restaurant</a>
+                  </h3>
+                  <span className="listing">15 Listing</span>
                 </div>
               </div>
-              <div className="col-lg-2 col-md-4 category-column">
-                <div className="category-item category-item-one">
-                  <div className="info text-center">
-                    <div className="icon">
-                      <i className="flaticon-game-controller"></i>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12">
+              <div
+                className="category-item category-item-two mb-25 wow fadeInUp"
+                data-wow-delay=".30s"
+              >
+                <div className="category-img">
+                  <img
+                    src="assets/images/category/cat-3.jpg"
+                    alt="Category Image"
+                  />
+                  <div className="category-overlay">
+                    <div className="category-content">
+                      <Link href="/index-2">
+                        <i className="ti-link" />
+                      </Link>
                     </div>
-                    <h6>Game Field</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
-                  </Link>
+                </div>
+                <div className="info">
+                  <div className="icon">
+                    <i className="flaticon-gift-box" />
+                  </div>
+                  <h3 className="title">
+                    <a href="#">Party Center</a>
+                  </h3>
+                  <span className="listing">15 Listing</span>
                 </div>
               </div>
-              <div className="col-lg-2 col-md-4 category-column">
-                <div className="category-item category-item-one">
-                  <div className="info text-center">
-                    <div className="icon">
-                      <i className="flaticon-suitcase"></i>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12">
+              <div
+                className="category-item category-item-two mb-25 wow fadeInUp"
+                data-wow-delay=".35s"
+              >
+                <div className="category-img">
+                  <img
+                    src="assets/images/category/cat-4.jpg"
+                    alt="Category Image"
+                  />
+                  <div className="category-overlay">
+                    <div className="category-content">
+                      <Link href="/index-2">
+                        <i className="ti-link" />
+                      </Link>
                     </div>
-                    <h6>Job & Feed</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
-                  </Link>
+                </div>
+                <div className="info">
+                  <div className="icon">
+                    <i className="flaticon-dumbbell" />
+                  </div>
+                  <h3 className="title">
+                    <a href="#">Fitness Zone</a>
+                  </h3>
+                  <span className="listing">15 Listing</span>
                 </div>
               </div>
-              <div className="col-lg-2 col-md-4 category-column">
-                <div className="category-item category-item-one">
-                  <div className="info text-center">
-                    <div className="icon">
-                      <i className="flaticon-gift-box"></i>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12">
+              <div
+                className="category-item category-item-two mb-25 wow fadeInUp"
+                data-wow-delay=".40s"
+              >
+                <div className="category-img">
+                  <img
+                    src="assets/images/category/cat-5.jpg"
+                    alt="Category Image"
+                  />
+                  <div className="category-overlay">
+                    <div className="category-content">
+                      <Link href="/index-2">
+                        <i className="ti-link" />
+                      </Link>
                     </div>
-                    <h6>Party Center</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
-                  </Link>
+                </div>
+                <div className="info">
+                  <div className="icon">
+                    <i className="flaticon-game-controller" />
+                  </div>
+                  <h3 className="title">
+                    <a href="#">Game Field</a>
+                  </h3>
+                  <span className="listing">15 Listing</span>
                 </div>
               </div>
-              <div className="col-lg-2 col-md-4 category-column">
-                <div className="category-item category-item-one">
-                  <div className="info text-center">
-                    <div className="icon">
-                      <i className="flaticon-dumbbell"></i>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12">
+              <div
+                className="category-item category-item-two mb-25 wow fadeInUp"
+                data-wow-delay=".45s"
+              >
+                <div className="category-img">
+                  <img
+                    src="assets/images/category/cat-6.jpg"
+                    alt="Category Image"
+                  />
+                  <div className="category-overlay">
+                    <div className="category-content">
+                      <Link href="/index-2">
+                        <i className="ti-link" />
+                      </Link>
                     </div>
-                    <h6>Fitness Zone</h6>
                   </div>
-                  <Link href="/" className="category-btn" legacyBehavior>
-
-                    <i className="ti-arrow-right"></i>
-
-                  </Link>
+                </div>
+                <div className="info">
+                  <div className="icon">
+                    <i className="flaticon-suitcase" />
+                  </div>
+                  <h3 className="title">
+                    <a href="#">Job &amp; Feeds</a>
+                  </h3>
+                  <span className="listing">15 Listing</span>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12">
+              <div
+                className="category-item category-item-two mb-25 wow fadeInUp"
+                data-wow-delay=".50s"
+              >
+                <div className="category-img">
+                  <img
+                    src="assets/images/category/cat-7.jpg"
+                    alt="Category Image"
+                  />
+                  <div className="category-overlay">
+                    <div className="category-content">
+                      <Link href="/index-2">
+                        <i className="ti-link" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="info">
+                  <div className="icon">
+                    <i className="flaticon-shopping" />
+                  </div>
+                  <h3 className="title">
+                    <a href="#">Shooping</a>
+                  </h3>
+                  <span className="listing">15 Listing</span>
+                </div>
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-6 col-sm-12">
+              <div
+                className="category-item category-item-two mb-25 wow fadeInUp"
+                data-wow-delay=".55s"
+              >
+                <div className="category-img">
+                  <img
+                    src="assets/images/category/cat-8.jpg"
+                    alt="Category Image"
+                  />
+                  <div className="category-overlay">
+                    <div className="category-content">
+                      <Link href="/index-2">
+                          <i className="ti-link" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                <div className="info">
+                  <div className="icon">
+                    <i className="flaticon-color-palette" />
+                  </div>
+                  <h3 className="title">
+                    <a href="#">Art Gallery</a>
+                  </h3>
+                  <span className="listing">15 Listing</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </section> 
       {/* <!--====== End Category Section ======--> */}
       {/* <!--====== Start Listing Section ======--> */}
       <section className="listing-grid-area pt-115 pb-75">

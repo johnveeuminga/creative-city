@@ -19,8 +19,7 @@ function Header({ header }: any) {
         return <Header3 />;
 
       default:
-        // @ts-expect-error Server Component
-        return <Header1 />;
+        return <Header2 />;
     }
   };
   return <Fragment>{getHeader()}</Fragment>;
