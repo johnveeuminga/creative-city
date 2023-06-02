@@ -8,7 +8,6 @@ import UserAvatar from "@/components/UserAvatar";
 
 const Header1 = async () => {
   const session = await getServerSession();
-  console.log(session);
 
   return (
     <header className="header-area header-area-one d-none d-xl-block">

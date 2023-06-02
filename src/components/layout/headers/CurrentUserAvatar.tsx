@@ -3,6 +3,7 @@ import { getServerSession } from "@/lib/server/auth";
 
 export default async function CurrentUserAvatar() {
   const session = await getServerSession();
+  console.log(session)
 
   return (
     <div className="user-avatar d-flex">

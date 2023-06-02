@@ -7,7 +7,6 @@ import UserAvatar from "@/components/UserAvatar";
 const Header2 = async () => {
   const session = await getServerSession();
 
-  console.log(session);
   return (
     <header className="header-area header-area-two d-none d-xl-block">
       <div className="header-navigation">

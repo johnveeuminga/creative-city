@@ -14,7 +14,7 @@ export async function middleware(request: NextRequest) {
 
     return response;
   } else if (request.nextUrl.pathname.startsWith('/dashboard')) {
-    const cookieToken = request.cookies.get('authToken')
+    const cookieToken = request.cookies.get('authToken');
     const redirectUri = process.env.APP_URL ?? "/"
 
     if(!cookieToken || !cookieToken.value)
@@ -22,8 +22,11 @@ export async function middleware(request: NextRequest) {
 
     try {
       await decodeToken(cookieToken.value, "access")
+
+      return NextResponse.next();
     } catch(err) {
-      // return NextResponse.redirect(process.env.APP_URL ?? "/")
+      console.log("Next")
+      return NextResponse.redirect(process.env.APP_URL ?? "/")
     }
   }
 }

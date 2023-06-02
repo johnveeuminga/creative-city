@@ -12,7 +12,6 @@ export async function GET(req: NextRequest) {
 
     return NextResponse.json(user)
   } catch(err) {
-    console.log(err)
     return NextResponse.json('Unauthorized', { status: 401 })
   }
 }

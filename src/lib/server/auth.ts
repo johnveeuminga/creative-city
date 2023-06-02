@@ -24,11 +24,15 @@ export async function getServerSession() {
     const decodeTokenReq = decodeToken(token.value, "access")
 
     const [userInfoRes, tokenDecoded] = await Promise.all([userInfoReq, decodeTokenReq])
+    // const userInfoRes = await userInfoReq;
     const userInfo = await userInfoRes.json();
 
     const res = {
       user: {
         ...userInfo,
+        // groups: [
+        //   'artist'
+        // ],
         groups: tokenDecoded['cognito:groups'] ?? [],
       }, 
       isAuthenticated: true,

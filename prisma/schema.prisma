@@ -26,7 +26,7 @@ model Artwork {
   description String   @db.LongText
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now())
-  artist      User     @relation(fields: [artirst_id], references: [id])
-  artirst_id  Int
+  artist      User     @relation(fields: [artist_id], references: [id])
+  artist_id  Int
 }
 

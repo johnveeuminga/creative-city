@@ -50,7 +50,8 @@ export const ArtistMenuItems: {
       name: 'My Artworks',
       icon: 'ti-gallery',
       href: '/dashboard/artist/artworks',
-      priority: 12
+      priority: 12,
+      prefetch: false,
     },
   ]
 }
@@ -127,9 +128,14 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
     },
     ...ordered,
     {
+      name: 'Account',
+      icon: 'ti-user'
+    },
+    {
       name: 'Logout',
       icon: 'ti-power-off',
       href: '/api/auth/logout',
+      prefetch: false,
     }
   ]
 }
@@ -140,5 +146,6 @@ export interface MenuItem {
   icon?: string;
   href?: string;
   priority?: number;
+  prefetch?: boolean;
 }
 
