@@ -8,12 +8,10 @@ export default async function DashboardSidebar() {
       <div className="dashboard-sidebar__content">
         <div className="dashboard-sidebar__header">
           <Suspense fallback={<p>Loading avatar...</p>}>
-            {/* @ts-expect-error Server Component */}
             <SidebarUserAvatar />
           </Suspense>
           <div className="dashboard-sidebar__menu-container">
           <Suspense fallback={<p>Loading sidebar...</p>}>
-            {/* @ts-expect-error Server Component */}
             <SidebarMenu />
           </Suspense>
           </div>

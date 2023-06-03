@@ -13,18 +13,19 @@ export async function middleware(request: NextRequest) {
     });
 
     return response;
-  } else if (request.nextUrl.pathname.startsWith('/dashboardssss')) {
-    const cookieToken = request.cookies.get('authToken');
+  } else if (request.nextUrl.pathname.startsWith('/dashboard')) {
+    const cookieToken = request.cookies.get('idToken');
 
     if(!cookieToken || !cookieToken.value)
       return NextResponse.redirect(process.env.APP_URL ?? "/")
 
     try {
-      await decodeToken(cookieToken.value, "access")
+      console.log("From middleware")
+      await decodeToken(cookieToken.value)
 
       return NextResponse.next();
     } catch(err) {
-      console.log("Next")
+      console.log(err)
       return NextResponse.redirect(process.env.APP_URL ?? "/")
     }
   }

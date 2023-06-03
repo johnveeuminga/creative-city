@@ -4,8 +4,8 @@ import { getServerSession } from "@/lib/server/auth";
 
 
 export default async function SidebarMenu() {
-  const session = await getServerSession();
-  const menuItems = getMenuItems(session.user.groups);
+  const session = await getServerSession("Sidebar Menu");
+  const menuItems = getMenuItems(session?.user?.groups ?? []);
 
   return (
     <SidebarMenuItems items={menuItems}></SidebarMenuItems>

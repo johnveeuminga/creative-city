@@ -16,7 +16,6 @@ export default async function DashboardHeader() {
       <div className="header-right">
         <div className="user-avatar d-flex">
           <Suspense fallback={<p>Loading...</p>}>
-            {/* @ts-expect-error Server Component */}
             <CurrentUserAvatar />
           </Suspense>
         </div>

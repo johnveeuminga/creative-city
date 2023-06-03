@@ -9,7 +9,8 @@ export default function SidebarMenuItems({
 }: {
   items: MenuItem[]
 }) {
-  const route = usePathname();
+  // const route = usePathname();
+  const route = '';
 
   return(
     <ul>

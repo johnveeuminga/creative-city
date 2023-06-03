@@ -1,38 +1,51 @@
 import { CognitoJwtVerifier } from "aws-jwt-verify";
-import { CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
+import { CognitoIdTokenPayload, CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
 import { cookies } from "next/dist/client/components/headers";
+import * as jwt from "jsonwebtoken"
+import verifier from "../cognito";
+import { Json } from "aws-jwt-verify/safe-json-parse";
+
+interface User {
+  name: string,
+  username: string,
+  email: string,
+  groups?: string[]
+}
 
 // TODO: Typesafe this route with a user object.
-export async function getServerSession() {
-  const token = cookies().get('authToken') ?? ''
+export async function getServerSession(referrer="default"): Promise<{
+  user: User | null,
+  isAuthenticated: boolean,
+  error?: any,
+}> {
+  const token = cookies().get('idToken') ?? ''
+  console.log("Request from: ", referrer);
 
   const ret = {
     user: null,
     isAuthenticated: false,
+    error: null, 
   }
 
-  if(!token)
-    return ret
+  if(!token) {
+    return {
+      ...ret,
+      error: {
+        status: 401,
+        message: "No Token Specified"
+      }
+    }
+  }
 
   try {
-    const userInfoReq =  fetch(`${process.env.COGNITO_BASE_URL}/oauth2/userInfo`, {
-      headers: {
-        'Authorization': `Bearer ${token.value}`
-      }
-    });
-
-    const decodeTokenReq = decodeToken(token.value, "access")
-
-    const [userInfoRes, tokenDecoded] = await Promise.all([userInfoReq, decodeTokenReq])
-    // const userInfoRes = await userInfoReq;
-    const userInfo = await userInfoRes.json();
+    const decodeTokenReq = decodeToken(token.value, "id")
+    const tokenDecoded = await decodeTokenReq
 
     const res = {
       user: {
-        ...userInfo,
-        // groups: [
-        //   'artist'
-        // ],
+        name: tokenDecoded["name"],
+        username: tokenDecoded["username"],
+        email: tokenDecoded["email"],
         groups: tokenDecoded['cognito:groups'] ?? [],
       }, 
       isAuthenticated: true,
@@ -49,23 +62,36 @@ export async function getServerSession() {
   }
 }
 
-export async function decodeToken(token: string, tokenUse: "id" | "access" = "id"): Promise<CognitoJwtPayload> {
+type JWTDecodeResponse = CognitoIdTokenPayload & {
+  name: string,
+  username: string,
+  email: string,
+  groups: string
+};
+
+
+// interface JWTDecodeResponse extends CognitoIdTokenPayload, JsonObject {
+//   // "cognito:groups": Array<string>
+// }
+
+export async function decodeToken(token: string, tokenUse: "id" | "access" = "id"): Promise<JWTDecodeResponse> {
   if(!process.env.COGNITO_USER_POOL_ID || !process.env.COGNITO_CLIENT_ID)
     throw("No user pool ID or user pool ID configured")
 
-  const verifier = CognitoJwtVerifier.create({
-    userPoolId: process.env.COGNITO_USER_POOL_ID,
-    tokenUse,
-    clientId: process.env.COGNITO_CLIENT_ID,
-  })
-
   try {
-    const payload = await verifier.verify(token);
+    const payload = await verifier.verify(token) as JWTDecodeResponse;
+
 
     return payload
   } catch(err) {
+    console.log(err);
     throw("Token is not valid")
   }
+}
+
+export async function decodeToken2(token: string) { 
+  const jwk = await fetch("https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_XNxfV9r2F/.well-known/jwks.json");
+  const res = await jwk.json()    
 }
 
 export function buildUrl(endpoint: string, {

@@ -11,7 +11,7 @@ export default async function SidebarUserAvatar() {
       className="dashboard-sidebar__avatar"
       user={session.user} />
     <div className="dashboard-sidebar__user-information">
-      <p className="dashboard-sidebar__user-name">{session.user.name}</p>
+      <p className="dashboard-sidebar__user-name">{ session.user && session.user.name ? session.user.name : "" }</p>
     </div>
   </div>
   )
