@@ -26,7 +26,6 @@ export default async function ArtworksPage() {
       <div className="container">
         <div className="row">
           <Suspense fallback={<p>Loading Artworks</p>}>
-            {/* @ts-expect-error Async Server Component */}
             <ArtworkList /> 
           </Suspense>
         </div>

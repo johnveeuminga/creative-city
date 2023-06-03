@@ -22,7 +22,6 @@ const Layout = ({ children, header } : {
     <Fragment>
       <ImageView />
       <MobileMenu />
-      {/* @ts-expect-error Async Server Component */}
       <Header2 />
       {children} 
       <Footer />
