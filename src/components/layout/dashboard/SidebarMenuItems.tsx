@@ -9,8 +9,7 @@ export default function SidebarMenuItems({
 }: {
   items: MenuItem[]
 }) {
-  // const route = usePathname();
-  const route = '';
+  const route = usePathname();
 
   const MenuDivider = ({ label, className = '' } : { label: string, className?: string }) => (
     <li className={className}>

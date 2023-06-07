@@ -2,7 +2,7 @@ import UserAvatar from "@/components/UserAvatar";
 import { getServerSession } from "@/lib/server/auth";
 
 export default async function CurrentUserAvatar() {
-  const session = await getServerSession("Current user avatar");
+  const session = await getServerSession();
   
   return (
     <div className="user-avatar d-flex">

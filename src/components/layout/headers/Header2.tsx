@@ -5,16 +5,8 @@ import { getServerSession } from "@/lib/server/auth";
 import UserAvatar from "@/components/UserAvatar";
 
 const Header2 = async () => {
-  const session = await getServerSession("Header2");
-  // const session = {
-  //   user: {
-  //     name: "John Vee Uminga",
-  //     groups: [
-  //       "artist",
-  //     ]
-  //   },
-  //   isAuthenticated: true,
-  // }
+  const session = await getServerSession();
+  
   return (
     <header className="header-area header-area-two d-none d-xl-block">
       <div className="header-navigation">
