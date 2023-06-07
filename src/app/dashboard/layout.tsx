@@ -10,7 +10,9 @@ export default function Layout({ children }:  {
       <div className="dashboard-content">
         <DashboardSidebar />
         <main className='dashboard-main-content'>
-          { children }
+          <div className="container-fluid">
+            { children }
+          </div>
         </main>
       </div>
     </div>

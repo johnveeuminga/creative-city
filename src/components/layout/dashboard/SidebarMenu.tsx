@@ -8,6 +8,7 @@ export default async function SidebarMenu() {
   const menuItems = getMenuItems(session?.user?.groups ?? []);
 
   return (
-    <SidebarMenuItems items={menuItems}></SidebarMenuItems>
+    <SidebarMenuItems 
+      items={menuItems} />
   )
 }

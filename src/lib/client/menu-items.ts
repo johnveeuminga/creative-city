@@ -60,19 +60,22 @@ export const AdminMenuItems: {
   role: string,
   items: MenuItem[],
 } = {
-  role: 'artist',
+  role: 'admin',
   items: [
     {
-      name: 'My Purchases',
-      icon: 'ti-receipt',
+      name: 'Artists',
+      icon: 'ti-id-badge',
+      priority: 20,
+      prefetch: false,
     },
     {
-      name: 'My Biddings',
+      name: 'Auctions',
       icon: 'ti-money',
+      href: '/dashboard/auctions',
       priority: 13,
     },
     {
-      name: 'My Artworks',
+      name: 'Artworks',
       icon: 'ti-gallery',
       priority: 12
     },
@@ -82,27 +85,29 @@ export const AdminMenuItems: {
 export function getMenuItems(roles: Array<string> = []): MenuItem[] {
   let items: Array<MenuItem> = []
 
-  roles.forEach(role => {
-    switch(role) {
-      case 'artist':
-        items = [
-          ...items,
-          ...ArtistMenuItems.items,
-        ]
-        break;
-      case 'admin':
-        items = [
-          ...items,
-          ...AdminMenuItems.items,
-        ]
-        break;
-      default:
-        items = [
-          ...items,
-          ...UserMenuItems.items,
-        ]
-    }
-  });
+  if(roles.indexOf('admin') === -1) {
+    roles.forEach(role => {
+      switch(role) {
+        case 'artist':
+          items = [
+            ...items,
+            ...UserMenuItems.items,
+          ]
+          break;
+        case 'user':
+          items = [
+            ...items,
+            ...ArtistMenuItems.items,
+          ]
+          break;
+      }
+    });
+  } else {
+    items = [
+      ...items,
+      ...AdminMenuItems.items,
+    ] 
+  }
 
   function compare( a: MenuItem, b: MenuItem ) {
     const prioA = a.priority ?? 0;
@@ -120,15 +125,29 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
 
   const ordered = items.sort(compare);
 
+  console.log(ordered);
+
   return [
+    {
+      name: 'Main',
+      type: "divider",
+    },
     {
       name: 'Dashboard',
       icon: 'ti-dashboard',
       href: '/dashboard'
     },
+    {
+      name: 'Apps',
+      type: 'divider'
+    },
     ...ordered,
     {
       name: 'Account',
+      type: "divider",
+    },
+    {
+      name: 'My Profile',
       icon: 'ti-user'
     },
     {
@@ -147,5 +166,7 @@ export interface MenuItem {
   href?: string;
   priority?: number;
   prefetch?: boolean;
+  type?: MenuType;
 }
 
+type MenuType = "divider" | "link";

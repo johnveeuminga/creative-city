@@ -46,7 +46,7 @@ const Header2 = async () => {
                           <i className="ti-arrow-down"></i>
                         </span>
                       </li>
-                      <About />
+                      
                       <li className="menu-item has-children">
                         <a href="#">Listings</a>
                         <ul className="sub-menu">
