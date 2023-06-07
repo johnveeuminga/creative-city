@@ -1,5 +1,35 @@
-export default function ArtworksPage() {
+import { handleOnClick } from "@/actions/artworks";
+import Artwork from "@/components/Artwork";
+import prisma from "@/lib/prisma";
+import { Suspense } from "react";
+
+export default async function ArtworksPage() {
+  async function ArtworkList() {
+    // const artworks = await prisma.artwork.findMany();
+    const artworks: any = []
+
+    return (
+      artworks.map((artwork: any)=> (
+        <div 
+          key={artwork.id}
+          className="col-md-3">
+          <Artwork 
+            // onClick={handleOnClick}
+            artwork={artwork} />
+        </div>
+      ))
+    )
+  }
+
   return(
-    <p>This is the artworks.</p>
+    <>
+      <div className="container">
+        <div className="row">
+          <Suspense fallback={<p>Loading Artworks</p>}>
+            <ArtworkList /> 
+          </Suspense>
+        </div>
+      </div>
+    </>
   )
 }

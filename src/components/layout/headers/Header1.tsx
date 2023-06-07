@@ -8,7 +8,6 @@ import UserAvatar from "@/components/UserAvatar";
 
 const Header1 = async () => {
   const session = await getServerSession();
-  console.log(session);
 
   return (
     <header className="header-area header-area-one d-none d-xl-block">
@@ -170,7 +169,7 @@ const Header1 = async () => {
                           <UserAvatar user={session.user}></UserAvatar>
                       }
                     </li>
-                    { session.user && session.user.groups.indexOf["artist"] !== -1 &&
+                    { session.user && session?.user?.groups && session?.user?.groups?.indexOf("artist") !== -1 &&
                       <li 
                         className="hero-nav-btn">
                         <Link href="/add-listing" className="main-btn icon-btn">

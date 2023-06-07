@@ -339,7 +339,7 @@ const ProductDetails = () => {
                 <div className="product-info text-center">
                   <h3 className="title">
                     <Link href="/products-details">
-                      <a>Hand Dumbell</a>
+                      Hand Dumbell
                     </Link>
                   </h3>
                   <span className="price">
@@ -373,7 +373,7 @@ const ProductDetails = () => {
                 <div className="product-info text-center">
                   <h3 className="title">
                     <Link href="/products-details">
-                      <a>Green Plastic Light</a>
+                      Green Plastic Light
                     </Link>
                   </h3>
                   <span className="price">$120.00</span>
@@ -405,7 +405,7 @@ const ProductDetails = () => {
                 <div className="product-info text-center">
                   <h3 className="title">
                     <Link href="/products-details">
-                      <a>Leaser Photography</a>
+                      Leaser Photography
                     </Link>
                   </h3>
                   <span className="price">$320.00</span>
@@ -437,7 +437,7 @@ const ProductDetails = () => {
                 <div className="product-info text-center">
                   <h3 className="title">
                     <Link href="/products-details">
-                      <a>Nike Sports Shoe</a>
+                      Nike Sports Shoe
                     </Link>
                   </h3>
                   <span className="price">$232.00</span>

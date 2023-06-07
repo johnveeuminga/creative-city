@@ -20,7 +20,6 @@ export default async function Page({ params }: { params: { id: number } }) {
     <>
       <p>Creative City</p>
       <Suspense fallback={<p>This is a test...</p>}>
-        {/* @ts-expect-error Server Component */}
         <Content id={params.id}/>
       </Suspense>
     </>

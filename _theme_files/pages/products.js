@@ -33,16 +33,16 @@ const Products = () => {
                 <ul className="list d-flex">
                   <li>
                     <Link href="/products">
-                      <a>
-                        <i className="ti-view-grid" />
-                      </a>
+
+                      <i className="ti-view-grid" />
+
                     </Link>
                   </li>
                   <li>
-                    <Link href="/products">
-                      <a className="active">
-                        <i className="ti-view-list-alt" />
-                      </a>
+                    <Link href="/products" className="active">
+
+                      <i className="ti-view-list-alt" />
+
                     </Link>
                   </li>
                 </ul>
@@ -78,7 +78,7 @@ const Products = () => {
                   <div className="product-info text-center">
                     <h3 className="title">
                       <Link href="/products-details">
-                        <a>Hand Dumbell</a>
+                        Hand Dumbell
                       </Link>
                     </h3>
                     <span className="price">
@@ -114,7 +114,7 @@ const Products = () => {
                   <div className="product-info text-center">
                     <h3 className="title">
                       <Link href="/products-details">
-                        <a>Green Plastic Light</a>
+                        Green Plastic Light
                       </Link>
                     </h3>
                     <span className="price">$120.00</span>
@@ -148,7 +148,7 @@ const Products = () => {
                   <div className="product-info text-center">
                     <h3 className="title">
                       <Link href="/products-details">
-                        <a>Leaser Photography</a>
+                        Leaser Photography
                       </Link>
                     </h3>
                     <span className="price">$320.00</span>
@@ -182,7 +182,7 @@ const Products = () => {
                   <div className="product-info text-center">
                     <h3 className="title">
                       <Link href="/products-details">
-                        <a>Nike Sports Shoe</a>
+                        Nike Sports Shoe
                       </Link>
                     </h3>
                     <span className="price">$232.00</span>
@@ -216,7 +216,7 @@ const Products = () => {
                   <div className="product-info text-center">
                     <h3 className="title">
                       <Link href="/products-details">
-                        <a>Room Decorator</a>
+                        Room Decorator
                       </Link>
                     </h3>
                     <span className="price">$320.00</span>
@@ -250,7 +250,7 @@ const Products = () => {
                   <div className="product-info text-center">
                     <h3 className="title">
                       <Link href="/products-details">
-                        <a>Card Showcase</a>
+                        Card Showcase
                       </Link>
                     </h3>
                     <span className="price">$852.00</span>
@@ -284,7 +284,7 @@ const Products = () => {
                   <div className="product-info text-center">
                     <h3 className="title">
                       <Link href="/products-details">
-                        <a>Hand Watch</a>
+                        Hand Watch
                       </Link>
                     </h3>
                     <span className="price">$25.00</span>
@@ -318,7 +318,7 @@ const Products = () => {
                   <div className="product-info text-center">
                     <h3 className="title">
                       <Link href="/products-details">
-                        <a>Realstic Dumbell</a>
+                        Realstic Dumbell
                       </Link>
                     </h3>
                     <span className="price">$50.00</span>
@@ -352,7 +352,7 @@ const Products = () => {
                   <div className="product-info text-center">
                     <h3 className="title">
                       <Link href="/products-details">
-                        <a>Hand Speaker</a>
+                        Hand Speaker
                       </Link>
                     </h3>
                     <span className="price">$250.00</span>

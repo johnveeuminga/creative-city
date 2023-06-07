@@ -1,17 +1,13 @@
 import { MenuItem, getMenuItems } from "@/lib/client/menu-items"
-import SidebarMenuItem from "./SidebarMenuItem";
+import SidebarMenuItems from "./SidebarMenuItems";
 import { getServerSession } from "@/lib/server/auth";
 
 
 export default async function SidebarMenu() {
-  const session = await getServerSession();
-  const menuItems = getMenuItems(session.user.groups);
+  const session = await getServerSession("Sidebar Menu");
+  const menuItems = getMenuItems(session?.user?.groups ?? []);
 
   return (
-    <ul className="dashboard-sidebar__menu">
-    { menuItems.map(item => (
-      <SidebarMenuItem item={item} />
-    ))}
-  </ul>
+    <SidebarMenuItems items={menuItems}></SidebarMenuItems>
   )
 }

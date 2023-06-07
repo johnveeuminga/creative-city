@@ -5,9 +5,16 @@ import { getServerSession } from "@/lib/server/auth";
 import UserAvatar from "@/components/UserAvatar";
 
 const Header2 = async () => {
-  const session = await getServerSession();
-
-  console.log(session);
+  const session = await getServerSession("Header2");
+  // const session = {
+  //   user: {
+  //     name: "John Vee Uminga",
+  //     groups: [
+  //       "artist",
+  //     ]
+  //   },
+  //   isAuthenticated: true,
+  // }
   return (
     <header className="header-area header-area-two d-none d-xl-block">
       <div className="header-navigation">
@@ -101,7 +108,7 @@ const Header2 = async () => {
                         </li> 
                     }
                     <li className="hero-nav-btn">
-                    { session.user  && session.user.groups.indexOf('artist') !== -1 && 
+                    { session.user  && session?.user?.groups?.indexOf('artist') !== -1 && 
                       <Link href="/add-listing" className="main-btn icon-btn">
                         Add Listing
                       </Link>
