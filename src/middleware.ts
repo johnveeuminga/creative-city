@@ -20,7 +20,6 @@ export async function middleware(request: NextRequest) {
       return NextResponse.redirect(process.env.APP_URL ?? "/")
 
     try {
-      console.log("From middleware")
       await decodeToken(cookieToken.value)
 
       return NextResponse.next();

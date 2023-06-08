@@ -10,5 +10,4 @@ export async function handleOnClick(id: string) {
   });
 
   // Redirect with success message.
-  console.log(artwork);
 }

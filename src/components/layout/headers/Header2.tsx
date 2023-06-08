@@ -3,18 +3,11 @@ import React from "react";
 import { About, Blog, Contact, Home, Listing, Pages } from "../Menu";
 import { getServerSession } from "@/lib/server/auth";
 import UserAvatar from "@/components/UserAvatar";
+import UniversalLoadingLink from "@/components/UniversalLoadingLink";
 
 const Header2 = async () => {
-  const session = await getServerSession("Header2");
-  // const session = {
-  //   user: {
-  //     name: "John Vee Uminga",
-  //     groups: [
-  //       "artist",
-  //     ]
-  //   },
-  //   isAuthenticated: true,
-  // }
+  const session = await getServerSession();
+  
   return (
     <header className="header-area header-area-two d-none d-xl-block">
       <div className="header-navigation">
@@ -46,7 +39,7 @@ const Header2 = async () => {
                           <i className="ti-arrow-down"></i>
                         </span>
                       </li>
-                      <About />
+                      
                       <li className="menu-item has-children">
                         <a href="#">Listings</a>
                         <ul className="sub-menu">
@@ -100,7 +93,10 @@ const Header2 = async () => {
                     {
                       session.user &&
                         <li className="user-btn">
-                          <Link href="/dashboard" className="avatar" prefetch={false}>
+                          <Link 
+                            href="/dashboard" 
+                            className="avatar"
+                            prefetch={false}>
                             <UserAvatar 
                               size="54"
                               user={session.user}/>

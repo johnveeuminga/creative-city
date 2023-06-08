@@ -1,9 +1,7 @@
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 import { CognitoIdTokenPayload, CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
 import { cookies } from "next/dist/client/components/headers";
-import * as jwt from "jsonwebtoken"
 import verifier from "../cognito";
-import { Json } from "aws-jwt-verify/safe-json-parse";
 
 interface User {
   name: string,
@@ -13,13 +11,12 @@ interface User {
 }
 
 // TODO: Typesafe this route with a user object.
-export async function getServerSession(referrer="default"): Promise<{
+export async function getServerSession(): Promise<{
   user: User | null,
   isAuthenticated: boolean,
   error?: any,
 }> {
   const token = cookies().get('idToken') ?? ''
-  console.log("Request from: ", referrer);
 
   const ret = {
     user: null,

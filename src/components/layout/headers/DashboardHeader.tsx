@@ -7,11 +7,11 @@ export default async function DashboardHeader() {
     <header className="dashboard-header">
 
       <div className="header-left">
-        <h4>
+        {/* <h4>
           <Link href='/'>
             Creative City
           </Link>
-        </h4> 
+        </h4>  */}
       </div>
       <div className="header-right">
         <div className="user-avatar d-flex">

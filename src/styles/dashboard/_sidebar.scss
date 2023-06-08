@@ -3,13 +3,31 @@
   top: 0;
   bottom: 0;
   height: 100vh;
-  padding-top: 76px;
+  // padding-top: 76px;
   box-shadow: 0 6px 15px 0 rgba(0,0,0,.1);
   width: 300px;
+  background-color: #1e1e2d;
+  z-index: 99;
 
   &__content {
-    padding: 0 16px;
+    padding: 30px 16px;
+  }
 
+  &__header {
+    padding: 0 16px;
+    text-align: center;
+    color: #fff;
+    font-size: 24px;
+    font-family: "Quicksand";
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #333;
+
+    a {
+      font-weight: 700;
+    }
   }
 
   &__user {
@@ -36,16 +54,25 @@
   }
 
   &__menu-item {
+    color: #9D9DA6;
+
+    &--divider {
+      padding: 10px 8px 8px;
+      text-transform: uppercase;
+      font-size: .875em;
+      font-weight: 600;
+    }
+
     a {
       display: block;
-      padding: 10px 8px;
+      padding: 8px 10px;
       margin: 2px 0;
       transition: all .2s ease;
 
       &:hover,
       &.active {
-        background-color: #f5f7fa;
         color: $primary-color;
+        color: $white;
       }
 
       i {
