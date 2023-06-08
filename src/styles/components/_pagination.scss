@@ -1,0 +1,11 @@
+.pagination {
+  .page-link {
+    border: 0;
+    color: #181c32;
+    font-weight: 700;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+}

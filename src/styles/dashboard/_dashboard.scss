@@ -2,6 +2,20 @@
 @import "sidebar";
 
 .dashboard {
+  background-color: #f5f8fa;
+
+  .breadcrumb {
+    padding: 0;
+    background-color: transparent;
+
+    &-item {
+      font-size: .875em;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+      content: "-";
+    }
+  }
   .dashboard-header {
     padding: 0 2em;
     display: flex;
@@ -28,29 +42,31 @@
     }
 
     box-shadow: 0px 5px 10px 0px rgba(0,0,0,.05);
-
-    .header-left {
-    //   margin-left: -2em;
-    //   margin-right: -2em;
-    //   padding-left: 2em;
-    //   padding-right: 2em;
-    //   width: 300px;
-    //   height: 100%;
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
-    //   text-align: center;
-    //   background-color: #1e1e2d;
-    }
   }
 
   .content {
-    margin-top: 76px;
+    margin-top: $sidebar-height;
   }
 
 
   &-main-content {
-    margin-top: 76px;
-    margin-left: 300px;
+    padding-top: calc($sidebar-height + 1em);
+    margin-left: $sidebar-width;
+    min-height: 100vh;
+    padding-left: 1em;
+    padding-right: 1em;
+
+    .page-title {
+      h1 {
+        font-size: 1.5em;
+        line-height: 1.5em;
+      }
+    }
+
+    .content-card {
+      border-color: transparent;
+      box-shadow: 0px 0px 20px 0px rgba(76, 87, 125, 0.02);
+      border-radius: 0.625rem;
+    }
   }
 }

@@ -125,7 +125,6 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
 
   const ordered = items.sort(compare);
 
-  console.log(ordered);
 
   return [
     {

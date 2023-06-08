@@ -9,11 +9,11 @@ export default function Layout({ children }:  {
       <DashboardHeader />
       <div className="dashboard-content">
         <DashboardSidebar />
-        <main className='dashboard-main-content'>
           <div className="container-fluid">
-            { children }
+            <main className='dashboard-main-content'>
+              { children }
+            </main>
           </div>
-        </main>
       </div>
     </div>
   )

@@ -27,6 +27,19 @@ model Artwork {
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now())
   artist      User     @relation(fields: [artist_id], references: [id])
-  artist_id  Int
+  artist_id   Int
+  auction     Auction?  @relation(fields: [auction_id], references: [id])
+  auction_id  Int?     
+}
+
+model Auction {
+  id          Int @id @default(autoincrement())
+  name        String
+  description String @db.LongText
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now())
+  start_date  DateTime @db.DateTime
+  end_date    DateTime @db.DateTime
+  artworks    Artwork[]
 }
 
