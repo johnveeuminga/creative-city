@@ -20,10 +20,24 @@ $text-color: #676767;
 
 $border: #efefef;
 
+$theme-colors: (
+  "primary": $primary-color,
+);
+
+$base-themes: (
+  "dashboard-primary": $primary-color
+);
+
+$theme-colors: map-merge($theme-colors, $base-themes);
+@debug $theme-colors;
+
+
 
 // Bg Color
 $dark-black: #121416;
 $light-bg: #f7f7f7;
+
+$font-size-root: 15px;
 
 
 

@@ -4,6 +4,7 @@ import { getAuctions } from "@/lib/server/auctions"
 import { Prisma } from "@prisma/client";
 import { DateTime } from "luxon"
 import { AuctionsSearch } from "./AuctionsSearch";
+import Link from "next/link";
 
 export async function Auctions({
   page = '0',
@@ -43,8 +44,17 @@ export async function Auctions({
 
   return(
     <div className="table-wrapper">
-      <div className="search-wrapper">
-        <AuctionsSearch />
+      <div className="actions d-flex align-items-center justify-content-between mb-3">
+        <div className="search-wrapper">
+          <AuctionsSearch />
+        </div>
+        <div className="filters">
+          <Link 
+            href={"/dashboard/auctions/create"}
+            className="btn btn-dashboard-primary">
+            Create Auction
+          </Link>
+        </div>
       </div>
       <table className="table">
         <thead>

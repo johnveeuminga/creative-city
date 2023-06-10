@@ -15,7 +15,7 @@ export function AuctionsSearch() {
   }, [debouncedSearch, pathname, router])
 
   return (
-    <div className="form-solid mb-3">
+    <div className="form-solid">
       <div className='input-group'>
         <span className="input-group-text">
           <i className="ti-search"></i>

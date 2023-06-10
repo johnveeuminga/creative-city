@@ -134,7 +134,8 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
     {
       name: 'Dashboard',
       icon: 'ti-dashboard',
-      href: '/dashboard'
+      href: '/dashboard',
+      exactPathMatch: true,
     },
     {
       name: 'Apps',
@@ -153,6 +154,7 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
       name: 'Logout',
       icon: 'ti-power-off',
       href: '/api/auth/logout',
+
       prefetch: false,
     }
   ]
@@ -166,6 +168,8 @@ export interface MenuItem {
   priority?: number;
   prefetch?: boolean;
   type?: MenuType;
+  as?: 'link' | 'a',
+  exactPathMatch?: boolean;
 }
 
 type MenuType = "divider" | "link";
