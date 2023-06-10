@@ -1,11 +1,19 @@
 .pagination {
   .page-link {
-    border: 0;
-    color: #181c32;
-    font-weight: 700;
+    font-size: .875em;
+    // border: 0;
+    color: var(--bs-gray-600);
+    // background-color: var(--bs-gray-200);
+    // border-color: var(--bs-gray-200);
+    // font-weight: 700;
+    
+    &:hover {
+      color: var(--bs-blue);
+    }
 
     &:focus {
       box-shadow: none;
+      background-color: transparent;
     }
   }
 }

@@ -3,7 +3,6 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import React from "react"
-import { Pagination } from "react-bootstrap"
 
 export default function ClientPagination({ 
   nextPage,
@@ -16,32 +15,33 @@ export default function ClientPagination({
 
 
   return (
-    // <Pagination>
-    //   <Pagination.Item 
-    //     href={prevPage ?? null}
-    //     disabled={!prevPage}>
-    //     <i className="ti-angle-left"></i>
-    //   </Pagination.Item>
-    //   <Pagination.Item
-    //     disabled={!nextPage}
-    //     href={nextPage}>
-    //     <i className="ti-angle-right"></i>
-    //   </Pagination.Item>
-    // </Pagination>
-    <>
-      {
-        prevPage &&
+    <nav>
+      <ul className="pagination">
+        <li className="page-item">
+          { prevPage &&
+            <Link 
+              className="page-link"
+              href={`${currPath}${prevPage}` ?? null}
+              prefetch={false}>  
+              <i className="ti-arrow-left"></i>
+            </Link>
+          }
+          {
+            ! prevPage &&
+              <a href="#" className="page-link disabled">
+                <i className="ti-arrow-left"></i>
+              </a>
+          }
+        </li>
+        <li className="page-item">
           <Link 
-            href={`${currPath}${prevPage}`} >  
-            &lt; 
+            className="page-link"
+            href={`${currPath}${nextPage}` ?? null}
+            prefetch={false}>  
+            <i className="ti-arrow-right"></i>
           </Link>
-      }
-      &nbsp;
-      <Link 
-        href={`${currPath}${nextPage}` ?? null}
-        prefetch={false}>  
-        &gt; 
-      </Link>
-    </>
+        </li>
+      </ul>
+    </nav>
   )
 }

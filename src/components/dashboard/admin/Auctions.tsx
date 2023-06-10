@@ -43,10 +43,8 @@ export async function Auctions({
 
   return(
     <div className="table-wrapper">
-      <div className="row">
-        <div className="col-lg-4 col-md-6 col-12">
-          <AuctionsSearch />
-        </div>
+      <div className="search-wrapper">
+        <AuctionsSearch />
       </div>
       <table className="table">
         <thead>
@@ -77,7 +75,7 @@ export async function Auctions({
           <p className="text-center">No data found</p>
       }
       <div 
-        className="pagination d-flex justify-content-end">
+        className="table-pagination d-flex justify-content-end">
         <ClientPagination
           prevPage={page && parseInt(page) > 1? `?page=${(parseInt(page) - 1)}` : ""}
           nextPage={page ? `?page=${(parseInt(page) + 1)}` : `?page=2`} />
