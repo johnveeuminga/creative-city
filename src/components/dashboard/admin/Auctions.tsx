@@ -7,11 +7,13 @@ import { AuctionsSearch } from "./AuctionsSearch";
 
 export async function Auctions({
   page = '0',
-  orderBy = {}
+  orderBy = {},
+  search=''
 }: {
   page?: string;
   orderBy?: Prisma.AuctionOrderByWithRelationInput,
   lastCursor?: string;
+  search?: string;
 }) {
   let params: Prisma.AuctionFindManyArgs = {
     take: 3,
@@ -29,11 +31,23 @@ export async function Auctions({
     params.skip = 3 * (parseInt(page) - 1);
   }
 
+  if(search) {
+    params.where = {
+      name: {
+        contains: search,
+      }
+    }
+  }
+
   const auctions = await getAuctions(params);
 
   return(
     <div className="table-wrapper">
-      <AuctionsSearch />
+      <div className="row">
+        <div className="col-lg-4 col-md-6 col-12">
+          <AuctionsSearch />
+        </div>
+      </div>
       <table className="table">
         <thead>
           <tr>
@@ -58,6 +72,10 @@ export async function Auctions({
           }
         </tbody>
       </table>
+      {
+        ! auctions.length &&
+          <p className="text-center">No data found</p>
+      }
       <div 
         className="pagination d-flex justify-content-end">
         <ClientPagination

@@ -15,11 +15,18 @@ export function AuctionsSearch() {
   }, [debouncedSearch, pathname, router])
 
   return (
-    <>
-      <input 
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        type="text" /> 
-    </>
+    <div className="form-solid mb-3">
+      <div className='input-group'>
+        <span className="input-group-text">
+          <i className="ti-search"></i>
+        </span>
+        <input 
+          placeholder="Search"
+          className="form-control"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          type="text" /> 
+      </div>
+    </div>
   )
 }

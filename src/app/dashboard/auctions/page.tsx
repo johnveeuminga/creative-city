@@ -6,6 +6,7 @@ import LoadingSkeleton from "./_skeleton";
 type PageProps = {
   searchParams?: {
     page?: string;
+    search?: string;
   }
 }
 
@@ -29,6 +30,7 @@ export default async function Page({ searchParams }: PageProps) {
             <Suspense fallback={<LoadingSkeleton />}>
               <Auctions 
                 page={searchParams && searchParams.page ? searchParams.page : "" }  
+                search={searchParams && searchParams.search ? searchParams.search : ""}
                 />
             </Suspense>
           </div>

@@ -1,0 +1,17 @@
+
+.form-solid {
+  .form-control {
+    background-color: var(--bs-gray-200);
+    border-color: var(--bs-gray-200);
+
+    &:focus {
+      box-shadow: none;
+      border-color: transparent;
+    }
+  }
+
+  .input-group-text {
+    background-color: var(--bs-gray-200);
+    border-color: var(--bs-gray-200);
+  }
+}
