@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma"
 import { getAuctions } from "@/lib/server/auctions"
 import { Prisma } from "@prisma/client";
 import { DateTime } from "luxon"
+import { AuctionsSearch } from "./AuctionsSearch";
 
 export async function Auctions({
   page = '0',
@@ -25,10 +26,6 @@ export async function Auctions({
   }
 
   if(page) {
-    // params.skip = 1;
-    // params.cursor = {
-    //   id: parseInt(page),
-    // }
     params.skip = 3 * (parseInt(page) - 1);
   }
 
@@ -36,6 +33,7 @@ export async function Auctions({
 
   return(
     <div className="table-wrapper">
+      <AuctionsSearch />
       <table className="table">
         <thead>
           <tr>
