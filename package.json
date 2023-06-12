@@ -33,6 +33,10 @@
   },
   "devDependencies": {
     "prisma": "^4.14.1",
-    "sass": "^1.62.1"
+    "sass": "^1.62.1",
+    "ts-node": "^10.9.1"
+  },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   }
 }

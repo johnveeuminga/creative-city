@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
+  id         Int       @id @default(autoincrement())
   first_name String
   last_name  String
-  email      String   @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
+  email      String    @unique
+  created_at DateTime  @default(now())
+  updated_at DateTime  @default(now())
   artworks   Artwork[]
 }
 
@@ -26,7 +26,6 @@ model Artwork {
   description String   @db.LongText
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now())
-  artist      User     @relation(fields: [artirst_id], references: [id])
-  artirst_id  Int
+  artist      User     @relation(fields: [artist_id], references: [id])
+  artist_id   Int
 }
-
