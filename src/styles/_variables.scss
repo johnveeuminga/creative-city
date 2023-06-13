@@ -22,6 +22,7 @@ $border: #efefef;
 
 $theme-colors: (
   "primary": $primary-color,
+  "secondary": $secondary-color,
 );
 
 $base-themes: (
@@ -62,3 +63,5 @@ $input-font-size: .925em;
 // $input-bg: var(--bs-gray-200);
 // $input-border-color: $input-bg;
 // $input-group-addon-bg: $input-bg;
+
+$auctions-sidebar-width: 300px;
