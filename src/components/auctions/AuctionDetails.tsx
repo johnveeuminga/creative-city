@@ -1,14 +1,24 @@
 import prisma from "@/lib/prisma"
 import { DateTime } from "luxon";
-import { redirect } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
+import AuctionArtworksGrid from "./AuctionArtworksGrid";
+import Link from "next/link";
 
-export async function AuctionDetails({ id }: {
-  id: string
+export async function AuctionDetails({ id, page = 1 }: {
+  id: string,
+  page: number
 }) {
+  const currPage = page - 1;
   const auction = await prisma.auction.findFirst({
     where: {
       id: parseInt(id),
-    }
+    },
+    include: {
+      artworks: {
+        take: 2,
+        skip: currPage * 2,
+      },
+    },
   });
 
   if(!auction) 
@@ -57,7 +67,7 @@ export async function AuctionDetails({ id }: {
             <div className="py-3 text-center">
               <h4 className="mb-4">Auction Starting In</h4>
               {/* TODO: Make client component and countdown */}
-              <div className="timer d-flex justify-content-around mb-3">
+              <div className="timer d-flex justify-content-around mb-4">
                 <div className="timer-section days">
                   <p className="value">3</p>
                   <p className="label"><small>Days</small></p>
@@ -81,6 +91,56 @@ export async function AuctionDetails({ id }: {
                 </button>
               </div>
             </div> 
+          </div>
+        </div>
+      </div>
+      <div className="auction-content py-5">
+        <div className="container">
+          <div className="filters">
+            <div className="search">
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="ti-search"></i>
+                </span>
+                <input 
+                  placeholder="Search for an artwork"
+                  className="form-control"
+                  type="text" />
+              </div>
+            </div>
+          </div>
+          <div className="auction-artworks-grid-container">
+            <AuctionArtworksGrid artworks={auction.artworks} />
+            <div className="pagination d-flex justify-content-end">
+              <ul className="pagination">
+                <li className="page-item">
+                  {
+                    !! currPage &&
+                      <Link 
+                        scroll={false}
+                        href={`/auctions/${auction.id}?page=${currPage}`}
+                        className={"page-link"}>
+                        <i className="ti-arrow-left"></i>
+                      </Link>
+                  }
+                  {
+                    !currPage &&
+                      <a 
+                        className={"page-link disabled"} 
+                        href="#">
+                        <i className="ti-arrow-left"></i>
+                      </a>
+                  }
+                </li>
+                <li className="page-item">
+                  <Link 
+                    href={`/auctions/${auction.id}?page=${+page + 1}`}
+                    className={"page-link"}>
+                    <i className="ti-arrow-right"></i>
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
