@@ -91,13 +91,13 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
         case 'artist':
           items = [
             ...items,
-            ...UserMenuItems.items,
+            ...ArtistMenuItems.items,
           ]
           break;
         case 'user':
           items = [
             ...items,
-            ...ArtistMenuItems.items,
+            ...UserMenuItems.items,
           ]
           break;
       }
