@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/pisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -17,7 +14,38 @@ model User {
   email      String   @unique
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+  Artist     Artist?
   artworks   Artwork[]
+}
+
+model Artist {
+  id                   Int        @id @default(autoincrement())
+  userId               Int        @unique
+  nickname             String?
+  myStory              String?
+  myBio                String?
+  artworkPickUpAddress String?
+  contactNumber        String?
+  gcash                String?
+  paymaya              String?
+  interests            Interest[]
+  status               ArtistStatus
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+  user                 User       @relation(fields: [userId], references: [id])
+}
+
+model Interest {
+  id       Int    @id @default(autoincrement())
+  name     String
+  artist   Artist @relation(fields: [artistId], references: [id])
+  artistId Int
+}
+
+enum ArtistStatus {
+  PENDING
+  APPROVED
+  REJECTED
 }
 
 model Artwork {
@@ -28,18 +56,17 @@ model Artwork {
   updated_at  DateTime @default(now())
   artist      User     @relation(fields: [artist_id], references: [id])
   artist_id   Int
-  auction     Auction?  @relation(fields: [auction_id], references: [id])
-  auction_id  Int?     
+  auction     Auction? @relation(fields: [auction_id], references: [id])
+  auction_id  Int?
 }
 
 model Auction {
-  id          Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  description String @db.LongText
+  description String   @db.LongText
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now())
   start_date  DateTime @db.DateTime
   end_date    DateTime @db.DateTime
   artworks    Artwork[]
 }
-
