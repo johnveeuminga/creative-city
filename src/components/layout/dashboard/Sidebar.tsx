@@ -14,9 +14,6 @@ export default async function DashboardSidebar() {
         </Link>
       </div>
       <div className="dashboard-sidebar__content">
-        {/* <Suspense fallback={<p>Loading avatar...</p>}>
-          <SidebarUserAvatar />
-        </Suspense> */}
         <div className="dashboard-sidebar__menu-container">
         <Suspense fallback={<p>Loading sidebar...</p>}>
           <SidebarMenu />

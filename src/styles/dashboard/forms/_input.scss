@@ -1,8 +1,8 @@
 
 .form-solid {
   .form-control {
-    background-color: var(--bs-gray-200);
-    border-color: var(--bs-gray-200);
+    background-color: var(--bs-gray-100);
+    border-color: var(--bs-gray-100);
 
     &:focus {
       box-shadow: none;
@@ -13,5 +13,14 @@
   .input-group-text {
     background-color: var(--bs-gray-200);
     border-color: var(--bs-gray-200);
+  }
+}
+
+.form-group {
+  label {
+    font-weight: 700;
+    font-size: .875em;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
   }
 }

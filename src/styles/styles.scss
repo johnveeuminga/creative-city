@@ -50,6 +50,8 @@
 /* <!--====== Default css ======--> */
 @import "../../public/assets/css/default.css";
 
+@import "~react-quill/dist/quill.snow.css";
+
 @import 'mixin';
 
 //common
@@ -106,3 +108,6 @@
 @import 'components/tables';
 @import 'components/pagination';
 @import 'components/buttons';
+
+@import 'shop/layout';
+@import 'shop/auctions';

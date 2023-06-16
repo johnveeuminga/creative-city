@@ -16,6 +16,7 @@ model User {
   updated_at DateTime @default(now())
   Artist     Artist?
   artworks   Artwork[]
+  bids       Bid[]
 }
 
 model Artist {
@@ -49,15 +50,17 @@ enum ArtistStatus {
 }
 
 model Artwork {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String   @db.LongText
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now())
-  artist      User     @relation(fields: [artist_id], references: [id])
-  artist_id   Int
-  auction     Auction? @relation(fields: [auction_id], references: [id])
-  auction_id  Int?
+  id                  Int      @id @default(autoincrement())
+  name                String
+  description         String   @db.LongText
+  created_at          DateTime @default(now())
+  updated_at          DateTime @default(now())
+  artist              User     @relation(fields: [artist_id], references: [id])
+  artist_id           Int
+  auction             Auction? @relation(fields: [auction_id], references: [id])
+  auction_id          Int?
+  bids                Bid[]
+  highest_bid         ArtworkHighestBid?
 }
 
 model Auction {
@@ -69,4 +72,25 @@ model Auction {
   start_date  DateTime @db.DateTime
   end_date    DateTime @db.DateTime
   artworks    Artwork[]
+}
+
+model Bid {
+  id                   Int     @id @default(autoincrement())
+  user                 User    @relation(fields: [user_id], references: [id])
+  user_id              Int 
+  amount               Float
+  artwork              Artwork @relation(fields: [artwork_id], references: [id])
+  artwork_id           Int
+  highest_bid_artwork  ArtworkHighestBid? 
+}
+
+model ArtworkHighestBid {
+  artwork              Artwork  @relation(fields: [artwork_id], references: [id])
+  artwork_id           Int      @unique 
+  bid                  Bid      @relation(fields: [bid_id], references: [id])
+  bid_id               Int      @unique
+  version              Int      @default(1)
+
+  @@id([artwork_id, bid_id])
+  @@unique([artwork_id, bid_id])
 }
