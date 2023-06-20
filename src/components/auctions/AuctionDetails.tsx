@@ -14,9 +14,17 @@ export async function AuctionDetails({ id, page = 1 }: {
       id: parseInt(id),
     },
     include: {
+      _count: {
+        select: {
+          artworks: true,
+        }
+      },
       artworks: {
         take: 2,
         skip: currPage * 2,
+        include: {
+          bids: true,
+        }
       },
     },
   });
@@ -40,7 +48,7 @@ export async function AuctionDetails({ id, page = 1 }: {
                     <p className="fw-bold"><i className="ti-gallery d-inline-block me-1"></i>Artworks</p>
                   </div>
                   <div className="auction-single-header__widget-content">
-                    76 Registered
+                    { auction._count.artworks } Registered
                   </div>
                 </div>
                 <div className="auction-single-header__widget me-4">

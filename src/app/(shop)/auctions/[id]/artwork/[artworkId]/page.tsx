@@ -1,7 +1,9 @@
+import { ArtworkBiddingBox } from "@/components/auctions/ArtworkBiddingBox"
 import prisma from "@/lib/prisma"
 import Image from "next/image"
 import { redirect } from "next/navigation"
 import { relative } from "path"
+import { NumericFormat } from "react-number-format"
 
 export default async function AuctionArtworkSinglePage({
   params: {
@@ -20,6 +22,7 @@ export default async function AuctionArtworkSinglePage({
       auction_id: parseInt(auctionId),
     },
     include: {
+      bids: true,
       artist: true,
     }
   })
@@ -57,26 +60,7 @@ export default async function AuctionArtworkSinglePage({
               <h3>{ artwork.name }</h3>
               <p>{ artwork.artist.first_name } {artwork.artist.last_name }</p>
             </div>
-            <div className="bidding-box">
-              <div className="bidding-box__current-details">
-                <p><small>Current Price</small></p>
-                <p className="bidding-box__current-price"><strong>Php 100,000</strong></p>
-              </div>
-              <div className="bidding-box__bid my-5">
-                <div className="mb-3">
-                  <label className="mb-2" htmlFor="">Your bid</label>
-                  <div className="input-group">
-                    <span className="input-group-text">₱</span>
-                    <input type="number" className="form-control" />
-                  </div>
-                </div>
-                <div className="d-grid">
-                  <button className="btn btn-primary btn-lg fw-bold">
-                    PLACE BID
-                  </button>
-                </div>
-              </div>
-            </div>
+            <ArtworkBiddingBox artwork={ artwork }/>
           </div>
         </div>
       </div>

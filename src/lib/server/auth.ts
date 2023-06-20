@@ -4,6 +4,7 @@ import { cookies } from "next/dist/client/components/headers";
 import verifier from "../cognito";
 
 interface User {
+  id: string;
   name: string,
   username: string,
   email: string,
@@ -40,6 +41,7 @@ export async function getServerSession(): Promise<{
 
     const res = {
       user: {
+        id: tokenDecoded["sub"],
         name: tokenDecoded["name"],
         username: tokenDecoded["username"],
         email: tokenDecoded["email"],
