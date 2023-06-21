@@ -1,4 +1,5 @@
 import { ArtworkBiddingBox } from "@/components/auctions/ArtworkBiddingBox"
+import ArtworkBiddingHistory from "@/components/auctions/ArtworkBiddingHistory"
 import prisma from "@/lib/prisma"
 import Image from "next/image"
 import { redirect } from "next/navigation"
@@ -61,6 +62,9 @@ export default async function AuctionArtworkSinglePage({
               <p>{ artwork.artist.first_name } {artwork.artist.last_name }</p>
             </div>
             <ArtworkBiddingBox artwork={ artwork }/>
+            <div className="artwork-bidding-history my-3">
+              <ArtworkBiddingHistory />
+            </div>
           </div>
         </div>
       </div>

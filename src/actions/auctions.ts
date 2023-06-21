@@ -1,9 +1,13 @@
 'use server'
 
+import 'server-only'
+import { getClient } from "@/lib/apollo";
 import prisma from "@/lib/prisma";
 import { getServerSession } from "@/lib/server/auth";
+import { gql } from "@apollo/client";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import React from 'react';
 
 export async function createAuction(params: Prisma.AuctionCreateInput)  {
   try {
@@ -99,4 +103,22 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
       error: err.message,
     }
   }
+}
+
+export async function testAppSync() {
+  const mutation = gql`mutation PublishData($data: AWSJSON!) {
+    publish(data: $data, name: "channel") {
+      data
+      name
+    }
+  }`
+  
+  await getClient().mutate({
+    mutation: mutation,
+    variables: {
+      data: JSON.stringify({
+        "amount": "13000"
+      })
+    },
+  })
 }
