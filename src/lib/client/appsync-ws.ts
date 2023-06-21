@@ -3,7 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 
 export type SendMessage = (message: string) => void;
 
-const useAppSync = () => {
+const useAppSync = ({
+  channelName
+}: {
+  channelName: string
+}) => {
   const [lastMessage, setLastMessage] = useState<WebSocketEventMap['message'] | null>(null);
   const [readyState, setReadyState] = useState<boolean>(false);
 
@@ -56,12 +60,15 @@ const useAppSync = () => {
 
         // Attempt to subscribe
         const query = {
-          query: `subscription SubscribeToData {
-            subscribe(name: "channel") {
+          "query": `subscription SubscribeToData($channel: String!) {
+            subscribe(name: $channel) {
               name
               data
             }
-          }`
+          }`,
+          variables: {
+            channel: channelName,
+          }
         }
 
         const connection = {
@@ -70,7 +77,8 @@ const useAppSync = () => {
             data: JSON.stringify(query),
             extensions: {
               authorization: header,
-            }
+            },
+
           },
           type: "start"
         }
@@ -91,7 +99,7 @@ const useAppSync = () => {
         webSocket.current = null;
       }
     }
-  }, [sendMessage])
+  }, [sendMessage, channelName])
 
   return {
     sendMessage,

@@ -62,8 +62,11 @@ export default async function AuctionArtworkSinglePage({
               <p>{ artwork.artist.first_name } {artwork.artist.last_name }</p>
             </div>
             <ArtworkBiddingBox artwork={ artwork }/>
-            <div className="artwork-bidding-history my-3">
-              <ArtworkBiddingHistory />
+            <div className="artwork-bidding-history-container my-3">
+              <ArtworkBiddingHistory 
+                auctionId={auctionId}
+                artworkId={artworkId}
+                />
             </div>
           </div>
         </div>

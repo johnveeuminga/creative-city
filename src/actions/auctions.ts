@@ -7,7 +7,8 @@ import { getServerSession } from "@/lib/server/auth";
 import { gql } from "@apollo/client";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import React from 'react';
+import { CognitoIdentityClient, GetIdCommand, GetIdCommandInput } from "@aws-sdk/client-cognito-identity"
+
 
 export async function createAuction(params: Prisma.AuctionCreateInput)  {
   try {
@@ -27,7 +28,7 @@ export type artworkBidInput = {
 export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
   const { user } = await getServerSession();
 
-  if(!user)
+  if(!user || (user.groups?.indexOf('artist') == -1 && user.groups?.indexOf('admin') == -1))
     return {
       error: "Unauthorized",
     }
@@ -60,7 +61,7 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
             amount: amount,
             artwork_id: id,
             user_id: user.id,
-          }
+          },
         });
 
         // Check if the version from the highest bid is still the same. If it's not, this means that
@@ -89,8 +90,26 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
           ...highestBid,
           bid,
         };
+
+        
       });
 
+      const mutation = gql`mutation PublishData($data: AWSJSON!, $channelName: String!) {
+        publish(data: $data, name: $channelName) {
+          data
+          name
+        }
+      }`
+
+      await getClient().mutate({
+        mutation: mutation,
+        variables: {
+          data: JSON.stringify({
+            "amount": result.bid.amount.toString(),
+          }),
+          channelName: `auction.${highestBid.artwork.auction_id}.artwork.${highestBid.artwork.id}.bid`.toString(),
+        },
+      })
       revalidatePath("/auctions/[id]")
 
       return result;
@@ -103,22 +122,4 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
       error: err.message,
     }
   }
-}
-
-export async function testAppSync() {
-  const mutation = gql`mutation PublishData($data: AWSJSON!) {
-    publish(data: $data, name: "channel") {
-      data
-      name
-    }
-  }`
-  
-  await getClient().mutate({
-    mutation: mutation,
-    variables: {
-      data: JSON.stringify({
-        "amount": "13000"
-      })
-    },
-  })
 }
