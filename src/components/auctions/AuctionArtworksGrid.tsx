@@ -1,13 +1,18 @@
-import prisma from "@/lib/prisma"
+'use client'
+
 import { Artwork } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
+import { NumericFormat } from 'react-number-format';
+import { ArtworkWithBids } from "../../../types";
+import { getHighestBid } from "@/lib/server/artworks";
+
 
 export default async function AuctionArtworksGrid({ 
   artworks = [],
   auctionId 
 }: {
-  artworks: Artwork[],
+  artworks: ArtworkWithBids[],
   auctionId?: number
 }) {
   return (
@@ -31,7 +36,26 @@ export default async function AuctionArtworksGrid({
                   <div className="card-body">
                     <h5 className="card-title">{ artwork.name }</h5>
                     <div className="artwork-details">
-                      <p>Minimum Bid: Php 100,000.00</p>
+                      { !! artwork.bids.length && 
+                        <p>
+                        Current Bid: <strong><NumericFormat 
+                          displayType="text"
+                          prefix="Php "
+                          thousandSeparator={true}
+                          value={getHighestBid(artwork)}/>
+                          </strong>
+                      </p> 
+                      }
+                      { artwork.minimum_bid && !artwork.bids.length &&
+                        <p>
+                          Starts at: <strong><NumericFormat 
+                            displayType="text"
+                            prefix="Php "
+                            thousandSeparator={true}
+                            value={artwork.minimum_bid}/>
+                            </strong>
+                        </p>
+                      }
                     </div>
                   </div>
                 </div>

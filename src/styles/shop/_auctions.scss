@@ -164,3 +164,16 @@
     }
   }
 }
+
+.artwork-bidding-history {
+  // box-shadow: 0px 9px 20px 0px rgba(22, 26, 57, 0.2);
+  // border: transparent;
+  border-radius: 0;
+  border-color: var(--bs-gray-200);
+
+  .artwork-bidding {
+    &:not(:last-of-type) {
+      border-bottom: 1px solid var(--bs-gray-100);
+    }
+  }
+}
