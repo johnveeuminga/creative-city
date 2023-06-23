@@ -12,6 +12,8 @@ export async function GET(request: NextRequest) {
   try {
     const res: AuthCallbackResponse = await getTokenFromCode(code);
 
+    // todo: cognitoId, search @ Users table if not create()
+
     let response = NextResponse.redirect(process.env.APP_URL ?? "");
     response.cookies.set(
       'authToken', 
