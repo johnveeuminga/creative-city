@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export default function ArtworkList({ artworks, userId }) {
   const { push } = useRouter();
   const handleClick = (id: number) => {
-    push(`/artworks/${userId}/edit/${id}`);
+    push(`/dashboard/artworks/${id}/edit`);
   };
   return (
     <div className="row">

@@ -49,7 +49,7 @@ export const ArtistMenuItems: {
     {
       name: 'My Artworks',
       icon: 'ti-gallery',
-      href: '/dashboard/artist/artworks',
+      href: '/dashboard/artworks',
       priority: 12,
       prefetch: false,
     },

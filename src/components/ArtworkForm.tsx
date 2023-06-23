@@ -1,14 +1,29 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useTransition } from "react";
+import { doCreateArtwork } from "@/actions/artworks";
+import { useRouter } from "next/navigation";
+import { User } from "@prisma/client";
 
-export default function ArtworkForm({ data, handleClick }) {
+export default function ArtworkForm({ data }: { data: User }) {
+  const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [isPending, startTransition] = useTransition();
+
+  const handleClick = async (name: string, description: string) => {
+    startTransition(async () => {
+      try {
+        await doCreateArtwork(name, description, data.id);
+        router.push(`/dashboard/artworks/`);
+      } catch (err) {
+        console.log(err);
+      }
+    });
+  };
 
   return (
     <div>
       <h2>Create Artwork</h2>
-      <p>User: {data.first_name}</p>
       <form>
         <label className="form-label">
           Name:
