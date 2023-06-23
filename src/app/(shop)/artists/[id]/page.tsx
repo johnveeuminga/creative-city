@@ -1,5 +1,4 @@
 import styles from './ArtistProfile.module.css';
-import { Artist, User } from '@prisma/client';
 import Link from 'next/link';
 import prisma from "@/lib/prisma"
 import Image from "next/image"
@@ -24,9 +23,6 @@ export default async function ArtistProfile({
           user: true,
         }
       })
-
-
-
 
     // Placeholder for artworks
     // const artworks = artist.artworks || []
