@@ -20,11 +20,13 @@ export default async function ArtworksPage() {
     <div>
       <div>
         {" "}
-        <button className="btn btn-primary">
+        <button className="main-btn icon-btn">
           <Link href="/dashboard/artworks/create">Add Artwork</Link>
         </button>
       </div>
-      <ArtworkList artworks={artworks} userId={2} />
+      <div className="row mt-5">
+        <ArtworkList artworks={artworks} userId={2} />
+      </div>
     </div>
   );
 }
