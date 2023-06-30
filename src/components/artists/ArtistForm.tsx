@@ -190,5 +190,5 @@ export default function ArtistForm() {
         </button>
       </form>
     </div>
-  );
+  );  
 }

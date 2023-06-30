@@ -1,68 +1,79 @@
 import styles from './ArtistProfile.module.css';
 import Link from 'next/link';
-import prisma from "@/lib/prisma"
-import Image from "next/image"
-import { redirect } from "next/navigation"
-import { relative } from "path"
+import prisma from '@/lib/prisma';
+import Image from 'next/image';
 
-export default async function ArtistProfile({ 
-    params: {
-        id: artistId
-    }
+export default async function ArtistProfile({
+  params: {
+    id: artistId
+  }
 }: {
-    params: {
-      id: string
+  params: {
+    id: string;
+  };
+}) {
+  const artist = await prisma.artist.findFirst({
+    where: {
+      id: parseInt(artistId)
+    },
+    include: {
+      user: true
     }
-  }) 
-{
-    const artist = await prisma.artist.findFirst({
-        where: {
-          id: parseInt(artistId)
-        },
-        include: {
-          user: true,
-        }
-      })
+  });
 
-    // Placeholder for artworks
-    // const artworks = artist.artworks || []
-    const artworks = [
-        { id: 1, title: 'Artwork 1', year: 2020, price: 'Price on request', image: 'https://via.placeholder.com/150' },
-        { id: 2, title: 'Artwork 2', year: 2021, price: 'Price on request', image: 'https://via.placeholder.com/150' },
-        // ... other artworks ...
-      ];
+  const artworks = [
+    { id: 1, title: 'Artwork 1', year: 2020, price: 'Price on request', image: 'https://via.placeholder.com/150' },
+    { id: 2, title: 'Artwork 2', year: 2021, price: 'Price on request', image: 'https://via.placeholder.com/150' },
+    // ... other artworks ...
+  ];
 
   return (
     <div className={styles.container}>
       <div>
-        <div className={styles.header}>
-          <Image
-            src={'https://via.placeholder.com/200'}
-            // src={artist.image || 'https://via.placeholder.com/200'}
-            alt={'test'}
-            className={styles.artistPhoto}
-            width={200}
-            height={200}
-          />
-          <div>
-            <h1 className={styles.title}>{artist?.user.first_name} {artist?.user.last_name}</h1>
+              <div className="col col-md-9 col-lg-7 col-xl-5">
+                <div className="card" style={{ borderRadius: '15px' }}>
+                  <div className="card-body p-4">
+                    <div className="d-flex text-black">
+                      <div className="flex-shrink-0">
+                        <img
+                          src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                          alt="Generic placeholder image"
+                          className="img-fluid"
+                          style={{ width: '180px', borderRadius: '10px' }}
+                        />
+                      </div>
+                      <div className="flex-grow-1 ms-3">
+                        <h5 className="mb-1">{artist?.user.first_name} {artist?.user.last_name}</h5>
+                        <p className="mb-2 pb-1" style={{ color: '#2b2a2a' }}>Artist</p>
+                        <div className="d-flex justify-content-start rounded-3 p-2 mb-2" style={{ backgroundColor: '#efefef' }}>
+                          <div>
+                            <p className="small text-muted mb-1">Articles</p>
+                            <p className="mb-0">41</p>
+                          </div>
+                          <div className="px-3">
+                            <p className="small text-muted mb-1">Followers</p>
+                            <p className="mb-0">976</p>
+                          </div>
+                          <div>
+                            <p className="small text-muted mb-1">Rating</p>
+                            <p className="mb-0">8.5</p>
+                          </div>
+                        </div>
+                        <div className="d-flex pt-1">
+                          <button type="button" className="btn btn-outline-primary me-1 flex-grow-1">Chat</button>
+                          <button type="button" className="btn btn-primary flex-grow-1">Follow</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-            {/* <p>{artist.nationality}, b. {artist.birthYear}</p>
-            <p>{artist.followers} Followers</p> */}
-
-            <p>{'Filipino'}, B. {'1997'}</p>
-            <p>{69} Followers</p>
-
-            <button className={styles.follow}>Follow</button>
-          </div>
-        </div>
-
-        {/* Artist's story and bio */}
         <div className={styles.artistDetails}>
-          <h2>My Story</h2>
-          <p>{artist.myStory}</p>
-          <h2>My Bio</h2>
-          <p>{artist.myBio}</p>
+          <h5>My Story</h5>
+          <p>{artist?.myStory}</p>
+          <h5>My Bio</h5>
+          <p>{artist?.myBio}</p>
         </div>
 
         <div className={styles.tabContainer}>
@@ -72,16 +83,18 @@ export default async function ArtistProfile({
           {/* ... other tabs ... */}
         </div>
 
-        {/* Replace this section depending on the active tab */}
-        <div>
+        <div className={styles.artworksContainer}>
           {artworks.map(artwork => (
             <div className={styles.artwork} key={artwork.id}>
-              <Image
-                src={artwork.image || 'https://via.placeholder.com/150'}
-                alt={artwork.title}
-                width={150}
-                height={150}
-              />
+              <div className={styles.artworkImage}>
+                <Image
+                  src={artwork.image || 'https://via.placeholder.com/150'}
+                  alt={artwork.title}
+                  layout="fill"
+                  objectFit="cover"
+                  objectPosition="center"
+                />
+              </div>
               <div className={styles.artworkInfo}>
                 <p className={styles.artworkTitle}>{artwork.title}</p>
                 <p className={styles.artworkYear}>{artwork.year}</p>
@@ -90,25 +103,23 @@ export default async function ArtistProfile({
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Sidebar */}
-      <div className={styles.sidebar}>
-        <div className={styles.filterSection}>
-          {/* Filter options */}
-          <h2>Filter by</h2>
-          <p>Keyword Search</p>
-          <p>Rarity</p>
-          <p>Medium</p>
-          <p>Price</p>
-          <p>Size</p>
-          <p>Ways to Buy</p>
-          <p>Material</p>
-          <p>Artwork Location</p>
-          <p>Time Period</p>
-          <p>Color</p>
+        <div className={styles.sidebar}>
+          <div className={styles.filterSection}>
+            <h2>Filter by</h2>
+            <p>Keyword Search</p>
+            <p>Rarity</p>
+            <p>Medium</p>
+            <p>Price</p>
+            <p>Size</p>
+            <p>Ways to Buy</p>
+            <p>Material</p>
+            <p>Artwork Location</p>
+            <p>Time Period</p>
+            <p>Color</p>
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
