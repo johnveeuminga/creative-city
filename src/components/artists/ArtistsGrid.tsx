@@ -12,8 +12,8 @@ export default async function ArtistsGrid() {
     <div className="row">
       {
         artists.length && artists.map(artist => (
-          <div key={artist.id} className="col-md-6">
-            <ArtistCard artist={artist}/>
+          <div key={artist.id} className="col-md-6" style={{ width: '25%' }}>
+            <ArtistCard artist={artist} />
           </div>
         ))
       }

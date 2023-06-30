@@ -43,7 +43,7 @@ export default function ArtistForm() {
 
   return (
     <div className="main-block">
-      <h2>Create Artist</h2>
+      <h2>Artist</h2>
       <form onSubmit={handleSubmit} className="my-3">
         <div className="form-row">
           <div className="form-group col-md-6">

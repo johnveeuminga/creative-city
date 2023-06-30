@@ -1,5 +1,4 @@
 // Import your components
-import ArtistCard from "@/components/artists/ArtistCard"
 import ArtistsGrid from "@/components/artists/ArtistsGrid"
 import { Suspense } from "react"
 
