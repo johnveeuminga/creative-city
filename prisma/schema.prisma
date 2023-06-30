@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id         String      @id @unique
+  id         Int      @id @unique
   first_name String
   last_name  String
   email      String   @unique
@@ -23,7 +23,7 @@ model User {
 
 model Artist {
   id                   Int        @id @default(autoincrement())
-  userId               String     @unique
+  userId               Int     @unique
   user                 User       @relation(fields: [userId], references: [id])
   nickname             String?
   myStory              String?
@@ -50,7 +50,7 @@ model Follow {
   artist   Artist @relation(fields: [artistId], references: [id])
   artistId Int
   user     User   @relation(fields: [userId], references: [id])
-  userId   String
+  userId   Int
 }
 
 model Interest {
@@ -67,7 +67,7 @@ model Artwork {
   created_at          DateTime @default(now())
   updated_at          DateTime @default(now())
   artist              User     @relation(fields: [artist_id], references: [id])
-  artist_id           String
+  artist_id           Int
   auction             Auction? @relation(fields: [auction_id], references: [id])
   auction_id          Int?
   bids                Bid[]
@@ -89,7 +89,7 @@ model Auction {
 model Bid {
   id                   Int     @id @default(autoincrement())
   user                 User    @relation(fields: [user_id], references: [id])
-  user_id              String 
+  user_id              Int 
   amount               Float
   artwork              Artwork @relation(fields: [artwork_id], references: [id])
   artwork_id           Int
