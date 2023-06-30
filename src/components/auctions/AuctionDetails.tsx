@@ -134,6 +134,7 @@ export async function AuctionDetails({ id, page = 1 }: {
                 </li>
                 <li className="page-item">
                   <Link 
+                    scroll={false}
                     href={`/auctions/${auction.id}?page=${+page + 1}`}
                     className={"page-link"}>
                     <i className="ti-arrow-right"></i>

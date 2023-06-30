@@ -19,6 +19,7 @@ export default async function AuctionSinglePage({
   return (
     <>
       <div className="auctions-single mb-3" style={{ minHeight: 400 }}>
+        {/* TODO: Skeleton loading here */}
         <Suspense fallback={<p>Loading Content...</p>}>
           <AuctionDetails 
             page={page}

@@ -49,7 +49,7 @@ export const ArtistMenuItems: {
     {
       name: 'My Artworks',
       icon: 'ti-gallery',
-      href: '/dashboard/artist/artworks',
+      href: '/dashboard/artworks',
       priority: 12,
       prefetch: false,
     },
@@ -91,13 +91,13 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
         case 'artist':
           items = [
             ...items,
-            ...UserMenuItems.items,
+            ...ArtistMenuItems.items,
           ]
           break;
         case 'user':
           items = [
             ...items,
-            ...ArtistMenuItems.items,
+            ...UserMenuItems.items,
           ]
           break;
       }
