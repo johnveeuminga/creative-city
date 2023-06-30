@@ -2,6 +2,7 @@ import { CognitoJwtVerifier } from "aws-jwt-verify";
 import { CognitoIdTokenPayload, CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
 import { cookies } from "next/dist/client/components/headers";
 import verifier from "../cognito";
+import { NextRequest } from "next/server";
 
 interface User {
   name: string,
@@ -67,10 +68,6 @@ type JWTDecodeResponse = CognitoIdTokenPayload & {
 };
 
 
-// interface JWTDecodeResponse extends CognitoIdTokenPayload, JsonObject {
-//   // "cognito:groups": Array<string>
-// }
-
 export async function decodeToken(token: string, tokenUse: "id" | "access" = "id"): Promise<JWTDecodeResponse> {
   if(!process.env.COGNITO_USER_POOL_ID || !process.env.COGNITO_CLIENT_ID)
     throw("No user pool ID or user pool ID configured")
@@ -86,11 +83,6 @@ export async function decodeToken(token: string, tokenUse: "id" | "access" = "id
   }
 }
 
-export async function decodeToken2(token: string) { 
-  const jwk = await fetch("https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_XNxfV9r2F/.well-known/jwks.json");
-  const res = await jwk.json()    
-}
-
 export function buildUrl(endpoint: string, {
   cognitoRedirectUrl,
   cognitoAppId,
@@ -103,4 +95,19 @@ export function buildUrl(endpoint: string, {
   const redirect_uri = encodeURIComponent(cognitoRedirectUrl);
 
   return `${cognitoBaseUrl}/${endpoint}?response_type=code&client_id=${cognitoAppId}&redirect_uri=${redirect_uri}`;
+}
+
+export async function isAuthenticated(req: NextRequest): Promise<boolean> {
+  const idToken = req.cookies.get('idToken')
+
+  if(!idToken || !idToken.value)
+    return false
+
+  try {
+    await decodeToken(idToken.value, "id")
+
+    return true
+  } catch {
+    return false
+  }
 }

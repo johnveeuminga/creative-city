@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decodeToken } from "./lib/server/auth";
+import { decodeToken, isAuthenticated } from "./lib/server/auth";
 
 export async function middleware(request: NextRequest) {
   if(request.nextUrl.pathname.startsWith('/api')) {
@@ -14,18 +14,11 @@ export async function middleware(request: NextRequest) {
 
     return response;
   } else if (request.nextUrl.pathname.startsWith('/dashboard')) {
-    const cookieToken = request.cookies.get('idToken');
+    const authenticated = await isAuthenticated(request)
 
-    if(!cookieToken || !cookieToken.value)
-      return NextResponse.redirect(process.env.APP_URL ?? "/")
-
-    try {
-      await decodeToken(cookieToken.value)
-
-      return NextResponse.next();
-    } catch(err) {
-      console.log(err)
-      return NextResponse.redirect(process.env.APP_URL ?? "/")
-    }
+    if(authenticated)
+      return NextResponse.redirect("/")
   }
+
+  return NextResponse.next();
 }
