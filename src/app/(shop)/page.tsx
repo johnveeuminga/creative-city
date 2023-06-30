@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React from "react";
 import dynamic from "next/dynamic";
+import ArtistCard from '@/components/artists/ArtistCard';
+import { getArtists } from "@/lib/server/artists";
 
 const Counter = dynamic(() => import("@/components/Counter"), {
   ssr: false,
@@ -12,6 +14,13 @@ import {
 import SlickSlider from "@/components/SlickSlider";
 
 const Index = async () => {
+
+  const artists = await getArtists({
+    orderBy: {
+      nickname: 'asc',
+    }
+  });
+
   return <>
     {/* <!--====== Start Hero Section ======--> */}
     <section className="hero-area">
@@ -595,12 +604,23 @@ const Index = async () => {
           <div className="col-lg-6">
             <div className="section-title text-center mb-60 wow fadeInUp">
               <h2>
-                Explore By Category
+                Explore By Artist
               </h2>
             </div>
           </div>
         </div>
+
         <div className="row">
+            {
+              artists.map(artist => (
+                <div className="col-lg-3 col-md-6 col-sm-12" key={artist.id}>
+                  <ArtistCard artist={artist} />
+                </div>
+              ))
+            }
+        </div>        
+
+        {/* <div className="row">
           <div className="col-lg-3 col-md-6 col-sm-12">
             <div
               className="category-item category-item-two mb-25 wow fadeInUp"
@@ -837,7 +857,7 @@ const Index = async () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section> 
     {/* <!--====== End Category Section ======--> */}

@@ -18,11 +18,12 @@ model User {
   Artist     Artist?
   artworks   Artwork[]
   bids       Bid[]
+  follows    Follow[]
 }
 
 model Artist {
   id                   Int        @id @default(autoincrement())
-  userId               Int        @unique
+  userId               String     @unique
   user                 User       @relation(fields: [userId], references: [id])
   nickname             String?
   myStory              String?
@@ -34,7 +35,6 @@ model Artist {
   interests            Interest[]
   follows              Follow[]
   status               ArtistStatus
-  statusUpdatedAt      DateTime   @updatedAt
   createdAt            DateTime   @default(now())
   updatedAt            DateTime   @updatedAt
 }
@@ -49,8 +49,8 @@ model Follow {
   id       Int    @id @default(autoincrement())
   artist   Artist @relation(fields: [artistId], references: [id])
   artistId Int
-  user   User @relation(fields: [artistId], references: [id])
-  userId Int
+  user     User   @relation(fields: [userId], references: [id])
+  userId   String
 }
 
 model Interest {
