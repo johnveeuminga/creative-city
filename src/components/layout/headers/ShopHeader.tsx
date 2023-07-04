@@ -1,8 +1,12 @@
+import UserAvatar from "@/components/UserAvatar";
+import { getServerSession } from "@/lib/server/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { MdPersonOutline } from "react-icons/md";
 
-export default function ShopHeader() {
+export default async function ShopHeader() {
+  const session = await getServerSession();
+
   return (
     <div className="header">
       <nav className="navbar navbar-expand-lg">
@@ -30,12 +34,26 @@ export default function ShopHeader() {
               </li>
             </ul>
             <div className="ms-5 actions">
-              <button className="btn btn-lg btn-tertiary d-flex align-items-center">
-                <MdPersonOutline 
-                  fontSize={26}
-                  className="me-3"/>
-                Sign Up
-              </button>
+              {
+                ! session.user && 
+                  <a className="btn btn-lg btn-tertiary d-flex align-items-center" href={"/api/auth/login"}>
+                    <MdPersonOutline 
+                      fontSize={26}
+                      className="me-3"/>
+                    Sign In
+                  </a>
+              }
+              {
+                !! session.user &&
+                  <Link 
+                    href="/dashboard" 
+                    className="avatar"
+                    prefetch={false}>
+                    <UserAvatar 
+                      size="54"
+                      user={session.user}/>
+                  </Link>
+              }
             </div>
           </div>
         </div>

@@ -63,6 +63,10 @@ export default async function AuctionArtworksGrid({
           </div>
         ))
       } 
+      {
+        !artworks.length &&
+          <p className="text-center fw-semibold px-5">There are no artworks registered for this auction just yet.</p>
+      }
       </div>
     </>
   )

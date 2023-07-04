@@ -12,6 +12,7 @@ $font-family-sans-serif:
 $primary-color: #515DCD;
 $secondary-color: #F8E23A;
 $tertiary-color: #FE3434;
+$brown: #4b4743;
 
 $primary: $primary-color;
 $secondary: $secondary-color;
@@ -30,6 +31,7 @@ $base-themes: (
   "tertiary": $tertiary-color,
   "dashboard-primary": $primary-color,
   "dashboard-secondary": $secondary-color,
+  "brown": $brown,
 );
 
 $container-max-widths: (
@@ -40,7 +42,7 @@ $container-max-widths: (
   xxl: 1630px
 );
 
-$heading-color: var(--font-tajawal);
+$headings-font-family: var(--font-tajawal);
 
 
 // Bg Color

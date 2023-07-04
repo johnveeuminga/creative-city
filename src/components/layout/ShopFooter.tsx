@@ -11,7 +11,7 @@ export default function ShopFooter() {
             <Image 
               width={385}
               height={143}
-              src="bcc.svg" 
+              src="/bcc.svg" 
               alt="Baguio Creative City"/>
           </div>
           <div className="col-md-4 col-12">
