@@ -6,6 +6,8 @@ import Header from "./headers/Header";
 import MobileMenu from "./MobileMenu";
 import ScrollTop from "./ScrollTop";
 import Header2 from "./headers/Header2";
+import ShopHeader from "./headers/ShopHeader";
+import ShopFooter from "./ShopFooter";
 
 const Layout = ({ children, header } : {
   children?: any,
@@ -20,12 +22,15 @@ const Layout = ({ children, header } : {
 
   return (
     <Fragment>
-      <ImageView />
+      {/* <ImageView />
       <MobileMenu />
       <Header2 />
       {children} 
       <Footer />
-      <ScrollTop />
+      <ScrollTop /> */}
+      <ShopHeader />
+      { children }
+      <ShopFooter />
     </Fragment>
   );
 };

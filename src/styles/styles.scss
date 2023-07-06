@@ -29,6 +29,7 @@
 
 
 -----------------------------------------------------------------------------------*/
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
 
 @import 'variables';
 // @import "~bootstrap/scss/bootstrap";
@@ -106,55 +107,55 @@ $theme-colors: map-merge($theme-colors, $base-themes);
 
 
 
-@import 'mixin';
+// @import 'mixin';
 
-//common
-@import 'common';
+// //common
+// @import 'common';
 
-//Extend
-@import 'extend';
+// //Extend
+// @import 'extend';
 
-//Header
-@import 'header';
+// //Header
+// @import 'header';
 
-//Hero
-@import 'hero';
+// //Hero
+// @import 'hero';
 
-//Category
-@import 'category';
+// //Category
+// @import 'category';
 
-//Features
-@import 'features';
+// //Features
+// @import 'features';
 
-//Elements
-@import 'elements';
+// //Elements
+// @import 'elements';
 
-//Listing
-@import 'listing';
+// //Listing
+// @import 'listing';
 
-//Place
-@import 'place';
+// //Place
+// @import 'place';
 
-//Products
-@import 'products';
+// //Products
+// @import 'products';
 
-//Testimonial
-@import 'testimonial';
+// //Testimonial
+// @import 'testimonial';
 
-//Team
-@import 'team';
+// //Team
+// @import 'team';
 
-//Blog
-@import 'blog';
+// //Blog
+// @import 'blog';
 
-//Widget
-@import 'widget';
+// //Widget
+// @import 'widget';
 
-//Footer
-@import 'footer';
+// //Footer
+// @import 'footer';
 
-//Contact
-@import 'contact';
+// //Contact
+// @import 'contact';
 
 //Dashboard
 @import 'dashboard/dashboard';
@@ -164,4 +165,7 @@ $theme-colors: map-merge($theme-colors, $base-themes);
 @import 'components/buttons';
 
 @import 'shop/layout';
+@import 'shop/header';
 @import 'shop/auctions';
+@import 'shop/banner';
+@import 'shop/footer';

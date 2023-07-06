@@ -40,8 +40,9 @@
     display: flex;
     align-items: center;
     height: 300px;
-    background-color: var(--bs-gray-200);
     color: var(--bs-gray-800);
+    border-top: 1px solid var(--bs-gray-200);
+    border-bottom: 1px solid var(--bs-gray-200);
 
     p {
       color: var(--bs-gray-900);
@@ -67,7 +68,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #285f2c;
+      background-color: var(--bs-primary);
       color: #fff;
 
       h4 {

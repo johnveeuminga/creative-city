@@ -3,13 +3,16 @@ import { DateTime } from "luxon";
 import { redirect, usePathname } from "next/navigation";
 import AuctionArtworksGrid from "./AuctionArtworksGrid";
 import Link from "next/link";
+import { getServerSession } from "@/lib/server/auth";
+import { useState } from "react";
+import { AuctionDetailsCountdown } from "./AuctionDetailsCountdown";
 
 export async function AuctionDetails({ id, page = 1 }: {
   id: string,
   page: number
 }) {
   const currPage = page - 1;
-  const auction = await prisma.auction.findFirst({
+  const auctionPromise = prisma.auction.findFirst({
     where: {
       id: parseInt(id),
     },
@@ -20,50 +23,59 @@ export async function AuctionDetails({ id, page = 1 }: {
         }
       },
       artworks: {
-        take: 2,
-        skip: currPage * 2,
+        take: 10,
+        skip: currPage * 10,
         include: {
           bids: true,
         }
       },
     },
   });
+  const now = DateTime.now()
+
+  const sessionPromise = getServerSession()
+  const [session, auction] = await Promise.all([sessionPromise, auctionPromise]);
 
   if(!auction) 
     redirect("/")
 
   return (
     <div className="auctions-single">
+      <div className="auctions-single-pagination">
+        <div className="container">
+          <p className="text-body-tertiary"><small>Home / Auctions / {auction.name}</small></p>
+        </div>
+      </div>
       <div className="auction-single-header">
         <div className="container position-relative">
           <div className="row">
             <div className="col-md-9 align-self-center">
-              <h2 className="mb-3">{ auction.name }</h2>
-              <div className="auction-single-header__description" dangerouslySetInnerHTML={{
+              <h1 className="mb-3 fw-bold text-primary">{ auction.name }</h1>
+              <div className="auction-single-header__description mb-4" dangerouslySetInnerHTML={{
                 __html: auction.description
               }}></div>
               <div className="auction-single-header__details align-items-stretch d-flex my-3 w-100">
                 <div className="auction-single-header__widget me-4">
                   <div className="auction-single-header__widget-icon me-3">
-                    <p className="fw-bold"><i className="ti-gallery d-inline-block me-1"></i>Artworks</p>
+                    <p className="fw-bold mb-1 text-primary"><i className="ti-gallery d-inline-block me-2"></i>Artworks</p>
                   </div>
-                  <div className="auction-single-header__widget-content">
+                  <div className="auction-single-header__widget-content fw-semibold">
                     { auction._count.artworks } Registered
                   </div>
                 </div>
                 <div className="auction-single-header__widget me-4">
                   <div className="auction-single-header__widget-icon me-3">
-                    <p className="fw-bold"><i className="ti-calendar d-inline-block me-1"></i>Start Date</p>
+                    <p className="fw-bold mb-1 text-primary"><i className="ti-calendar d-inline-block me-2"></i>Starts At</p>
                   </div>
-                  <div className="auction-single-header__widget-content">
+                  <div className="auction-single-header__widget-content fw-semibold">
                     { DateTime.fromJSDate(auction.start_date).toFormat('LLLL dd, yyyy hh:mm a') }
                   </div>
                 </div>
                 <div className="auction-single-header__widget">
                   <div className="auction-single-header__widget-icon me-3">
-                    <p className="fw-bold"><i className="ti-calendar d-inline-block me-1"></i>End Date</p>
+                    <p className="fw-bold mb-1 text-primary"><i className="ti-calendar d-inline-block me-2"></i>Ends At</p>
                   </div>
-                  <div className="auction-single-header__widget-content">
+                  <div className="auction-single-header__widget-content fw-semibold">
                     { DateTime.fromJSDate(auction.end_date).toFormat('LLLL dd, yyyy hh:mm a') }
                   </div>
                 </div>
@@ -73,31 +85,32 @@ export async function AuctionDetails({ id, page = 1 }: {
           </div>
           <div className="auction-single-timer">
             <div className="py-3 text-center">
-              <h4 className="mb-4">Auction Starting In</h4>
-              {/* TODO: Make client component and countdown */}
-              <div className="timer d-flex justify-content-around mb-4">
-                <div className="timer-section days">
-                  <p className="value">3</p>
-                  <p className="label"><small>Days</small></p>
-                </div>
-                <div className="timer-section hours">
-                <p className="value">18</p>
-                  <p className="label"><small>Hrs</small></p>
-                </div>
-                <div className="timer-section minutes">
-                <p className="value">30</p>
-                  <p className="label"><small>Mins</small></p>
-                </div>
-                <div className="timer-section seconds">
-                <p className="value">00</p>
-                  <p>Sec</p>
-                </div>
-              </div>
-              <div className="actions mt-4">
-                <button className="btn btn-secondary text-white d-block w-100">
-                  <strong>REGISTER YOUR ARTWORK</strong>
-                </button>
-              </div>
+              {
+                now < DateTime.fromJSDate(auction.start_date) &&
+                <>
+                  <h3 className="mb-4">Auction Starts In</h3>
+                  <AuctionDetailsCountdown date={auction.start_date}  />
+                </> 
+              }
+              {
+                now >= DateTime.fromJSDate(auction.start_date) && now < DateTime.fromJSDate(auction.end_date) &&
+                <>
+                  <h3 className="mb-4">Auction Ends In</h3>
+                  <AuctionDetailsCountdown date={auction.end_date}  />
+                </>
+              }
+              {
+                now >= DateTime.fromJSDate(auction.end_date) &&
+                  <h3 className="mb-4">Auction Has Ended</h3>
+              }
+              {
+                session.user && session.user.groups?.indexOf("artist") !== -1 &&
+                  <div className="actions mt-4">
+                    <button className="btn btn-tertiary text-white d-block w-100">
+                      <strong>REGISTER YOUR ARTWORK</strong>
+                    </button>
+                  </div>
+              }
             </div> 
           </div>
         </div>
