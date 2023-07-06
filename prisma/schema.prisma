@@ -26,6 +26,7 @@ model Artist {
   userId               Int        @unique
   user                 User       @relation(fields: [userId], references: [id])
   nickname             String?
+  avatar_path          String?
   myStory              String?
   myBio                String?
   artworkPickUpAddress String?

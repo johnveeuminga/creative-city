@@ -13,7 +13,7 @@ export default function ArtistCard({ artist }: { artist: ArtistWithUser }) {
       <div className={`${styles.container} ${styles.categoryItem} ${styles.categoryItemTwo} mb-25 wow fadeInUp`} data-wow-delay=".2s">
         <div className={styles.artistPhoto}>
           <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+            src={artist?.avatar_path}
             alt="Generic placeholder image"
             className={styles.artistPhotoImg}
           />
