@@ -1,10 +1,10 @@
-import ArtistCard from "./ArtistCard";
 import { getArtists } from "@/lib/server/artists";
+import ArtistCard from "./ArtistCard";
 
 export default async function ArtistsGrid() {
   const artists = await getArtists({
     orderBy: {
-        nickname: 'asc', // assuming you're ordering by artist name
+        nickname: 'asc',
     }
   });
 
@@ -12,8 +12,10 @@ export default async function ArtistsGrid() {
     <div className="row">
       {
         artists.length && artists.map(artist => (
-          <div key={artist.id} className="col-md-6" style={{ width: '25%' }}>
-            <ArtistCard artist={artist} />
+          <div 
+            key={artist.id} 
+            className="col-md-6" style={{ width: '25%' }}>
+              <ArtistCard artist={artist} />
           </div>
         ))
       }

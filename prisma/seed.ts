@@ -1,31 +1,29 @@
-import { Auction, Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-const data: Prisma.AuctionCreateInput[] = [
+const data = [
   {
     name: "Auction 1",
     description: "Auction Sample 1",
     start_date: new Date(2023, 5, 8, 8, 0),
-    end_date: new Date(2023, 5, 31, 11, 59),
-    artworks: {
-      createMany: {
-        data: [
-          { name: "Artwork 1", description: "Artwork Sample 1" },
-          { name: "Artwork 2", description: "Artwork Sample 2" },
-        ],
-      },
-    },
+    end_date: new Date(2023, 6, 1, 3, 59),
     artist: {
       create: {
         first_name: "John",
         last_name: "Doe",
         email: "john@example.com",
-        artworks: {
-          create: [
-            { name: "John's Artwork 1", description: "John's Artwork Sample 1" },
-            { name: "John's Artwork 2", description: "John's Artwork Sample 2" },
-          ],
+        Artist: {
+          create: {
+            nickname: "JohnDoe",
+            myStory: "I am an artist with a passion for painting.",
+            myBio: "I have been painting for over 10 years and love to explore various themes and styles.",
+            artworkPickUpAddress: "123 Art Street, City",
+            contactNumber: "1234567890",
+            gcash: "gcash@example.com",
+            paymaya: "paymaya@example.com",
+            status: 'APPROVED',
+          },
         },
       },
     },
@@ -34,14 +32,19 @@ const data: Prisma.AuctionCreateInput[] = [
 ];
 
 async function seed() {
-  await prisma.auction.createMany({
-    data,
-  });
+  for (const auctionData of data) {
+    const auction = await prisma.auction.create({
+      data: auctionData,
+    });
+
+    console.log(`Created auction with ID: ${auction.id}`);
+  }
 }
 
 seed()
   .then(async () => {
     await prisma.$disconnect();
+    console.log("Auction seed completed successfully.");
   })
   .catch(async (e) => {
     console.error(e);
