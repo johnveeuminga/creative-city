@@ -85,6 +85,11 @@ export async function decodeToken(token: string, tokenUse: "id" | "access" = "id
   }
 }
 
+export async function decodeToken2(token: string) { 
+  const jwk = await fetch("https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_XNxfV9r2F/.well-known/jwks.json");
+  const res = await jwk.json()
+}
+
 export function buildUrl(endpoint: string, {
   cognitoRedirectUrl,
   cognitoAppId,

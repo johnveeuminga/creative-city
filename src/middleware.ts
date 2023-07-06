@@ -17,7 +17,7 @@ export async function middleware(request: NextRequest) {
     const authenticated = await isAuthenticated(request)
 
     if(!authenticated)
-      return NextResponse.redirect("/")
+      return NextResponse.redirect(`${process.env.APP_URL}`)
   }
 
   return NextResponse.next();
