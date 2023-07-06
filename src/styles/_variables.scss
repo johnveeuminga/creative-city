@@ -4,13 +4,20 @@ $quicksand: 'Quicksand', sans-serif;
 
 $mulish: 'Mulish', sans-serif;
 
+$font-family-sans-serif: 
+"Work Sans", -apple-system, 
+"Segoe UI", Roboto, "Helvetica Neue", 
+"Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
-//color
+$primary-color: #515DCD;
+$secondary-color: #F8E23A;
+$tertiary-color: #FE3434;
+$brown: #4b4743;
 
-$primary-color: #285f2c;
+$primary: $primary-color;
+$secondary: $secondary-color;
 
-$secondary-color: #3f2e27;
-
+$heading-font: var(--font-tajawal);
 $heading-color: #0d0d0d;
 $heading-color-dark: #0d0d0d;
 
@@ -20,18 +27,22 @@ $text-color: #676767;
 
 $border: #efefef;
 
-$theme-colors: (
-  "primary": $primary-color,
-  "secondary": $secondary-color,
-);
-
 $base-themes: (
-  "dashboard-primary": $primary-color
+  "tertiary": $tertiary-color,
+  "dashboard-primary": $primary-color,
+  "dashboard-secondary": $secondary-color,
+  "brown": $brown,
 );
 
-$theme-colors: map-merge($theme-colors, $base-themes);
-@debug $theme-colors;
+$container-max-widths: (
+  sm: 540px,
+  md: 980px,
+  lg: 1280px,
+  xl: 1440px,
+  xxl: 1630px
+);
 
+$headings-font-family: var(--font-tajawal);
 
 
 // Bg Color
@@ -39,8 +50,6 @@ $dark-black: #121416;
 $light-bg: #f7f7f7;
 
 $font-size-root: 15px;
-
-
 
 // Responsive Variables
 $lp: 'only screen and (min-width: 1200px) and (max-width: 1600px)';
@@ -65,3 +74,6 @@ $input-font-size: .925em;
 // $input-group-addon-bg: $input-bg;
 
 $auctions-sidebar-width: 300px;
+
+// Buttons
+$btn-font-weight: 600;

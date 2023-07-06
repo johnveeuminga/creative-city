@@ -1,9 +1,20 @@
 import '@/styles/styles.scss'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { Inter } from 'next/font/google'
+import { Tajawal, Work_Sans } from 'next/font/google'
 import SessionProvider from '../components/layout/providers/SessionProvider'
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Work_Sans({ 
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-work-sans'
+})
+
+const headingFont = Tajawal({
+  subsets: ['latin'],
+  variable: '--font-tajawal',
+  weight: ['300', '400', '500', '700'],
+  display: 'swap',
+})
 
 export const metadata = {
   title: 'Create Next App',
@@ -23,12 +34,8 @@ export default function RootLayout({
           href="assets/images/favicon.ico"
           type="image/png"
         />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600&family=Quicksand:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet"
-        />
       </head>
-      <body className={inter.className}>
+      <body className={`${font.variable} ${headingFont.variable}`}>
         <SessionProvider>
           {children}
         </SessionProvider>
