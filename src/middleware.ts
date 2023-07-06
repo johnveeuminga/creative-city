@@ -24,8 +24,11 @@ export async function middleware(request: NextRequest) {
 
       return NextResponse.next();
     } catch(err) {
-      console.log(err)
-      return NextResponse.redirect(process.env.APP_URL ?? "/")
+      const response = NextResponse.redirect(process.env.APP_URL ?? "/");
+      response.cookies.set('authToken', '');
+      response.cookies.set('refreshToken', '');
+      response.cookies.set('idToken', '');
+      return response;
     }
   }
 }

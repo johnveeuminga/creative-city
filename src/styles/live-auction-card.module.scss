@@ -1,0 +1,30 @@
+.gallery {
+  height: 440px;
+}
+
+.slider {
+  height: 100%;
+}
+
+.slide {
+  height: 440px;
+  border-radius: var(--bs-card-border-radius);
+  overflow: hidden;
+}
+
+.timer {
+  width: 300px;
+  max-width: 100%;
+  padding-top: .25em;
+  padding-bottom: .25em;
+  bottom: 1em;
+  left: 0;
+  right: 0;
+  z-index: 1;
+}
+
+.timer_background {
+  top: 0;
+  left: 0;
+  opacity: .47;
+}

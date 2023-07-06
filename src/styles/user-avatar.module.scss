@@ -1,6 +1,4 @@
-@import '@/styles/variables';
-
 .avatar {
   border-radius: 50%;
-  background-color: $secondary-color !important;
+  background-color: var(--bs-tertiary) !important;
 }

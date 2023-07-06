@@ -1,3 +1,13 @@
 .content-container {
   margin: calc($sidebar-height + 1em);
 }
+
+.shop-index-section {
+  padding-top: 4em;
+  padding-bottom: 4em;
+
+  &__title {
+    font-size: 3em;
+    font-weight: 700;
+  }
+}

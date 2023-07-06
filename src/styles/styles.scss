@@ -29,9 +29,62 @@
 
 
 -----------------------------------------------------------------------------------*/
-@import 'variables';
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
 
-@import "~bootstrap/scss/bootstrap";
+@import 'variables';
+// @import "~bootstrap/scss/bootstrap";
+// scss-docs-start import-stack
+// Configuration
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+$theme-colors: map-merge($theme-colors, $base-themes);
+
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+
+
+// Layout & components
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/images";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid";
+@import "~bootstrap/scss/tables";
+@import "~bootstrap/scss/forms";
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/transitions";
+@import "~bootstrap/scss/dropdown";
+@import "~bootstrap/scss/button-group";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/card";
+@import "~bootstrap/scss/accordion";
+@import "~bootstrap/scss/breadcrumb";
+@import "~bootstrap/scss/pagination";
+@import "~bootstrap/scss/badge";
+@import "~bootstrap/scss/alert";
+@import "~bootstrap/scss/progress";
+@import "~bootstrap/scss/list-group";
+@import "~bootstrap/scss/close";
+@import "~bootstrap/scss/toasts";
+@import "~bootstrap/scss/modal";
+@import "~bootstrap/scss/tooltip";
+@import "~bootstrap/scss/popover";
+@import "~bootstrap/scss/carousel";
+@import "~bootstrap/scss/spinners";
+@import "~bootstrap/scss/offcanvas";
+@import "~bootstrap/scss/placeholders";
+
+// Helpers
+@import "~bootstrap/scss/helpers";
+
+// Utilities
+@import "~bootstrap/scss/utilities/api";
+// scss-docs-end import-stack
 
 /* <!--====== FontAwesoem css ======--> */
 @import "../../public/assets/fonts/themify-icons/themify-icons.css";
@@ -52,55 +105,57 @@
 
 @import "~react-quill/dist/quill.snow.css";
 
-@import 'mixin';
 
-//common
-@import 'common';
 
-//Extend
-@import 'extend';
+// @import 'mixin';
 
-//Header
-@import 'header';
+// //common
+// @import 'common';
 
-//Hero
-@import 'hero';
+// //Extend
+// @import 'extend';
 
-//Category
-@import 'category';
+// //Header
+// @import 'header';
 
-//Features
-@import 'features';
+// //Hero
+// @import 'hero';
 
-//Elements
-@import 'elements';
+// //Category
+// @import 'category';
 
-//Listing
-@import 'listing';
+// //Features
+// @import 'features';
 
-//Place
-@import 'place';
+// //Elements
+// @import 'elements';
 
-//Products
-@import 'products';
+// //Listing
+// @import 'listing';
 
-//Testimonial
-@import 'testimonial';
+// //Place
+// @import 'place';
 
-//Team
-@import 'team';
+// //Products
+// @import 'products';
 
-//Blog
-@import 'blog';
+// //Testimonial
+// @import 'testimonial';
 
-//Widget
-@import 'widget';
+// //Team
+// @import 'team';
 
-//Footer
-@import 'footer';
+// //Blog
+// @import 'blog';
 
-//Contact
-@import 'contact';
+// //Widget
+// @import 'widget';
+
+// //Footer
+// @import 'footer';
+
+// //Contact
+// @import 'contact';
 
 //Dashboard
 @import 'dashboard/dashboard';
@@ -110,4 +165,7 @@
 @import 'components/buttons';
 
 @import 'shop/layout';
+@import 'shop/header';
 @import 'shop/auctions';
+@import 'shop/banner';
+@import 'shop/footer';

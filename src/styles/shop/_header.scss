@@ -1,0 +1,15 @@
+.header {
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+
+  .nav-item {
+    &:not(:last-of-type) {
+      margin-right: 3em;
+    }
+  }
+
+  .nav-link {
+    font-weight: 600;
+    color: var(--bs-primary);
+  }
+}
