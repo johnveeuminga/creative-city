@@ -18,7 +18,8 @@ export default function UserAvatar({
       color="" 
       size={size}
       className={[className, styles.avatar].join(" ")} 
-      name={user.name ?? "Creative City"}>
+      // name={user.name ?? "Creative City"}>
+      name={"Creative City"}>
     </Avatar>
   )
 }

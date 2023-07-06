@@ -5,11 +5,14 @@ import { redirect } from "next/navigation";
 const prisma = new PrismaClient();
 
 export default async function CreateArtwork() {
-  const user = await await prisma.user.findUnique({
+  const user = await prisma.user.findUnique({
     where: {
-      id: 2,
+      id: "2",
     },
   });
+
+  if(!user)
+    return redirect("/")
 
   console.log(user);
   return <ArtworkForm data={user} />;

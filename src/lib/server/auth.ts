@@ -5,6 +5,7 @@ import verifier from "../cognito";
 import { NextRequest } from "next/server";
 
 interface User {
+  id: string;
   name: string,
   username: string,
   email: string,
@@ -41,6 +42,7 @@ export async function getServerSession(): Promise<{
 
     const res = {
       user: {
+        id: tokenDecoded["sub"],
         name: tokenDecoded["name"],
         username: tokenDecoded["username"],
         email: tokenDecoded["email"],
@@ -81,6 +83,11 @@ export async function decodeToken(token: string, tokenUse: "id" | "access" = "id
     console.log(err);
     throw("Token is not valid")
   }
+}
+
+export async function decodeToken2(token: string) { 
+  const jwk = await fetch("https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_XNxfV9r2F/.well-known/jwks.json");
+  const res = await jwk.json()
 }
 
 export function buildUrl(endpoint: string, {

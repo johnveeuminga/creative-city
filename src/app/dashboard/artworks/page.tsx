@@ -8,7 +8,7 @@ import { Suspense } from "react";
 async function getArtworks(id: number) {
   return await prisma.artwork.findMany({
     where: {
-      artist_id: Number(id),
+      artist_id: id.toString(),
     },
   });
 }

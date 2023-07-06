@@ -1,8 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/pisma-schema
-
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["clientExtensions"]
 }
 
 datasource db {
@@ -11,14 +9,55 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
+  id         Int      @id @unique
   first_name String
   last_name  String
   email      String   @unique
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
+  Artist     Artist?
   artworks   Artwork[]
   bids       Bid[]
+  follows    Follow[]
+}
+
+model Artist {
+  id                   Int        @id @default(autoincrement())
+  userId               Int        @unique
+  user                 User       @relation(fields: [userId], references: [id])
+  nickname             String?
+  myStory              String?
+  myBio                String?
+  artworkPickUpAddress String?
+  contactNumber        String?
+  gcash                String?
+  paymaya              String?
+  interests            Interest[]
+  follows              Follow[]
+  status               ArtistStatus
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+}
+
+enum ArtistStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Follow {
+  id       Int    @id @default(autoincrement())
+  artist   Artist @relation(fields: [artistId], references: [id])
+  artistId Int
+  user     User   @relation(fields: [userId], references: [id])
+  userId   Int
+}
+
+model Interest {
+  id       Int    @id @default(autoincrement())
+  name     String
+  artist   Artist @relation(fields: [artistId], references: [id])
+  artistId Int
 }
 
 model Artwork {
@@ -33,12 +72,13 @@ model Artwork {
   auction_id          Int?
   bids                Bid[]
   highest_bid         ArtworkHighestBid?
+  minimum_bid         Float?
 }
 
 model Auction {
-  id          Int @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   name        String
-  description String @db.LongText
+  description String   @db.LongText
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now())
   start_date  DateTime @db.DateTime
@@ -57,12 +97,9 @@ model Bid {
 }
 
 model ArtworkHighestBid {
-  artwork              Artwork  @relation(fields: [artwork_id], references: [id])
-  artwork_id           Int      @unique 
-  bid                  Bid      @relation(fields: [bid_id], references: [id])
-  bid_id               Int      @unique
-  version              Int      @default(1)
-
-  @@id([artwork_id, bid_id])
-  @@unique([artwork_id, bid_id])
+  artwork              Artwork   @relation(fields: [artwork_id], references: [id])
+  artwork_id           Int       @id @unique 
+  bid                  Bid?      @relation(fields: [bid_id], references: [id])
+  bid_id               Int?      @unique
+  version              Int       @default(1)
 }

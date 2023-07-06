@@ -16,8 +16,8 @@ export async function middleware(request: NextRequest) {
   } else if (request.nextUrl.pathname.startsWith('/dashboard')) {
     const authenticated = await isAuthenticated(request)
 
-    if(authenticated)
-      return NextResponse.redirect("/")
+    if(!authenticated)
+      return NextResponse.redirect(`${process.env.APP_URL}`)
   }
 
   return NextResponse.next();
