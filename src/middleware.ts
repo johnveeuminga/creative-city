@@ -16,7 +16,7 @@ export async function middleware(request: NextRequest) {
   } else if (request.nextUrl.pathname.startsWith('/dashboard')) {
     const authenticated = await isAuthenticated(request)
 
-    if(authenticated)
+    if(!authenticated)
       return NextResponse.redirect("/")
   }
 

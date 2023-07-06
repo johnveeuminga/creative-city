@@ -17,6 +17,14 @@ export default function SidebarMenuItems({
     </li>
   )
 
+  const isActive = (path: string, exact = false): boolean => {
+    if(!path)
+      return false
+
+    return !exact ? route.includes(path) : route === path;
+  }
+
+
   return(
     <ul>
       { items.map(item => (
@@ -27,13 +35,25 @@ export default function SidebarMenuItems({
           <li 
             key={item.name}
             className="dashboard-sidebar__menu-item">
-            <Link 
-              className={item.href == route ? 'active' : ''}
-              prefetch={item.prefetch ?? true}
-              href={item.href ?? "#"}>
-              {item.icon && <i className={`ti ${item.icon}`}></i>}
-              { item.name }
-            </Link>
+              {
+                item.as == 'link' || ! item.as && 
+                  <Link 
+                    className={isActive(item.href ?? "", !! item.exactPathMatch) ? 'active' : ''}
+                    prefetch={item.prefetch ?? true}
+                    href={item.href ?? "#"}>
+                    {item.icon && <i className={`ti ${item.icon}`}></i>}
+                    { item.name }
+                  </Link>
+              }
+              {
+                item.as == 'a' && item.href &&
+                  <a 
+                    href={item.href}
+                    className={isActive(item.href ?? "", item.exactPathMatch) ? 'active' : ''}>
+                    {item.icon && <i className={`ti ${item.icon}`}></i>}
+                    { item.name }
+                  </a>
+              }
           </li>
       ))}
     </ul>

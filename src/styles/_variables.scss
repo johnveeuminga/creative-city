@@ -8,7 +8,6 @@ $mulish: 'Mulish', sans-serif;
 //color
 
 $primary-color: #285f2c;
-
 $secondary-color: #3f2e27;
 
 $heading-color: #0d0d0d;
@@ -20,12 +19,17 @@ $text-color: #676767;
 
 $border: #efefef;
 
+$base-themes: (
+  "dashboard-primary": $primary-color,
+  "dashboard-secondary": $secondary-color,
+);
+
 
 // Bg Color
 $dark-black: #121416;
 $light-bg: #f7f7f7;
 
-
+$font-size-root: 15px;
 
 // Responsive Variables
 $lp: 'only screen and (min-width: 1200px) and (max-width: 1600px)';
@@ -36,3 +40,17 @@ $xm:'(max-width: 991px)';
 $xs:'(max-width: 767px)';
 $xss:'(max-width: 400px)';
 $sm: 'only screen and (min-width: 576px) and (max-width: 767px)';
+
+$sidebar-width: 265px;
+$sidebar-height: 60px;
+
+
+$input-focus-box-shadow: none;
+$input-focus-border-color:  none;
+$input-font-size: .925em;
+// $input-color: var(--bs-gray-700);
+// $input-bg: var(--bs-gray-200);
+// $input-border-color: $input-bg;
+// $input-group-addon-bg: $input-bg;
+
+$auctions-sidebar-width: 300px;

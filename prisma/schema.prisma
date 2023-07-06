@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["clientExtensions"]
 }
 
 datasource db {
@@ -11,22 +12,56 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @default(autoincrement())
+  id         String      @id @unique
   first_name String
   last_name  String
   email      String   @unique
   created_at DateTime @default(now())
   updated_at DateTime @default(now())
   artworks   Artwork[]
+  bids       Bid[]
 }
 
 model Artwork {
-  id          Int      @id @default(autoincrement())
-  name        String
-  description String   @db.LongText
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now())
-  artist      User     @relation(fields: [artist_id], references: [id])
-  artist_id  Int
+  id                  Int      @id @default(autoincrement())
+  name                String
+  description         String   @db.LongText
+  created_at          DateTime @default(now())
+  updated_at          DateTime @default(now())
+  artist              User     @relation(fields: [artist_id], references: [id])
+  artist_id           String
+  auction             Auction? @relation(fields: [auction_id], references: [id])
+  auction_id          Int?
+  bids                Bid[]
+  highest_bid         ArtworkHighestBid?
+  minimum_bid         Float?
 }
 
+model Auction {
+  id          Int @id @default(autoincrement())
+  name        String
+  description String @db.LongText
+  created_at  DateTime @default(now())
+  updated_at  DateTime @default(now())
+  start_date  DateTime @db.DateTime
+  end_date    DateTime @db.DateTime
+  artworks    Artwork[]
+}
+
+model Bid {
+  id                   Int     @id @default(autoincrement())
+  user                 User    @relation(fields: [user_id], references: [id])
+  user_id              String 
+  amount               Float
+  artwork              Artwork @relation(fields: [artwork_id], references: [id])
+  artwork_id           Int
+  highest_bid_artwork  ArtworkHighestBid? 
+}
+
+model ArtworkHighestBid {
+  artwork              Artwork   @relation(fields: [artwork_id], references: [id])
+  artwork_id           Int       @id @unique 
+  bid                  Bid?      @relation(fields: [bid_id], references: [id])
+  bid_id               Int?      @unique
+  version              Int       @default(1)
+}

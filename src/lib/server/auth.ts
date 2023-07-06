@@ -5,6 +5,7 @@ import verifier from "../cognito";
 import { NextRequest } from "next/server";
 
 interface User {
+  id: string;
   name: string,
   username: string,
   email: string,
@@ -41,6 +42,7 @@ export async function getServerSession(): Promise<{
 
     const res = {
       user: {
+        id: tokenDecoded["sub"],
         name: tokenDecoded["name"],
         username: tokenDecoded["username"],
         email: tokenDecoded["email"],
