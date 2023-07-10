@@ -20,6 +20,7 @@
     "@aws-sdk/client-cognito-identity": "^3.354.0",
     "@aws-sdk/client-s3": "^3.367.0",
     "@aws-sdk/s3-presigned-post": "^3.367.0",
+    "@aws-sdk/signature-v4-crt": "^3.363.0",
     "@prisma/client": "^4.16.2",
     "@types/react": "^18.2.8",
     "@types/react-dom": "18.2.4",
