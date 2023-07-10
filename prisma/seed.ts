@@ -1,20 +1,7 @@
-import { Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import { parseArgs } from 'node:util'
-import { seed as artistSeed} from './seeders/artist.seed'
-
 
 const prisma = new PrismaClient();
-
-const seedData: Prisma.AuctionCreateManyArgs = {
-  data: [
-    {
-      name: "Auction 1",
-      description: "Auction Sample 1",
-      start_date: new Date(2023, 5, 8, 8, 0),
-      end_date: new Date(2023, 6, 1, 3, 59),
-    }
-  ],
-};
 
 type Option = {
   type: 'boolean' | 'string', // required
@@ -34,9 +21,9 @@ const options: Options = {
 
 async function runSpecificSeeder(seeder: string) {
   try {
-    const seed = await import(`./seeders/${seeder}.seed.ts`)
+    const seed = await import(`./seeders/${seeder}.seeder.ts`)
 
-    await seed.seed()
+    await seed.default.seed()
   } catch(e) {
     console.log(e)
   }
@@ -48,10 +35,10 @@ async function seed() {
   } = parseArgs({ options });
 
   if(seeder) {
-    runSpecificSeeder(seeder.toString())
+    await runSpecificSeeder(seeder.toString())
   } else {
-    await artistSeed()
-    await prisma.auction.createMany(seedData)
+    const defaultSeeder = await import('./seeders/database.seeder')
+    defaultSeeder.default.seed();
   }
 }
 
