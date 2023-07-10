@@ -15,7 +15,8 @@ export default async function ArtistsGrid() {
           <div 
             key={artist.id} 
             className="col-md-2" style={{ width: '20%' }}>
-            <ArtistCard artist={artist} />
+            <ArtistCard 
+              artist={artist} />
           </div>
         ))
       }

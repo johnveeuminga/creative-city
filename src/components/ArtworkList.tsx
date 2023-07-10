@@ -2,8 +2,9 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Artwork } from "@prisma/client";
 
-export default function ArtworkList({ artworks, userId }) {
+export default function ArtworkList({ artworks, userId }: { artworks: Artwork[], userId: number }) {
   const { push } = useRouter();
   const handleClick = (id: number) => {
     push(`/dashboard/artworks/${id}/edit`);

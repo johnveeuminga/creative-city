@@ -1,11 +1,11 @@
 'use client'
 
 import { NumericFormat } from "react-number-format"
-import { ArtworkWithBids } from "../../../types"
 import { getHighestBid } from "@/lib/server/artworks"
 import { useState, useTransition } from "react"
 import { bidOnAnArtwork } from "@/actions/auctions"
 import { getServerSession } from "@/lib/server/auth"
+import { ArtworkWithBids } from "@/types/types"
 
 export function ArtworkBiddingBox({ artwork }: {
   artwork: ArtworkWithBids

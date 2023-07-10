@@ -135,7 +135,7 @@ export default async function ArtistProfile({
           ))}
         </div>
       </div>
-
+{/* 
       <div className={styles.sidebar}>
         <div className={styles.filterSection}>
           <h2>Filter by</h2>
@@ -150,7 +150,7 @@ export default async function ArtistProfile({
           <p>Time Period</p>
           <p>Color</p>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

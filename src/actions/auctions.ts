@@ -59,8 +59,8 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
         const bid = await tx.bid.create({
           data: {
             amount: amount,
-            artwork_id: id,
-            user_id: user.id,
+            artworkId: id,
+            userId: parseInt(user.id),
           },
         });
 
@@ -68,13 +68,13 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
         // sometime that this query is running, the version has been updated. Proceed if the same
         const highestBidVersion = await tx.artworkHighestBid.updateMany({
           data: {
-            bid_id: bid.id,
+            bidId: bid.id,
             version: {
               increment: 1
             }
           }, 
           where: {
-            artwork_id: highestBid.artwork_id,
+            artworkId: highestBid.artworkId,
             version: highestBid.version,
           }
         })

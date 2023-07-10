@@ -17,7 +17,7 @@ export default function ArtistForm() {
   const [paymaya, setPaymaya] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       await axios.post("/api/artists/register", {

@@ -2,18 +2,19 @@ import { Artist, User } from "@prisma/client";
 import styles from "@/styles/artist-card.module.scss";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
+import { ArtistWithUser } from "@/lib/server/artists";
 
-interface ArtistWithUser extends Artist {
-  user: User;
-}
+// interface ArtistWithUser extends Artist {
+//   user: User;
+// }
 
-export default function ArtistCard({ artist }: { artist: ArtistWithUser }) {
+export default function ArtistCard({ artist }: { artist: Artist }) {
   return (
     <Link href={`/artists/${artist?.id}`} style={{ textDecoration: 'none' }} >
       <div className={`${styles.container} ${styles.categoryItem} ${styles.categoryItemTwo} mb-25 wow fadeInUp`} data-wow-delay=".2s">
         <div className={styles.artistPhoto}>
           <img
-            src={artist?.avatar_path}
+            src={artist.avatar_path ?? ""}
             alt="Generic placeholder image"
             className={styles.artistPhotoImg}
           />

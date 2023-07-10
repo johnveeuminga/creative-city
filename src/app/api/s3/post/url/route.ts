@@ -1,10 +1,10 @@
 import { decodeToken, getServerSession } from "@/lib/server/auth";
-import { S3 } from "@aws-sdk/client-s3";
+import { S3Client } from "@aws-sdk/client-s3";
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 import { Conditions } from "@aws-sdk/s3-presigned-post/dist-types/types";
 import { NextRequest, NextResponse } from "next/server";
 
-const s3 = new S3({
+const s3 = new S3Client({
   region: process.env.S3_REGION,
   credentials: {
     accessKeyId: process.env.S3_ACCESS_KEY_ID ?? "",
@@ -40,6 +40,6 @@ export async function GET(req: NextRequest) {
       fields
     })
   } catch(err) {
-    NextResponse.json("Error", { status: 500 })
+    return NextResponse.json("Error", { status: 500 })
   }
 }

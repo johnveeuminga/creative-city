@@ -1,4 +1,4 @@
-import { ArtworkWithBids } from "../../../types";
+import { ArtworkWithBids } from "@/types/types";
 
 export function getHighestBid(artwork: ArtworkWithBids) {
   const max = artwork.bids.map(artwork => artwork.amount)
