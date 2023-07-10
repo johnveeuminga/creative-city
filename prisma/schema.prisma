@@ -9,7 +9,7 @@ datasource db {
 }
 
 model User {
-  id         Int      @id @unique
+  id         Int      @id @unique @default(autoincrement())
   first_name String
   last_name  String
   email      String   @unique
@@ -27,8 +27,8 @@ model Artist {
   user                 User       @relation(fields: [userId], references: [id])
   nickname             String?
   avatar_path          String?
-  myStory              String?
-  myBio                String?
+  myStory              String?    @db.LongText
+  myBio                String?    @db.LongText
   artworkPickUpAddress String?
   contactNumber        String?
   gcash                String?
@@ -83,8 +83,8 @@ model Auction {
   description String   @db.LongText
   created_at  DateTime @default(now())
   updated_at  DateTime @default(now())
-  start_date  DateTime @db.DateTime
-  end_date    DateTime @db.DateTime
+  start_date  DateTime
+  end_date    DateTime 
   artworks    Artwork[]
   artist      Artist?  @relation(fields: [artistId], references: [id])
   artistId    Int?

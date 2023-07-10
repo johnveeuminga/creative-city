@@ -1,0 +1,59 @@
+import { PrismaClient, ArtistStatus, Prisma, User } from "@prisma/client";
+import { faker } from '@faker-js/faker';
+
+
+const prisma = new PrismaClient();
+
+const userData = (): Prisma.UserCreateInput[] => {
+  return new Array(10).fill('').map(() => {
+    return {
+      first_name: faker.person.firstName(),
+      last_name: faker.person.lastName(),
+      email: faker.internet.email(),
+    }
+  });
+}
+
+export async function seed() {
+  const users = userData()
+
+  const artists: Prisma.ArtistCreateInput[] = users.map((user) => {
+    return {
+      nickname: '@' + faker.internet.userName(),
+      status: ArtistStatus.APPROVED,
+      avatar_path: faker.internet.avatar(),
+      myBio: faker.lorem.paragraph(),
+      artworkPickUpAddress: faker.location.streetAddress(),
+      myStory: faker.lorem.paragraph(),
+      contactNumber: faker.phone.number(),
+      gcash: faker.internet.email(),
+      paymaya: faker.internet.email(),
+      user: {
+        create: {
+          ...user,
+        }
+      }
+    } 
+  })
+
+  let promises: Promise<any>[] = []
+
+  artists.forEach(artist => {
+    promises.push(prisma.artist.create({
+      data: artist,
+    }));
+  })
+
+  await Promise.all(promises)
+}
+
+seed()
+  .then(async () => {
+    await prisma.$disconnect();
+    console.log("Artist seed completed successfully.");
+  })
+  .catch(async (e) => {
+    console.error(e);
+    await prisma.$disconnect();
+    process.exit(1);
+  });

@@ -1,52 +1,65 @@
-import { PrismaClient } from "@prisma/client";
+import { Prisma, PrismaClient } from "@prisma/client";
+import { parseArgs } from 'node:util'
+import { seed as artistSeed} from './seeders/artist.seed'
+
 
 const prisma = new PrismaClient();
 
-const data = [
-  {
-    name: "Auction 1",
-    description: "Auction Sample 1",
-    start_date: new Date(2023, 5, 8, 8, 0),
-    end_date: new Date(2023, 6, 1, 3, 59),
-    artist: {
-      create: {
-        first_name: "John",
-        last_name: "Doe",
-        email: "john@example.com",
-        Artist: {
-          create: {
-            nickname: "JohnDoe",
-            myStory: "I am an artist with a passion for painting.",
-            myBio: "I have been painting for over 10 years and love to explore various themes and styles.",
-            artworkPickUpAddress: "123 Art Street, City",
-            contactNumber: "1234567890",
-            gcash: "gcash@example.com",
-            paymaya: "paymaya@example.com",
-            status: 'APPROVED',
-          },
-        },
-      },
-    },
+const seedData: Prisma.AuctionCreateManyArgs = {
+  data: [
+    {
+      name: "Auction 1",
+      description: "Auction Sample 1",
+      start_date: new Date(2023, 5, 8, 8, 0),
+      end_date: new Date(2023, 6, 1, 3, 59),
+    }
+  ],
+};
+
+type Option = {
+  type: 'boolean' | 'string', // required
+  short?: string, // optional
+  multiple?: boolean, // optional, default `false`
+};
+
+type Options = {
+  [key: string]: Option 
+}
+
+const options: Options = {
+  seeder: { 
+    type: 'string'
   },
-  // Add more auction entries here if needed
-];
+}
+
+async function runSpecificSeeder(seeder: string) {
+  try {
+    const seed = await import(`./seeders/${seeder}.seed.ts`)
+
+    await seed.seed()
+  } catch(e) {
+    console.log(e)
+  }
+}
 
 async function seed() {
-  for (const auctionData of data) {
-    const auction = await prisma.auction.create({
-      data: auctionData,
-    });
+  const {
+    values: { seeder }
+  } = parseArgs({ options });
 
-    console.log(`Created auction with ID: ${auction.id}`);
+  if(seeder) {
+    runSpecificSeeder(seeder.toString())
+  } else {
+    await artistSeed()
+    await prisma.auction.createMany(seedData)
   }
 }
 
 seed()
   .then(async () => {
     await prisma.$disconnect();
-    console.log("Auction seed completed successfully.");
   })
-  .catch(async (e) => {
+  .catch(async (e) =>     {
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);
