@@ -11,7 +11,10 @@ export default class AuctionArtworkSeeder extends Seeder {
       const minBid = faker.number.int({ min: 1000, max: 2000 })
       return {
         name: startCase(faker.lorem.words(3)),
-        description: faker.lorem.paragraph(),
+        description: faker.lorem.paragraphs({
+          min: 2,
+          max: 3,
+        }),
         artist: {
           connect: {
             id: faker.number.int({ min: 1, max: 10})

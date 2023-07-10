@@ -77,6 +77,7 @@ export const AdminMenuItems: {
     {
       name: 'Artworks',
       icon: 'ti-gallery',
+      href: '/dashboard/artworks',
       priority: 12
     },
   ]

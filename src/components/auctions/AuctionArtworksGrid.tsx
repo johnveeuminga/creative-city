@@ -4,7 +4,6 @@ import { Artwork } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { NumericFormat } from 'react-number-format';
-import { ArtworkWithBids } from "../../../types";
 import { getHighestBid } from "@/lib/server/artworks";
 
 
@@ -12,7 +11,7 @@ export default async function AuctionArtworksGrid({
   artworks = [],
   auctionId 
 }: {
-  artworks: ArtworkWithBids[],
+  artworks: any[],
   auctionId?: number
 }) {
   return (
@@ -30,6 +29,7 @@ export default async function AuctionArtworksGrid({
                   <div className="card-img-top">
                   <Image 
                     fill={true}
+                    style={{ objectFit: 'cover' }}
                     src="/assets/images/listing/listing-grid-1.jpg" 
                     alt="" />
                   </div>

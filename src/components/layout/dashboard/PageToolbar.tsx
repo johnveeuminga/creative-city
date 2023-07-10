@@ -14,7 +14,7 @@ export function PageToolbar({
   return (
     <div className="toolbar">
       <div className="page-title">
-        <h1>{ heading }</h1>
+        <h1 className="fw-bold">{ heading }</h1>
         {
           breadcrumbs.length &&
             <ol className="breadcrumb">

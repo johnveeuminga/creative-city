@@ -13,7 +13,7 @@ export default function SidebarMenuItems({
 
   const MenuDivider = ({ label, className = '' } : { label: string, className?: string }) => (
     <li className={className}>
-      { label }
+      <h6 className="mb-0 fw-bold">{ label }</h6>
     </li>
   )
 
@@ -26,22 +26,22 @@ export default function SidebarMenuItems({
 
 
   return(
-    <ul>
+    <ul className="nav flex-column">
       { items.map(item => (
         item.type === 'divider' ? 
           <MenuDivider 
-            className='dashboard-sidebar__menu-item dashboard-sidebar__menu-item--divider'
+            className='dashboard-sidebar__menu-item dashboard-sidebar__menu-item--divider font-tajawal'
             key={item.name} label={item.name} />  : 
           <li 
             key={item.name}
-            className="dashboard-sidebar__menu-item">
+            className="dashboard-sidebar__menu-item fw-semibold">
               {
                 item.as == 'link' || ! item.as && 
                   <Link 
                     className={isActive(item.href ?? "", !! item.exactPathMatch) ? 'active' : ''}
                     prefetch={item.prefetch ?? true}
                     href={item.href ?? "#"}>
-                    {item.icon && <i className={`ti ${item.icon}`}></i>}
+                    {item.icon && <i className={`ti ${item.icon} me-3`}></i>}
                     { item.name }
                   </Link>
               }

@@ -1,7 +1,7 @@
 import { CognitoJwtVerifier } from "aws-jwt-verify";
 import { CognitoIdTokenPayload, CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
-import { cookies } from "next/dist/client/components/headers";
 import verifier from "../cognito";
+import { cookies } from "next/headers";
 
 interface User {
   id: string;

@@ -6,7 +6,8 @@ const nextConfig = {
     domains: ['via.placeholder.com'], // Add the hostname here
   },
   experimental: {
-    serverActions: true
+    serverActions: true,
+    serverActionsBodySizeLimit: '4mb',
   }
 }
 

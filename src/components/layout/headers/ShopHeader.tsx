@@ -15,9 +15,9 @@ export default async function ShopHeader() {
             className="navbar-brand"
             href={"/"}>
             <Image 
-              width={203}
-              height={75}
-              src="/bcc.svg"
+              width={261 / 4}
+              height={316 / 4}
+              src="/assets/images/bcc_logo.png"
               alt="logo" 
             />
           </Link>
