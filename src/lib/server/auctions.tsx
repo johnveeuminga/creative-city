@@ -1,5 +1,5 @@
 import { Auction, Prisma } from "@prisma/client";
-import prisma from "../prisma";
+import prisma from "@/lib/prisma";
 import { DateTime } from "luxon";
 
 export async function getAuctions(params: Prisma.AuctionFindManyArgs = {}): Promise<Auction[]> {
