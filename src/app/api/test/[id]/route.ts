@@ -11,7 +11,7 @@ export async function GET(
 ) {
   const user = await prisma.user.findFirst({
     where: {
-      id: params.id,
+      id: parseInt(params.id),
     }
   });
 
