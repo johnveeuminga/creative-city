@@ -5,10 +5,10 @@ import { Conditions } from "@aws-sdk/s3-presigned-post/dist-types/types";
 import { NextRequest, NextResponse } from "next/server";
 
 const s3 = new S3({
-  region: 'ap-southeast-1',
+  region: process.env.S3_REGION,
   credentials: {
-    accessKeyId: 'AKIA3FAI7PRF4B7OWWW7',
-    secretAccessKey: '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',
+    accessKeyId: process.env.S3_ACCESS_KEY_ID ?? "",
+    secretAccessKey: process.env.S3_SECRET_ACCESS_KEY ?? "",
   },
 });
 
@@ -22,7 +22,7 @@ export async function GET(req: NextRequest) {
     const conditions: Conditions[] = [
       { bucket: "creative-city"},
       ["starts-with", "$key", "tmp/"],
-      ["content-length-range", 0, 5242880],
+      ["content-length-range", 0, 5242880], // Upto 5mb
     ];
 
     const { url, fields } = await createPresignedPost(s3, {
@@ -35,14 +35,11 @@ export async function GET(req: NextRequest) {
       }
     })
 
-    console.log("URL", url)
-    console.log("Fields", fields)
-
     return NextResponse.json({
       url,
       fields
     })
   } catch(err) {
-    NextResponse.json("Error", { status: 500})
+    NextResponse.json("Error", { status: 500 })
   }
 }

@@ -4,6 +4,7 @@ import { doCreateArtwork } from "@/actions/artworks";
 import { useRouter } from "next/navigation";
 import { User } from "@prisma/client";
 import { doFileUpload } from "@/actions/upload";
+import { upload } from "@/lib/client/s3-upload";
 
 export default function ArtworkForm({ data }: { data: any }) {
   const router = useRouter();
@@ -22,36 +23,14 @@ export default function ArtworkForm({ data }: { data: any }) {
     });
   };
 
-  // TODO: Make this a hook or callback
-  const generatePostSignedUrl = async(file: File) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/s3/post/url`);
-
-    const presignedUrl = await response.json();
-
-    return {
-      url: presignedUrl.url,
-      fields: presignedUrl.fields,
-    }
-  }
-
-
   const fileHandle = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const toUpload = event.target.files?.item(0) as File;
 
-    const res = await generatePostSignedUrl(toUpload);
+    if(toUpload) {
+      const file = await upload(toUpload)
 
-    const formData = new FormData()
-
-    Object.keys(res.fields).forEach((key, field) => {
-      formData.append(key, res.fields[key])
-    })
-
-    formData.append('file', toUpload)
-
-    await fetch(res.url, {
-      method: 'POST',
-      body: formData,
-    })
+      console.log(file)
+    } else {}
   }
 
   return (
