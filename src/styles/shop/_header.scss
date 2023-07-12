@@ -1,4 +1,4 @@
-.header {
+.shop-header {
   padding-top: .25em;
   padding-bottom: .25em;
   background-color: rgba(#fff, .05);
@@ -27,6 +27,7 @@
   }
 
   &.scrolled {
+    background-color: white !important;
     .logo {
       width: 80px;
       height: 80px;

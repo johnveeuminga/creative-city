@@ -1,4 +1,6 @@
-import React, { Fragment } from "react";
+'use client'
+
+import React, { Fragment, useEffect } from "react";
 import ImageView from "../ImageView";
 import { activeNavMenu, animation, niceSelect, stickyNav } from "../../lib/utils";
 import Footer from "./Footer";
@@ -8,6 +10,7 @@ import ScrollTop from "./ScrollTop";
 import Header2 from "./headers/Header2";
 import ShopHeader from "./headers/ShopHeader";
 import ShopFooter from "./ShopFooter";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const Layout = ({ children, header } : {
   children?: any,
@@ -20,6 +23,7 @@ const Layout = ({ children, header } : {
   //   window.addEventListener("scroll", stickyNav);
   // }, []);
 
+
   return (
     <Fragment>
       {/* <ImageView />
@@ -29,7 +33,9 @@ const Layout = ({ children, header } : {
       <Footer />
       <ScrollTop /> */}
       <ShopHeader />
-      { children }
+        <div className="shop-content">
+          { children }
+        </div> 
       <ShopFooter />
     </Fragment>
   );

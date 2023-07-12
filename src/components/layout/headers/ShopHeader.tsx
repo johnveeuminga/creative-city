@@ -4,6 +4,7 @@ import UserAvatar from "@/components/UserAvatar";
 import { getServerSession } from "@/lib/server/auth";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { MdPersonOutline } from "react-icons/md";
 
@@ -21,10 +22,17 @@ export default function ShopHeader() {
     return () => window.removeEventListener('scroll', changeNavBg)
   }, [])
 
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  useEffect(() => {
+    if(pathname !== "/")
+      setNavScrolled(true)
+  }, [pathname, searchParams])
 
   return (
     <div 
-      className={`header border-bottom${navScrolled ? ' bg-white scrolled': ''}`}>
+      className={`shop-header border-bottom${navScrolled ? ' bg-white scrolled': ''}`}>
       <nav className="navbar navbar-expand-lg">
         <div className="container">
           <Link 

@@ -1,8 +1,8 @@
 import AuctionCard from "./AuctionCard";
-import { getAuctions } from "@/lib/server/auctions";
+import { getAuctions, getOngoingAuctions } from "@/lib/server/auctions";
 
 export default async function AuctionsGrid() {
-  const auctions = await getAuctions({
+  const auctions = await getOngoingAuctions({
     orderBy: {
       start_date: 'asc',
     }
@@ -14,7 +14,7 @@ export default async function AuctionsGrid() {
         auctions.length && auctions.map(auction => (
           <div 
             key={auction.id}
-            className="col-md-6">
+            className="col-md-4">
               <AuctionCard 
                 auction={auction}/>
           </div>

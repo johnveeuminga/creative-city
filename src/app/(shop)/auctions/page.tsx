@@ -10,11 +10,11 @@ export default async function AuctionsPage() {
           <h2>Auctions</h2> 
         </div>
         <section className="auctions-section py-5 d-flex ">
-          <div className="auctions-sidebar">
+          {/* <div className="auctions-sidebar">
             <div className="auctions-aggregation">
               <p>1,083 Auctions</p>
             </div>
-          </div>  
+          </div>   */}
           <div className="auctions-content">
             <div className="row">
               {/* TODO: Add skeleton loading here */}
