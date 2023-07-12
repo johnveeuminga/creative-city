@@ -8,7 +8,7 @@ export default function LiveAuctions() {
     <section className="shop-index-section">
       <div className="container">
         <div className="d-flex justify-content-between align-items-center">
-          <h2 className="text-primary shop-index-section__title">Live Auctions</h2>
+          <h2 className="text-primary shop-index-section__title">Auctions</h2>
           <Link 
             href={"/auctions"}
             className="btn text-primary bg-transparent">

@@ -1,18 +1,25 @@
 import '@/styles/styles.scss'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { Tajawal, Work_Sans } from 'next/font/google'
+import { Archivo, Lora, Playfair_Display, Poppins, Tajawal, Work_Sans } from 'next/font/google'
 import SessionProvider from '../components/layout/providers/SessionProvider'
 
-const font = Work_Sans({ 
-  subsets: ['latin'],
+// const font = Work_Sans({ 
+//   subsets: ['latin'],
+//   weight: ['300', '400', '500', '600', '700'],
+//   variable: '--font-work-sans'
+// })
+
+const font = Archivo({
   weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-work-sans'
+  subsets: ['latin'],
+  style: ['normal'],
+  variable: '--font-poppins' 
 })
 
-const headingFont = Tajawal({
+const headingFont = Lora({
   subsets: ['latin'],
   variable: '--font-tajawal',
-  weight: ['300', '400', '500', '700'],
+  weight: ['400', '500', '700'],
   display: 'swap',
 })
 

@@ -2,8 +2,14 @@ import { MdArrowForwardIos } from 'react-icons/md';
 
 export default function ShopBanner() {
   return (
-    <div className="shop-banner bg-secondary">
-      <div className="shop-banner__yellow-bg"></div>
+    <div className="shop-banner bg-secondary d-flex align-items-center mb-5">
+      <div className="container">
+        <div className="content w-50">
+          <h1 className='mb-5'>Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.</h1>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices non sem sed mattis. Donec finibus, ex suscipit efficitur facilisis, magna dui blandit urna, eget ultrices erat urna luctus neque. </p>
+        </div>
+      </div>
+      {/* <div className="shop-banner__yellow-bg"></div>
       <div className="shop-banner__top-line"></div>
       <div className="container h-100  position-relative z-3">
         <div className="shop-banner__content">
@@ -14,7 +20,7 @@ export default function ShopBanner() {
             <h2>
             Digital marketplace for artwork collectibles. Buy, sell and discover exclusive assets.
             </h2>
-            <button className="shop-banner__icon btn btn-lg btn-tertiary">
+            <button className="shop-banner__icon btn btn-lg btn-outline-primary">
               Explore
               <span className="ms-4 icon">
                 <MdArrowForwardIos /> 
@@ -24,7 +30,7 @@ export default function ShopBanner() {
             </button>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { Prisma } from "@prisma/client"
+import { Prisma, PrismaClient } from "@prisma/client"
 
 export type ArtworkWithBids = Prisma.ArtworkGetPayload<{
   include: {
@@ -26,5 +26,29 @@ export type ArtworkWithAuctionBidAndHighestBid = Prisma.ArtworkGetPayload<{
         bid: true,
       }
     }
+  }
+}>
+
+export type ArtworkWithArtist = Prisma.ArtworkGetPayload<{
+  include: {
+    artist: true,
+  }
+}>
+
+export type ArtistWithUser = Prisma.ArtistGetPayload<{
+  include: {
+    user: true,
+  }
+}>
+
+export type ArtistWithUserAndArtworkCount = Prisma.ArtistGetPayload<{
+  include: {
+    user: {
+      include: {
+        _count: {
+          select: { artworks: true }
+        }
+      }
+    },
   }
 }>

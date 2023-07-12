@@ -4,6 +4,11 @@ import LiveAuctionCard from "./LiveAuctionCard";
 export default async function LiveAuctionsGrid() {
   const auctions = await getOngoingAuctions({
     take: 4,
+    where: {
+      end_date: {
+        lte: new Date(),
+      }
+    },
     orderBy: {
       start_date: 'asc'
     }

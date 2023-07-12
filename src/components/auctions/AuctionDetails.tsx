@@ -48,7 +48,7 @@ export async function AuctionDetails({ id, page = 1 }: {
     <div className="auctions-single">
       <div className="auctions-single-pagination">
         <div className="container">
-          <p className="text-body-tertiary"><small>Home / Auctions / {auction.name}</small></p>
+          <p className="text-body-primary"><small>Home / Auctions / {auction.name}</small></p>
         </div>
       </div>
       <div className="auction-single-header">
@@ -111,7 +111,7 @@ export async function AuctionDetails({ id, page = 1 }: {
               {
                 session.user && session.user.groups?.indexOf("artist") !== -1 &&
                   <div className="actions mt-4">
-                    <button className="btn btn-tertiary text-white d-block w-100">
+                    <button className="btn btn-outline-primary text-white d-block w-100">
                       <strong>REGISTER YOUR ARTWORK</strong>
                     </button>
                   </div>

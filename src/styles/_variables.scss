@@ -4,15 +4,26 @@ $quicksand: 'Quicksand', sans-serif;
 
 $mulish: 'Mulish', sans-serif;
 
-$font-family-sans-serif: 
-"Work Sans", -apple-system, 
-"Segoe UI", Roboto, "Helvetica Neue", 
-"Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+// $font-family-sans-serif: 
+// "Poppins", -apple-system, 
+// "Segoe UI", Roboto, "Helvetica Neue", 
+// "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
-$primary-color: #515DCD;
-$secondary-color: #F8E23A;
+$primary-color: #272727;
+$secondary-color: #F3F3F3;
 $tertiary-color: #FE3434;
 $brown: #4b4743;
+
+$body-color: #272727;
+$body-bg: #fff;
+
+$btn-border-radius: 0;
+
+
+$card-border-color: transparent;
+$card-bg: #fff;
+$card-border-radius: 0;
+$card-inner-border-radius: 0;
 
 $primary: $primary-color;
 $secondary: $secondary-color;

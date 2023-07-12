@@ -3,32 +3,29 @@ import styles from "@/styles/artist-card.module.scss";
 import Link from "next/link";
 import { useEffect, useState } from 'react';
 import { ArtistWithUser } from "@/lib/server/artists";
+import { ArtistWithUserAndArtworkCount } from "@/types/types";
 
 // interface ArtistWithUser extends Artist {
 //   user: User;
 // }
 
-export default function ArtistCard({ artist }: { artist: Artist }) {
+export default function ArtistCard({ artist }: { artist: ArtistWithUserAndArtworkCount }) {
   return (
-    <Link href={`/artists/${artist?.id}`} style={{ textDecoration: 'none' }} >
-      <div className={`${styles.container} ${styles.categoryItem} ${styles.categoryItemTwo} mb-25 wow fadeInUp`} data-wow-delay=".2s">
-        <div className={styles.artistPhoto}>
-          <img
-            src={artist.avatar_path ?? ""}
-            alt="Generic placeholder image"
-            className={styles.artistPhotoImg}
-          />
-          <div className={styles.categoryOverlay}>
-            <div className={styles.categoryContent}></div>
-          </div>
-        </div>
-        <div className={styles.info}>
-          <div className={styles.artistDetails}>
-            <h3 className={styles.title}>{artist?.nickname}</h3>
-            <p className={styles.artworksCount}>Artworks: 20</p>
+      <div className="artist-card card mb-4">
+        <div className="card-body">
+          <div className="text-center">
+            <img
+              src={artist.avatar_path ?? ""}
+              alt="Generic placeholder image"
+              className={styles.artistPhotoImg}
+            />
+            <h5 className="mt-3">{ artist.user.first_name } { artist.user.last_name }</h5>
+            <p>Artworks: { artist.user._count.artworks }</p>
+            <Link className="btn btn-outline-primary" href={`/artists/${artist?.id}`} style={{ textDecoration: 'none' }} >
+              See More
+            </Link>
           </div>
         </div>
       </div>
-    </Link>
   );
 }
