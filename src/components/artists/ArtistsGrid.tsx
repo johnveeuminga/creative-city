@@ -1,22 +1,8 @@
-import { getArtists } from "@/lib/server/artists";
+import { getArtistsWithArtworkCount } from "@/lib/server/artists";
 import ArtistCard from "./ArtistCard";
 
 export default async function ArtistsGrid() {
-  const artists = await getArtists({
-    orderBy: {
-      nickname: 'asc',
-    },
-    include: {
-      user: {
-        include: {
-          _count: {
-            select: { artworks: true }
-          }
-        }
-      },
-    },
-    take: 4
-  });
+  const artists = await getArtistsWithArtworkCount();
 
   return (
     <div className="row">
