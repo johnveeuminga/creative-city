@@ -1,9 +1,11 @@
 import { ArtworkBiddingBox } from "@/components/auctions/ArtworkBiddingBox"
 import ArtworkBiddingHistory from "@/components/auctions/ArtworkBiddingHistory"
+import { checkIfAuctionHasEnded, checkIfAuctionIsOngoing } from "@/lib/client/auction-helpers"
 import prisma from "@/lib/prisma"
 import Image from "next/image"
 import { redirect } from "next/navigation"
 import { relative } from "path"
+import React from "react"
 import { NumericFormat } from "react-number-format"
 
 export default async function AuctionArtworkSinglePage({
@@ -23,14 +25,25 @@ export default async function AuctionArtworkSinglePage({
       auction_id: parseInt(auctionId),
     },
     include: {
-      bids: true,
+      bids: {
+        orderBy: {
+          createdAt: 'desc',
+        }
+      },
       artist: true,
+      auction: true,
+      highest_bid: {
+        include: {
+          bid: true
+        }
+      },
     }
   })
 
-  if(! artwork)
-    // TODO: 404 redirect
+  if(!artwork || !artwork.auction)
     redirect("/")
+
+  const auctionHasEnded = checkIfAuctionHasEnded(artwork.auction.start_date, artwork.auction.end_date)
 
   return(
     <div className="auction-artwork-single mb-5">
@@ -61,12 +74,15 @@ export default async function AuctionArtworkSinglePage({
               <h3>{ artwork.name }</h3>
               <p>{ artwork.artist.first_name } {artwork.artist.last_name }</p>
             </div>
-            <ArtworkBiddingBox artwork={ artwork }/>
+            <ArtworkBiddingBox 
+              finished={ auctionHasEnded }
+              artwork={ artwork } />
             <div className="artwork-bidding-history-container my-3">
-              <ArtworkBiddingHistory 
-                auctionId={auctionId}
-                artworkId={artworkId}
-                />
+              <React.Suspense fallback={<p>Loading</p>}>
+                <ArtworkBiddingHistory 
+                  auctionId={auctionId}
+                  artwork={artwork} />
+              </React.Suspense>
             </div>
           </div>
         </div>

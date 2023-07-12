@@ -20,8 +20,7 @@ export default function DatePicker({
   useEffect(() => {
     if(!flatpickrRef.current) {
       flatpickrRef.current = flatpickr(inputRef.current as Node, {
-        enableTime: true,
-        dateFormat: "Y-m-d H:i:S",
+        dateFormat: "Y-m-d",
         onChange: (selectedDates, dateStr, instance) => {
           setDate(dateStr);
           if(onChange) {
@@ -30,23 +29,18 @@ export default function DatePicker({
         }
       })
     }
-    
   }, [inputRef, onChange])
 
 
-  const handleChange = (event: any) => {
-    console.log(event.target.value)
-  }
-
   return (
     <div className="input-group">
+      <span className="input-group-text">
+        <i className="ti-calendar"></i>
+      </span>
       <input
         defaultValue={value}
         ref={inputRef} 
         className="form-control" />
-      <span className="input-group-text">
-        <i className="ti-calendar"></i>
-      </span>
     </div>
   )
 }

@@ -17,7 +17,7 @@ export async function Auctions({
   search?: string;
 }) {
   let params: Prisma.AuctionFindManyArgs = {
-    take: 3,
+    take: 10,
     orderBy: [
       {
         "start_date": "asc",
@@ -29,7 +29,7 @@ export async function Auctions({
   }
 
   if(page) {
-    params.skip = 3 * (parseInt(page) - 1);
+    params.skip = 10 * (parseInt(page) - 1);
   }
 
   if(search) {
@@ -59,7 +59,6 @@ export async function Auctions({
       <table className="table">
         <thead>
           <tr>
-            <th>ID</th>
             <th>Name</th>
             <th>Start Date</th>
             <th>End Date</th>
@@ -70,7 +69,6 @@ export async function Auctions({
         {
             auctions && auctions.map(auction => (
               <tr key={auction.id}>
-                <td>{ auction.id }</td>
                 <td><span className="text-dark font-weight-bold">{ auction.name }</span></td>
                 <td>{ DateTime.fromJSDate(auction.start_date).toLocaleString(DateTime.DATETIME_MED) }</td>
                 <td>{ DateTime.fromJSDate(auction.end_date).toLocaleString(DateTime.DATETIME_MED) }</td>

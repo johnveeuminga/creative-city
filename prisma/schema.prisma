@@ -88,6 +88,7 @@ model Auction {
   artworks    Artwork[]
   artist      Artist?  @relation(fields: [artistId], references: [id])
   artistId    Int?
+  isProcessed Boolean @default(false)
 }
 
 model Bid {
@@ -98,12 +99,15 @@ model Bid {
   artwork              Artwork @relation(fields: [artworkId], references: [id])
   artworkId            Int
   highest_bid_artwork  ArtworkHighestBid? 
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @default(now())
 }
 
 model ArtworkHighestBid {
   artwork              Artwork @relation(fields: [artworkId], references: [id])
   artworkId            Int     @id @unique 
-  bid                  Bid?    @relation(fields: [bidId], references: [id])
-  bidId                Int?    @unique
+  bid                  Bid     @relation(fields: [bidId], references: [id])
+  bidId                Int     @unique
+  processed            Boolean @default(false)
   version              Int     @default(1)
 }

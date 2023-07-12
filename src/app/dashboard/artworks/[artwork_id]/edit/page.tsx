@@ -19,5 +19,8 @@ export default async function EditArtworkPage({
   params: { artwork_id: number };
 }) {
   let artwork = await getArtwork(params.artwork_id);
+
+  if(!artwork)
+    
   return <EditArtworkForm artwork={artwork} />;
 }

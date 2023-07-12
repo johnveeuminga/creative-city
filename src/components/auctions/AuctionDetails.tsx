@@ -27,6 +27,11 @@ export async function AuctionDetails({ id, page = 1 }: {
         skip: currPage * 10,
         include: {
           bids: true,
+          highest_bid: {
+            include: {
+              bid: true
+            }
+          },
         }
       },
     },
@@ -131,7 +136,9 @@ export async function AuctionDetails({ id, page = 1 }: {
             </div>
           </div>
           <div className="auction-artworks-grid-container">
-            <AuctionArtworksGrid artworks={auction.artworks} />
+            <AuctionArtworksGrid 
+              auctionEnded={now >= DateTime.fromJSDate(auction.end_date)}
+              artworks={auction.artworks} />
             <div className="pagination d-flex justify-content-end">
               <ul className="pagination">
                 <li className="page-item">
