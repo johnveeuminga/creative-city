@@ -180,6 +180,44 @@ export default function page() {
           </div>
         </div>
       </div>
+      <div className={styles.container__how}>
+        <h3>How it works?</h3>
+        <p>Create and bid your own choice of artworks.</p>
+        <div className={styles.steps}>
+          <div className={styles.steps__step}>
+            <img src="assets/images/step1.png" alt="" />
+            <p>Register for free</p>
+            <small>
+              To start using our auction, you’ll need to register. It’s
+              completely free and requires just a few clicks!
+            </small>
+          </div>
+          <div className={styles.steps__step}>
+            <img src="assets/images/step2.png" alt="" />
+            <p>Buy or Bid</p>
+            <small>
+              To start using our auction, you’ll need to register. It’s
+              completely free and requires just a few clicks!
+            </small>
+          </div>{" "}
+          <div className={styles.steps__step}>
+            <img src="assets/images/step3.png" alt="" />
+            <p>Submit a Bid</p>
+            <small>
+              To start using our auction, you’ll need to register. It’s
+              completely free and requires just a few clicks!
+            </small>
+          </div>{" "}
+          <div className={styles.steps__step}>
+            <img src="assets/images/step4.png" alt="" />
+            <p>Win a Bid</p>
+            <small>
+              To start using our auction, you’ll need to register. It’s
+              completely free and requires just a few clicks!
+            </small>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
