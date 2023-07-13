@@ -28,6 +28,8 @@ export default function ArtworkForm({ data }: { data: any }) {
             return file.s3FileName ?? ""
           })
 
+        console.log(filesToUpload)
+
         await doCreateArtwork(name, description, data.id, {
           files: filesToUpload,
           type: forAuction && forAuction == 1 ? 'auction' : 'bidding',
@@ -42,7 +44,7 @@ export default function ArtworkForm({ data }: { data: any }) {
   };
 
   const handFileChange = (files: FileWithPreview[], promises: Promise<any>[])  => {
-    setFiles(files)
+    console.log(files)
     setPromises(promises)
   }
 

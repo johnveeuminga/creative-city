@@ -2,6 +2,7 @@ import { ArtworkWithArtistAndMedia } from "@/types/types";
 import { Artwork } from "@prisma/client";
 import MoneyFormat from "./MoneyFormat";
 import styles from '@/styles/components/artwork-item.module.scss';
+import Link from "next/link";
 
 export default function ArtworkCard({ artwork }: { artwork: ArtworkWithArtistAndMedia }) {
   const generateGalleryImage = () => {
@@ -31,7 +32,7 @@ export default function ArtworkCard({ artwork }: { artwork: ArtworkWithArtistAnd
             <h3 className="text-center text-white">{ artwork.name }</h3>
             <p className="text-center text-white">{ artwork.artist.first_name } { artwork.artist.last_name }</p>
             <p className="text-center text-white"><MoneyFormat value={ artwork.price?.toString() ?? "" }/></p>
-            <button className="btn btn-outline-light">See More</button>
+            <Link href={`/artworks/${artwork.id}`} className="btn btn-outline-light">See More</Link>
           </div>
         </div>
     </div>

@@ -19,6 +19,9 @@ model User {
   artworks   Artwork[]
   bids       Bid[]
   follows    Follow[]
+  purchases  ArtworkPurchase[]
+  fromMessages Message[] @relation("Message_fromUser")
+  toMessages Message[] @relation("Message_toUser")
 }
 
 model Artist {
@@ -45,6 +48,12 @@ enum ArtistStatus {
   PENDING
   APPROVED
   REJECTED
+}
+
+enum PaymentStatus {
+  PAID
+  PENDING
+  FAILED
 }
 
 model Follow {
@@ -77,6 +86,21 @@ model Artwork {
   minimum_bid         Float?
   media               ArtworkMedia[]
   price               Float?
+  inStock             Boolean @default(true)
+  purchase            ArtworkPurchase[]
+}
+
+model ArtworkPurchase {
+  id                  Int @id @default(autoincrement())
+  artworkId           Int 
+  artwork             Artwork @relation(fields: [artworkId], references: [id])
+  userId              Int
+  user                User    @relation(fields: [userId], references: [id])
+  xendItRefId         String
+  paymentStatus       PaymentStatus @default(value: PENDING)
+  isDraft             Boolean @default(false)               
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @default(now())
 }
 
 model Auction {
@@ -122,4 +146,16 @@ model ArtworkMedia {
   order               Int      @default(0)
   createdAt           DateTime @default(now())
   updatedAt           DateTime @default(now())
+}
+
+model Message {
+  id                 Int      @id @default(autoincrement())
+  fromUserId         Int
+  fromUser           User     @relation("Message_fromUser", fields: [fromUserId], references: [id])
+  toUserId           Int
+  toUser             User     @relation("Message_toUser", fields: [toUserId], references: [id])
+  isRead             Boolean  @default(false)
+  message            String   @db.LongText
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @default(now())
 }

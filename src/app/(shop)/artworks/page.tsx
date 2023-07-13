@@ -8,6 +8,7 @@ export default async function Page() {
   const artworks = await prisma.artwork.findMany({
     where: {
       auction_id: null,
+      inStock: true,
       media: {
         some: {},
       }
@@ -146,7 +147,7 @@ export default async function Page() {
                       className="col-md-4">
                       <Link 
                         className="text-decoration-none"
-                        href={`/artworks/${artwork.id}"`}
+                        href={`/artworks/${artwork.id}`}
                         prefetch={false}>
                         <div 
                           className={`${styles.artwork} mb-4`}>
@@ -166,38 +167,6 @@ export default async function Page() {
                     </div>
                   ))
                 }
-                {/* {Array(10)
-                  .fill(null)
-                  .map((_, i) => (
-                    <div key={i} className={styles.artwork}>
-                      <img
-                        className={styles.artwork__image}
-                        src="https://i.pinimg.com/originals/1d/9d/aa/1d9daa58ee8a38b4dfcca39932316c8e.jpg"
-                        alt="Card Image"
-                      />
-                      <div className={styles.artwork__body}>
-                        <p className="text-center">"Kasiyana"</p>
-                        <div className={styles.artwork__body__details}>
-                          <div>
-                            <img src="assets/images/avatar.png" alt="" />
-                            <p>
-                              Owned by: <br />
-                              <span>Venazir Martinez</span>
-                            </p>
-                          </div>
-                          <div>
-                            <p>ACRYLIC ON PAINT</p>
-                            <p>30.4 x 30.4 CM</p>
-                            <p>Price : </p>
-                            <p>1,000 PHP</p>
-                          </div>
-                        </div>
-                        <div className={styles.artwork__body__footer}>
-                          <button>Buy</button>
-                        </div>
-                      </div>
-                    </div>
-                  ))} */}
               </div>
             </div>
           </div>

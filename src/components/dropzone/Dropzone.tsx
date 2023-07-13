@@ -28,7 +28,6 @@ export default function Dropzone({ onFileChange }: { onFileChange?: (files: File
     getInputProps,
   } = useDropzone({ 
     accept: { 'image/*': [],}, 
-
     onDrop: (acceptedFiles: File[]) => {
       setFiles(state => {
         const previews: FileWithPreview[] = acceptedFiles.map((file, index) => {
@@ -42,7 +41,6 @@ export default function Dropzone({ onFileChange }: { onFileChange?: (files: File
 
           promise.then((res) => {
             setFiles(state => {
-              console.log("Then")
               const stateCopied = state.map((value, i) => {
                 if(i === index) { 
                   value.uploadStatus = 'successful';
@@ -51,6 +49,8 @@ export default function Dropzone({ onFileChange }: { onFileChange?: (files: File
 
                 return value;
               })
+
+              console.log("promise resolved files", stateCopied)
 
               return stateCopied
             })
