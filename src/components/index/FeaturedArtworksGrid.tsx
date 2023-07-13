@@ -5,10 +5,14 @@ export default async function FeaturedArtworksGrid() {
   const artworks = await prisma.artwork.findMany({
     take: 4,
     where: {
-      auction_id: null
+      auction_id: null,
     },
     include: {
-      artist: true
+      artist: true,
+      media: true,
+    },
+    orderBy: {
+      created_at: 'desc'
     }
   })
 

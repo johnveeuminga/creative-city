@@ -5,7 +5,7 @@ import { MdOutlineArrowRightAlt } from "react-icons/md";
 
 export default function LiveAuctions() {
   return (
-    <section className="shop-index-section">
+    <section className="shop-index-section py-5">
       <div className="container">
         <div className="d-flex justify-content-between align-items-center">
           <h2 className="text-primary shop-index-section__title">Auctions</h2>

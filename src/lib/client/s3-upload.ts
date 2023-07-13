@@ -15,9 +15,10 @@ export type S3UploadResult = {
 
 
 export async function upload(file: File): Promise<S3UploadResult>  {
- const { url, fields } = await generatePostSignedUrl()
+  console.log('Uploading File')
+  const { url, fields } = await generatePostSignedUrl()
 
- const formData = new FormData()
+  const formData = new FormData()
 
   Object.keys(fields).forEach((key, field) => {
     formData.append(key, fields[key])

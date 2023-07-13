@@ -2,7 +2,7 @@ import { MdArrowForwardIos } from 'react-icons/md';
 
 export default function ShopBanner() {
   return (
-    <div className="shop-banner bg-secondary d-flex align-items-center mb-5">
+    <div className="shop-banner bg-secondary d-flex align-items-center">
       <div className="container">
         <div className="content w-50">
           <h1 className='mb-5'>Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.</h1>

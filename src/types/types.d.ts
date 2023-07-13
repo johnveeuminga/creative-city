@@ -35,6 +35,13 @@ export type ArtworkWithArtist = Prisma.ArtworkGetPayload<{
   }
 }>
 
+export type ArtworkWithArtistAndMedia = Prisma.ArtworkGetPayload<{
+  include: {
+    artist: true,
+    media: true,
+  }
+}>
+
 export type ArtistWithUser = Prisma.ArtistGetPayload<{
   include: {
     user: true,

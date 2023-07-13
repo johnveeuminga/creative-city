@@ -75,6 +75,8 @@ model Artwork {
   bids                Bid[]
   highest_bid         ArtworkHighestBid?
   minimum_bid         Float?
+  media               ArtworkMedia[]
+  price               Float?
 }
 
 model Auction {
@@ -110,4 +112,14 @@ model ArtworkHighestBid {
   bidId                Int     @unique
   processed            Boolean @default(false)
   version              Int     @default(1)
+}
+
+model ArtworkMedia {
+  id                  Int      @id @default(autoincrement())
+  artwork             Artwork  @relation(fields: [artworkId], references: [id])
+  artworkId           Int      
+  filePath            String   @db.MediumText
+  order               Int      @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @default(now())
 }

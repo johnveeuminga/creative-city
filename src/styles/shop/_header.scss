@@ -9,9 +9,7 @@
   transition: .2s ease;
 
   .nav-item {
-    &:not(:last-of-type) {
-      margin-right: 3em;
-    }
+    margin-right: 3em;
   }
 
   .nav-link {

@@ -1,6 +1,7 @@
 .item {
   overflow: hidden;
   cursor: pointer;
+  min-height: 400px;
 
   img {
     transition: all .2s ease;

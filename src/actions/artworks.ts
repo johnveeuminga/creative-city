@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from "@/lib/prisma";
+import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
 export async function handleOnClick(id: string) {
@@ -9,22 +10,41 @@ export async function handleOnClick(id: string) {
       id: parseInt(id),
     }
   });
-
-  // Redirect with success message.
 }
 
-export async function doCreateArtwork(name: string, description: string, userId: number) {
+export async function doCreateArtwork(name: string, description: string, userId: number, {
+  files,
+  type,
+  price,
+}: { 
+  files: string[],
+  type: 'auction' | 'bidding'
+  price: number
+} = {files: [], type: 'bidding', price: 0 }) {
   try {
-    await prisma.artwork.create({
-      data: {
-        name,
-        description,
-        artist: {
-          connect: { id: userId },
-        },
+    const media: Prisma.ArtworkMediaCreateWithoutArtworkInput[] = files.map(f => ({
+      filePath: f
+    }))
+
+    const data: Prisma.ArtworkCreateInput = {
+      name,
+      description,
+      artist: {
+        connect: { id: userId }
       },
+      media: {
+        create: media
+      }
+    }
+
+    if(type == 'auction')
+      data.minimum_bid = price
+    else
+      data.price = price
+
+    await prisma.artwork.create({
+      data,
     });
-    console.log("Success Creating Artwork");
 
   } catch (error) {
     console.error("Error creating artwork:", error);
