@@ -3,6 +3,7 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { Artwork } from "@prisma/client";
+import styles from "../styles/artwork-card.module.scss";
 
 export default function ArtworkList({ artworks, userId }: { artworks: Artwork[], userId: number }) {
   const { push } = useRouter();
@@ -11,53 +12,35 @@ export default function ArtworkList({ artworks, userId }: { artworks: Artwork[],
   };
   return (
     <div className="row">
-      {artworks.map((artwork: any) => (
+      {artworks.map((artwork: any, index) => (
         <div className="col-lg-4 col-md-6 col-sm-12" key={artwork.id}>
           <div
-            className="listing-item listing-grid-one mb-45 wow fadeInUp"
-            dta-wow-delay="10ms"
+            className={`card ${styles.card} mb-3`}
+            onClick={() => handleClick(artwork.id)}
           >
-            <div className="listing-thumbnail">
-              <img
-                src="https://3.bp.blogspot.com/-Tg561TlmZNA/TxGjt2qSBrI/AAAAAAAAEQk/63OZ-7QFON8/s1600/WEDDING+DOD+20X16.jpg"
-                alt="Listing Image"
-              />
-              <div className="thumbnail-meta d-flex justify-content-between align-items-center">
-                <div className="meta-icon-title d-flex align-items-center">
-                  <div className="icon">
-                    <i className="ti-announcement"></i>
-                  </div>
-                  <div className="title">
-                    <h6>For Auction</h6>
-                  </div>
-                </div>
-                <span className="status st-open">Open</span>
+            <img
+              className={styles.card_img}
+              src="https://i.pinimg.com/originals/1d/9d/aa/1d9daa58ee8a38b4dfcca39932316c8e.jpg"
+              alt="Card Image"
+            />
+            <div className={styles.card_body}>
+              <div className={styles.card_description}>
+                <h5>{artwork.name}</h5>
+                <p>{artwork.description}</p>
+              </div>
+              <div className={styles.card_price}>
+                <p>Price:</p>
+                <p>5,000 PHP</p>
               </div>
             </div>
-            <div className="listing-content">
-              <h3 className="title">
-                <Link href="/listing-details-1">{artwork.name}</Link>
-              </h3>
-              <div className="my-3">
-                <span>{artwork.description}</span>
+            <div className={styles.avatar}>
+              <div className={styles.avatar_img}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.h0hPZzAziPf3v-srHQTdWQHaHa?pid=ImgDet&rs=1"
+                  alt="Avatar"
+                />
               </div>
-              <span className="price">P10, 000.00</span>
-              <span className="phone-meta">
-                <i className="ti-tablet"></i>
-                <a href="tel:+982653652-05">+98 (265) 3652 - 05</a>
-              </span>
-              <div className="listing-meta">
-                <ul>
-                  <li>
-                    <span>
-                      <i className="ti-location-pin"></i>Baguio City, Benguet
-                    </span>
-                  </li>
-                  <li>
-                    <span></span>
-                  </li>
-                </ul>
-              </div>
+              <p>@ericson_pogi69</p>
             </div>
           </div>
         </div>

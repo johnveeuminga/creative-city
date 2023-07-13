@@ -11,5 +11,5 @@ export default function FeaturedArtworks() {
         </React.Suspense>
       </div>
     </section>
-  )
+  );
 }

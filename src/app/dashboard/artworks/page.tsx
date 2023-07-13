@@ -14,13 +14,13 @@ async function getArtworks(id: number) {
 }
 
 export default async function ArtworksPage() {
-  let artworks = await getArtworks(2);
+  let artworks = await getArtworks(1);
 
   return (
     <div>
       <div>
         {" "}
-        <button className="main-btn icon-btn">
+        <button className="btn btn-secondary">
           <Link href="/dashboard/artworks/create">Add Artwork</Link>
         </button>
       </div>

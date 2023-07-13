@@ -49,7 +49,7 @@ export default function ShopHeader() {
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link" href="auctions">Arts & Crafts</Link>
+                <Link className="nav-link" href="artworks">Arts & Crafts</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="auctions">Auctions</Link>

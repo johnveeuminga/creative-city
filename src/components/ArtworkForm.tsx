@@ -11,6 +11,8 @@ export default function ArtworkForm({ data }: { data: any }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [isPending, startTransition] = useTransition();
+  let [imageUrl, setImageUrl] = useState("");
+
 
   const handleClick = async (name: string, description: string) => {
     startTransition(async () => {
