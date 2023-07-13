@@ -4,6 +4,7 @@ export interface ConversationUser {
   conversationUserId: number;
   oppositeUserName: string;
   latestMessage: string;
+  latestMessageUserId: number;
   latestMessageCreatedAt: Date;
   isRead: boolean;
   avatar: string | null; 
@@ -15,9 +16,10 @@ export async function getUniqueMessagesOfUser(id: string) {
       c.conversationUserId,
       CONCAT(u.first_name, ' ', u.last_name ) as oppositeUserName,
       t.message as latestMessage,
+      t.fromUserId as latestMessageUserId,
       t.createdAt as latestMessageCreatedAt,
       a.avatar_path as avatar,
-      t.isRead AS lastMessageRead
+      t.isRead AS isRead
     FROM 
       (
         SELECT DISTINCT
@@ -44,6 +46,8 @@ export async function getUniqueMessagesOfUser(id: string) {
       Artist a on a.userId = c.conversationUserId
     WHERE
       t.createdAt = c.latestMessageCreatedAt
+    ORDER BY
+      latestMessageCreatedAt DESC
   `
 
   return result

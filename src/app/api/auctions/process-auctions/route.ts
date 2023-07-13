@@ -15,6 +15,8 @@ export async function GET() {
     }
   })
 
+  console.log(auctions)
+
   const promises: Promise<any>[] = auctions.map(async (auction) => {
     return processAuction(auction)  
   })
@@ -28,16 +30,34 @@ const processAuction = async(auction: Auction): Promise<{
   processed: boolean
 }> => {
   try {
-    await prisma.artworkHighestBid.updateMany({
-      data: {
-        processed: true,
-      },
+    const highestBids = await prisma.artworkHighestBid.findMany({
       where: {
         artwork: {
           auction: {
             id: auction.id
           }
         }
+      },
+      include: {
+        artwork: true,
+        bid: {
+          include: {
+            user: true,
+          }
+        }
+      }
+    })
+
+    await prisma.artworkHighestBid.updateMany({
+      where: {
+        artwork: {
+          auction: {
+            id: auction.id
+          }
+        }  
+      },
+      data: {
+        processed: true
       }
     })
 
@@ -49,6 +69,18 @@ const processAuction = async(auction: Auction): Promise<{
         id: auction.id,
       }
     })
+
+    const promises: Promise<any>[] = highestBids.map(highestBid => {
+      return prisma.message.create({
+        data: {
+          fromUserId: highestBid.artwork.artist_id,
+          toUserId: highestBid.bid.userId,
+          message: `Congratulations! You have won the auction for ${highestBid.artwork.name} at ${auction.name}! Payment should be made before we initiate shipping. Please see your Dashboard -> My Biddings to start your payment.`
+        }
+      })
+    })
+
+    await Promise.all(promises)
 
     return {
       processed: true

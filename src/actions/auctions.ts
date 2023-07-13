@@ -31,7 +31,7 @@ export type artworkBidInput = {
 export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
   const { user } = await getServerSession();
 
-  if(!user || (user.groups?.indexOf('artist') == -1 && user.groups?.indexOf('admin') == -1))
+  if(!user)
     return {
       error: "Unauthorized",
     }

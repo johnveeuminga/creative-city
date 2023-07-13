@@ -3,9 +3,12 @@ import { getUniqueMessagesOfUser } from "@/lib/server/messages"
 import styles from '@/styles/components/dashboard-messages.module.scss'
 import { DateTime } from "luxon"
 import Image from "next/image"
+import Link from "next/link"
 import React from "react"
 
-export default async function MessagesPage() {
+export default async function MessagesPage({
+  searchParams: { conversationUserId }
+}: { searchParams: { conversationUserId: string }}) {
   const res = await getUniqueMessagesOfUser('2')
 
   const TimeAgo = (conversationTime: Date) => {
@@ -19,7 +22,9 @@ export default async function MessagesPage() {
         <small>
           {
             !! diff.days ? `${Math.floor(diff.days)}d` :
-              !! diff.hours ? `${Math.floor(diff.hours)}h` :  `${Math.floor(diff.minutes ?? 0)}m`
+              !! diff.hours ? `${Math.floor(diff.hours)}h` :  
+                !! diff.minutes ? diff.minutes > 1 ? `${Math.floor(diff.minutes)}m` : 'Now'
+                  : ''
           }
         </small>
       </p>
@@ -35,9 +40,13 @@ export default async function MessagesPage() {
               <h4 className="mb-5 fw-bold">Conversations</h4>
               {
                 res.map(conversation => (
-                  <div 
+                  <Link 
                     key={conversation.conversationUserId}
-                    className={`${styles.conversation} d-flex mb-5 w-100 cursor-pointer`}>
+                    href={`/dashboard/messages?conversationUserId=${conversation.conversationUserId}`}
+                    className="text-decoration-none">
+                    <div 
+                      key={conversation.conversationUserId}
+                      className={`${styles.conversation} ${Number(conversationUserId) == conversation.conversationUserId ? styles.conversation__selected : ''} d-flex w-100 cursor-pointer`}>
                       <div className={`${styles.avatar} rounded-circle position-relative overflow-hidden me-3`}>
                         { 
                           conversation.avatar && 
@@ -51,16 +60,17 @@ export default async function MessagesPage() {
                       </div>
                       <div className="conversation__content flex-grow-1">
                         <p className="fw-semibold mb-0">{ conversation.oppositeUserName }</p>
-                        <p className={`${styles.preview}`}>{ conversation.latestMessage }</p>
+                        <p className={`${styles.preview} mb-0`}>{ conversation.latestMessage }</p>
                       </div>
                       <div className="details ms-5 text-end">
                         { TimeAgo(conversation.latestMessageCreatedAt) }
                         {
-                          !conversation.isRead &&
+                            conversation.latestMessageUserId != 2 && !conversation.isRead &&
                             <div className={styles.indicator}></div>
                         }
                       </div>
-                  </div>
+                    </div>
+                  </Link>
                 ))
               } 
             </div>
@@ -70,8 +80,8 @@ export default async function MessagesPage() {
           {
             res.length &&
               <React.Suspense fallback={<p>Loading</p>}>
-                <Messages conversation={res[0]} />
-
+                <Messages 
+                  conversationUserId={conversationUserId ? Number(conversationUserId) : res[0].conversationUserId} />
               </React.Suspense>
           }
         </div>

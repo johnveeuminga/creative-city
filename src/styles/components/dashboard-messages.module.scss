@@ -8,13 +8,27 @@
 }
 
 .conversation {
-  height: 45px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
   overflow: hidden;
-  margin-bottom: 2em;
+  cursor: pointer;
+  transition: all .2s ease;
+
+  &:hover {
+    background-color: var(--bs-gray-200);
+  }
+}
+
+.conversation__selected {
+  background-color: var(--bs-gray-200);
 }
 
 .preview {
   color: var(--bs-gray-600);
+  height: 1.5em;
+  overflow: hidden;
 }
 
 .time {
@@ -38,6 +52,7 @@
   padding-top: 2em;
   border-top: 1px solid var(--bs-gray-200);
   border-bottom: 1px solid var(--bs-gray-200);
+  overflow-y: scroll;
 }
 
 .messages__message {
