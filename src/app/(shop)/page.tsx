@@ -11,5 +11,5 @@ export default async function Index() {
       <FeaturedArtists />
       <LiveAuctions />
     </div>
-  )
+  );
 }

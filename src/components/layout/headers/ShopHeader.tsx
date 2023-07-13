@@ -24,7 +24,7 @@ export default async function ShopHeader() {
           <div className="collapse navbar-collapse">
             <ul className="navbar-nav ms-auto">
               <li className="nav-item">
-                <Link className="nav-link" href="auctions">Artworks</Link>
+                <Link className="nav-link" href="artworks">Artworks</Link>
               </li>
               <li className="nav-item">
                 <Link className="nav-link" href="auctions">Auctions</Link>
