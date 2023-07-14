@@ -7,6 +7,12 @@ import { getServerSession } from "@/lib/server/auth";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
+export enum ArtistStatus {
+  PENDING = 'PENDING',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+}
+
 export async function createArtist(params: Prisma.ArtistCreateInput)  {
   try {
     const artist = await prisma.artist.create({

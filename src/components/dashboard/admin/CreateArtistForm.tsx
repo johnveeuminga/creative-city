@@ -1,28 +1,62 @@
+'use client'
+import { createArtist, ArtistStatus } from '@/actions/artists';
 import { useTransition } from 'react';
 import { Controller, useForm } from 'react-hook-form'
-import { useRouter } from 'next/router';
-import { createArtist } from '@/actions/artists'; // Replace with your actual action
+import { useRouter } from 'next/navigation';
+import Quill from '@/components/Quill';
+import { DateTime } from 'luxon';
+
+const modules = {
+    toolbar: [
+      [{ header: '1' }, { header: '2' }, { header: '3' }, { font: [] }],
+      [{ size: [] }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [
+        { list: 'ordered' },
+        { list: 'bullet' },
+        { indent: '-1' },
+        { indent: '+1' },
+      ],
+      ['link', 'image', 'video'],
+      ['clean'],
+    ],
+    clipboard: {
+      matchVisual: false,
+    },
+  }
 
 export default function CreateArtistForm() {
   const {
     register,
     handleSubmit,
     control,
+    watch,
   } = useForm();
-
-  const router = useRouter();
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   const onSubmit = (data: any) => {
-    startTransition(async () => {
+      const params = {
+        nickname: data.nickname ?? "",
+        avatar_path: data.avatar_path ?? "",
+        myBio: data.myBio ?? "",
+        myStory: data.myStory ?? "",
+        artworkPickUpAddress: data.artworkPickUpAddress ?? "",
+        contactNumber: data.contactNumber ?? "",
+        gcash: data.gcash ?? "",
+        paymaya: data.paymaya ?? "",
+        status: ArtistStatus.APPROVED,  // Add a default status
+        user: data.userId ?? "",
+      }
+      startTransition(async () => {
       try {
-        await createArtist(data); // Replace with your actual action
-
+        await createArtist(params);
+  
         router.push("/dashboard/artists");
       } catch(err) {
         console.log(err);
       }
-    });
+    })
   }
 
   return(
