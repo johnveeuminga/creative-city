@@ -34,3 +34,16 @@ export async function getArtistsWithArtworkCount(): Promise<ArtistWithUserAndArt
 
   return artists;
 }
+
+export async function updateArtistStatus(id: number, newStatus: 'PENDING' | 'APPROVED' | 'REJECTED'): Promise<Artist> {
+  const artist = await prisma.artist.update({
+    where: {
+      id: id,
+    },
+    data: {
+      status: newStatus,
+    },
+  });
+
+  return artist;
+}
