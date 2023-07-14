@@ -15,7 +15,11 @@ export default async function ArtistProfile({
       id: parseInt(artistId),
     },
     include: {
-      user: true,
+      user: {
+        include: {
+          artworks: true, // Include artworks related to this user
+        },
+      },
     },
   });
 
@@ -110,7 +114,7 @@ export default async function ArtistProfile({
           {/* ... other tabs ... */}
         </div>
 
-        <div className={styles.artworksContainer}>
+        {/* <div className={styles.artworksContainer}>
           {artworks.map((artwork) => (
             <div className={`${styles.artwork}`} key={artwork.id}>
               <div className={styles.artworkImage}>
@@ -133,9 +137,39 @@ export default async function ArtistProfile({
               </div>
             </div>
           ))}
+        </div> */}
+
+        <div className={styles.artworksContainer}>
+          {artist?.user.artworks.map((artwork) => (
+            <div className={`${styles.artwork}`} key={artwork.id}>
+              <div className={styles.artworkImage}>
+                <Image
+                  src={artwork.image || "https://via.placeholder.com/150"}
+                  alt={artwork.name} // I assume the artwork's title is in the `name` field
+                  layout="responsive"
+                  width={200}
+                  height={200}
+                  objectFit="cover"
+                  objectPosition="center"
+                />
+              </div>
+              <div className={styles.artworkInfo}>
+                <h3 className={styles.artworkTitle}>
+                  <Link href="/listing-details-1">{artwork.name}</Link>{" "}
+                  {/* Adjusted to `name` */}
+                </h3>
+                <p className={styles.artworkYear}>Unknown Year</p>{" "}
+                {/* I don't see a `year` field in your `Artwork` model */}
+                <p className={styles.artworkPrice}>{artwork.price}</p>{" "}
+                {/* Adjusted to `price` */}
+              </div>
+            </div>
+          ))}
         </div>
+
+
       </div>
-{/* 
+      {/* 
       <div className={styles.sidebar}>
         <div className={styles.filterSection}>
           <h2>Filter by</h2>
