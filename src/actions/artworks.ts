@@ -12,15 +12,15 @@ export async function handleOnClick(id: string) {
   });
 }
 
-export async function doCreateArtwork(name: string, description: string, userId: number, {
+export async function doCreateArtwork(name: string, description: string, userId: number, shortDescription: string, material: string, dimensions: string, weight: number, {
   files,
   type,
   price,
-}: { 
+}: {
   files: string[],
   type: 'auction' | 'bidding'
   price: number
-} = {files: [], type: 'bidding', price: 0 }) {
+} = { files: [], type: 'bidding', price: 0 }) {
   try {
     const media: Prisma.ArtworkMediaCreateWithoutArtworkInput[] = files.map(f => ({
       filePath: f
@@ -29,6 +29,10 @@ export async function doCreateArtwork(name: string, description: string, userId:
     const data: Prisma.ArtworkCreateInput = {
       name,
       description,
+      shortDescription,
+      material,
+      dimensions,
+      weight,
       artist: {
         connect: { id: userId }
       },
@@ -37,7 +41,7 @@ export async function doCreateArtwork(name: string, description: string, userId:
       }
     }
 
-    if(type == 'auction')
+    if (type == 'auction')
       data.minimum_bid = price
     else
       data.price = price
