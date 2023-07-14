@@ -19,27 +19,16 @@ export default async function ArtistProfile({
         include: {
           artworks: true, // Include artworks related to this user
         },
+        
       },
     },
   });
 
-  const artworks = [
-    {
-      id: 1,
-      title: "Artwork 1",
-      year: 2020,
-      price: "Price on request",
-      image: "https://via.placeholder.com/150",
+  const artworkCount = await prisma.artwork.count({
+    where: {
+      artist_id: artist?.user.id,
     },
-    {
-      id: 2,
-      title: "Artwork 2",
-      year: 2021,
-      price: "Price on request",
-      image: "https://via.placeholder.com/150",
-    },
-    // ... other artworks ...
-  ];
+  });
 
   return (
     <div className={styles.container}>
@@ -69,7 +58,7 @@ export default async function ArtistProfile({
                   >
                     <div>
                       <p className="small text-muted mb-1">Artworks</p>
-                      <p className="mb-0">2</p>
+                      <p className="mb-0">{ artworkCount }</p>
                     </div>
                     <div className="px-3">
                       <p className="small text-muted mb-1">Followers</p>
@@ -113,31 +102,6 @@ export default async function ArtistProfile({
           <div className={styles.tab}>About</div>
           {/* ... other tabs ... */}
         </div>
-
-        {/* <div className={styles.artworksContainer}>
-          {artworks.map((artwork) => (
-            <div className={`${styles.artwork}`} key={artwork.id}>
-              <div className={styles.artworkImage}>
-                <Image
-                  src={artwork.image || "https://via.placeholder.com/150"}
-                  alt={artwork.title}
-                  layout="responsive"
-                  width={200}
-                  height={200}
-                  objectFit="cover"
-                  objectPosition="center"
-                />
-              </div>
-              <div className={styles.artworkInfo}>
-                <h3 className={styles.artworkTitle}>
-                  <Link href="/listing-details-1">{artwork.title}</Link>
-                </h3>
-                <p className={styles.artworkYear}>{artwork.year}</p>
-                <p className={styles.artworkPrice}>{artwork.price}</p>
-              </div>
-            </div>
-          ))}
-        </div> */}
 
         <div className={styles.artworksContainer}>
           {artist?.user.artworks.map((artwork) => (
