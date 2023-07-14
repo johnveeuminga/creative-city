@@ -46,7 +46,7 @@ export default async function ArtistProfile({
               <div className="d-flex text-black">
                 <div className="flex-shrink-0">
                   <img
-                    src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                    src={artist?.avatar_path ?? ""}
                     alt="Generic placeholder image"
                     className="img-fluid"
                     style={{ width: "180px", borderRadius: "10px" }}
