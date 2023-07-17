@@ -2,7 +2,9 @@ import ClientPagination from "@/components/ClientPagination"
 import prisma from "@/lib/prisma"
 import { getArtists } from "@/lib/server/artists"
 import { Prisma } from "@prisma/client";
+import { DateTime } from "luxon"
 import { ArtistsSearch } from "./ArtistsSearch";
+import { ArtistStatus } from "./ArtistStatus";
 import Link from "next/link";
 
 export async function Artists({
@@ -58,6 +60,8 @@ export async function Artists({
       <table className="table">
         <thead>
           <tr>
+            <th>Name</th>
+            <th>Email</th>
             <th>Nickname</th>
             <th>Status</th>
             <th>Contact Number</th>
@@ -68,10 +72,12 @@ export async function Artists({
         {
             artists && artists.map(artist => (
               <tr key={artist.id}>
+                <td><span className="text-dark font-weight-bold">{ artist.user.first_name } { artist.user.last_name }</span></td>
+                <td><span className="text-dark font-weight-bold">{ artist.user.email }</span></td>
                 <td><span className="text-dark font-weight-bold">{ artist.nickname }</span></td>
-                <td>{ artist.status }</td>
+                <td><ArtistStatus artist={artist} /></td>
                 <td>{ artist.contactNumber }</td>
-                {/* <td>{ artist.createdAt.toLocaleString(DateTime.DATETIME_MED) }</td> */}
+                <td>{ DateTime.fromJSDate(artist.createdAt).toLocaleString(DateTime.DATETIME_MED) }</td>
               </tr>
             ))
           }

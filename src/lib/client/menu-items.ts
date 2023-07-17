@@ -70,6 +70,7 @@ export const AdminMenuItems: {
     {
       name: 'Artists',
       icon: 'ti-id-badge',
+      href: '/dashboard/artists',
       priority: 20,
       prefetch: false,
     },
