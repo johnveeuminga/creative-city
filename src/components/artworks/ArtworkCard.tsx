@@ -1,34 +1,35 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
-import styles from "../../styles/artwork-card.module.scss";
+import styles from "../../styles/artwork-page.module.scss";
+import Link from "next/link";
+import MoneyFormat from "../MoneyFormat";
 
 export default function ArtworkCard({ artwork }) {
+  console.log(artwork)
   return (
-    <div className={`card ${styles.card}`}>
-      <img
-        className={styles.card_img}
-        src="https://i.pinimg.com/originals/1d/9d/aa/1d9daa58ee8a38b4dfcca39932316c8e.jpg"
-        alt="Card Image"
-      />
-      <div className={styles.card_body}>
-        <div className={styles.card_description}>
-          <h5>{artwork.name}</h5>
-          <p>{artwork.description}</p>
-        </div>
-        <div className={styles.card_price}>
-          <p>Price:</p>
-          <p>5,000 PHP</p>
-        </div>
-      </div>
-      <div className={styles.avatar}>
-        <div className={styles.avatar_img}>
+    <Link
+      className="text-decoration-none"
+      href={`/artworks/${artwork.id}"`}
+      prefetch={false}
+    >
+      <div className={`${styles.artwork} mb-4`}>
+        <picture className="artwork__image-container w-100">
           <img
-            src="https://th.bing.com/th/id/OIP.h0hPZzAziPf3v-srHQTdWQHaHa?pid=ImgDet&rs=1"
-            alt="Avatar"
+            className={styles.artwork__image}
+            alt={artwork.name}
+            src={`${process.env.NEXT_PUBLIC_S3_URL}/${artwork.media[0].filePath}`}
           />
+        </picture>
+        <div className="artwork__content px-1 py-2">
+          <h4 className="fw-semibold text-primary">{artwork.name}</h4>
+          <p className="mb-0">
+            {artwork.artist.first_name} {artwork.artist.last_name}
+          </p>
+          <p className="fw-semibold">
+            <MoneyFormat value={artwork.price?.toString() ?? ""} />
+          </p>
         </div>
-        <p>{artwork.artist.email}</p>
       </div>
-    </div>
+    </Link>
   );
 }
