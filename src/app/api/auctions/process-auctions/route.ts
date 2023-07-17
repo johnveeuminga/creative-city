@@ -75,7 +75,7 @@ const processAuction = async(auction: Auction): Promise<{
         data: {
           fromUserId: highestBid.artwork.artist_id,
           toUserId: highestBid.bid.userId,
-          message: `Congratulations! You have won the auction for ${highestBid.artwork.name} at ${auction.name}! Payment should be made before we initiate shipping. Please see your Dashboard -> My Biddings to start your payment.`
+          message: `Congratulations! You have won the auction for ${highestBid.artwork.name} at ${auction.name}! Payment should be made before we initiate shipping. Please see your Dashboard -> My Orders to start your payment.`
         }
       })
     })
