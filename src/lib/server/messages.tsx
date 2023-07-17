@@ -14,7 +14,7 @@ export async function getUniqueMessagesOfUser(id: string) {
   const result: ConversationUser[] = await prisma.$queryRaw`
     SELECT
       c.conversationUserId,
-      CONCAT(u.first_name, ' ', u.last_name ) as oppositeUserName,
+      u.name as oppositeUserName,
       t.message as latestMessage,
       t.fromUserId as latestMessageUserId,
       t.createdAt as latestMessageCreatedAt,

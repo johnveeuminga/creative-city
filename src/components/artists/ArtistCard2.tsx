@@ -13,7 +13,6 @@
 // //     <Link href={`/artists/${artist.id}`}>
 // //       <div className="artist-card card">
 // //         <div className="card-body">
-// //           {/* <h5 className="card-title">{artist.user.first_name} {artist.user.last_name}</h5> */}
 // //           <h5 className="card-title">{artist.nickname}</h5>
 // //           <p className="artist-card__nickname">Nickname: {artist.nickname || 'N/A'}</p>
 // //           <p className="artist-card__story">Story: {artist.myStory || 'N/A'}</p>

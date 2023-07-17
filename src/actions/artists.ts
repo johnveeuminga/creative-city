@@ -1,9 +1,7 @@
 'use server'
 
 import 'server-only'
-import { getClient } from "@/lib/apollo";
 import prisma from "@/lib/prisma";
-import { getServerSession } from "@/lib/server/auth";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 

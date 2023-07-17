@@ -1,3 +1,5 @@
+import prisma from "@/lib/prisma";
+import { decodeToken } from "@/lib/server/auth";
 import { NextRequest, NextResponse } from "next/server";
 import { json } from "stream/consumers";
 
@@ -10,11 +12,24 @@ export async function GET(request: NextRequest) {
     });
 
   try {
-    const res: AuthCallbackResponse = await getTokenFromCode(code);
-
-    // todo: cognitoId, search @ Users table if not create()
+    const res: AuthCallbackResponse = await getTokenFromCode(code)
 
     let response = NextResponse.redirect(process.env.APP_URL ?? "");
+
+    const idToken = await decodeToken(res.id_token);
+
+    await prisma.user.upsert({
+      where: {
+        cognitoId: idToken.sub      
+      },
+      update: {},
+      create: {
+        name: idToken.name,
+        email: idToken.email,
+        cognitoId: idToken.sub,
+      },
+    })
+
     response.cookies.set(
       'authToken', 
       res.access_token, 

@@ -6,6 +6,7 @@ import { DateTime } from "luxon"
 import { ArtistsSearch } from "./ArtistsSearch";
 import { ArtistStatus } from "./ArtistStatus";
 import Link from "next/link";
+import { ArtistWithUser } from "@/types/types";
 
 export async function Artists({
   page = '0',
@@ -41,7 +42,7 @@ export async function Artists({
     }
   }
 
-  const artists = await getArtists(params);
+  const artists = await getArtists<ArtistWithUser[]>(params);
 
   return(
     <div className="table-wrapper">
@@ -72,7 +73,7 @@ export async function Artists({
         {
             artists && artists.map(artist => (
               <tr key={artist.id}>
-                <td><span className="text-dark font-weight-bold">{ artist.user.first_name } { artist.user.last_name }</span></td>
+                <td><span className="text-dark font-weight-bold">{ artist.user.name }</span></td>
                 <td><span className="text-dark font-weight-bold">{ artist.user.email }</span></td>
                 <td><span className="text-dark font-weight-bold">{ artist.nickname }</span></td>
                 <td><ArtistStatus artist={artist} /></td>

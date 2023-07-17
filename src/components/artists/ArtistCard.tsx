@@ -14,12 +14,14 @@ export default function ArtistCard({ artist }: { artist: ArtistWithUserAndArtwor
       <div className="artist-card card mb-4">
         <div className="card-body">
           <div className="text-center">
-            <img
-              src={artist.avatar_path ?? ""}
-              alt="Generic placeholder image"
-              className={styles.artistPhotoImg}
-            />
-            <h5 className="mt-3">{ artist.user.first_name } { artist.user.last_name }</h5>
+            <picture>
+              <img
+                src={artist.avatar_path ?? ""}
+                alt="Generic placeholder image"
+                className={styles.artistPhotoImg}
+              />
+            </picture>
+            <h5 className="mt-3">{ artist.user.name }</h5>
             <p>Artworks: { artist.user._count.artworks }</p>
             <Link className="btn btn-outline-primary" href={`/artists/${artist?.id}`} style={{ textDecoration: 'none' }} >
               See More

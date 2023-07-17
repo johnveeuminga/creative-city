@@ -3,12 +3,6 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import { Archivo, Lora, Playfair_Display, Poppins, Tajawal, Work_Sans } from 'next/font/google'
 import SessionProvider from '../components/layout/providers/SessionProvider'
 
-// const font = Work_Sans({ 
-//   subsets: ['latin'],
-//   weight: ['300', '400', '500', '600', '700'],
-//   variable: '--font-work-sans'
-// })
-
 const font = Archivo({
   weight: ['300', '400', '500', '600', '700'],
   subsets: ['latin'],
@@ -43,9 +37,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${font.variable} ${headingFont.variable}`}>
-        <SessionProvider>
-          {children}
-        </SessionProvider>
+        {children}
       </body>
     </html>
   )

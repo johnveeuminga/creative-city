@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
 import React from "react"
-import ShopHeaderSignInButton from "../ShopHeaderSignInButton"
 
 export default async function ShopNavbar() {
   return (
@@ -31,9 +30,9 @@ export default async function ShopNavbar() {
             </li>
           </ul>
           <div className="actions ms-3">
-            <React.Suspense fallback={<p>Loading</p>}>
+            {/* <React.Suspense fallback={<p>Loading</p>}>
               <ShopHeaderSignInButton />
-            </React.Suspense>
+            </React.Suspense> */}
           </div>
         </div>
       </div>

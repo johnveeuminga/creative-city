@@ -47,7 +47,7 @@ export default async function ArtistProfile({
                 </div>
                 <div className="flex-grow-1 ms-3">
                   <h5 className="mb-1">
-                    {artist?.user.first_name} {artist?.user.last_name}
+                    {artist?.user.name}
                   </h5>
                   <p className="mb-2 pb-1" style={{ color: "#2b2a2a" }}>
                     Artist

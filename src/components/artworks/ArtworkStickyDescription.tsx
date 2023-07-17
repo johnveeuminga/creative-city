@@ -49,7 +49,7 @@ export default function ArtworkStickyDescription({ artwork }: { artwork: Artwork
   return (
     <div ref={div} className="artwork-details">
       <h1 className="fw-semibold">{ artwork.name }</h1>
-      <h5>{ artwork.artist.first_name } { artwork.artist.last_name }</h5>
+      <h5>{ artwork.artist.name }</h5>
       <p className="fs-5 py-5">{ artwork.description }</p>
       {
         artwork.inStock &&

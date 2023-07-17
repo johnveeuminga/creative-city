@@ -8,14 +8,14 @@ export type ArtistWithUser = Prisma.ArtistGetPayload<{
   },
 }>
 
-export async function getArtists(params: Prisma.ArtistFindManyArgs = {}): Promise<Artist[]> {
+export async function getArtists<T = Artist[]>(params: Prisma.ArtistFindManyArgs = {}): Promise<T> {
   const artists = await prisma.artist.findMany({
     ...params,
     include: {
       ...params.include,
       user: true,
     },
-  });
+  }) as T;
 
   return artists;
 }

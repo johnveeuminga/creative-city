@@ -30,7 +30,7 @@ export default function ArtworkCard({ artwork }: { artwork: ArtworkWithArtistAnd
         <div className={`${styles.content} position-absolute`}>
           <div className="text-center">
             <h3 className="text-center text-white">{ artwork.name }</h3>
-            <p className="text-center text-white">{ artwork.artist.first_name } { artwork.artist.last_name }</p>
+            <p className="text-center text-white">{ artwork.artist.name }</p>
             <p className="text-center text-white"><MoneyFormat value={ artwork.price?.toString() ?? "" }/></p>
             <Link href={`/artworks/${artwork.id}`} className="btn btn-outline-light">See More</Link>
           </div>

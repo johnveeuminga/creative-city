@@ -6,11 +6,11 @@ import { Seeder } from "./seeder.interface";
 const prisma = new PrismaClient();
 
 const userData = (): Prisma.UserCreateInput[] => {
-  return new Array(20).fill('').map(() => {
+  return new Array(20).fill('').map((_, i) => {
     return {
-      first_name: faker.person.firstName(),
-      last_name: faker.person.lastName(),
+      name: faker.person.fullName(), 
       email: faker.internet.email(),
+      cognitoId: `cognito_user_${i}`
     }
   });
 }

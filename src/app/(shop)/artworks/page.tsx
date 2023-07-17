@@ -159,7 +159,7 @@ export default async function Page() {
                             </picture>
                             <div className="artwork__content px-1 py-2">
                               <h4 className="fw-semibold text-primary">{ artwork.name }</h4>
-                              <p className="mb-0">{ artwork.artist.first_name } { artwork.artist.last_name }</p>
+                              <p className="mb-0">{ artwork.artist.name }</p>
                               <p className="fw-semibold"><MoneyFormat value={artwork.price?.toString() ?? ""} /></p>
                             </div>
                         </div>

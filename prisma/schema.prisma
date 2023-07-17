@@ -10,8 +10,8 @@ datasource db {
 
 model User {
   id         Int      @id @unique @default(autoincrement())
-  first_name String
-  last_name  String
+  cognitoId  String   @unique
+  name       String
   email      String   @unique
   created_at DateTime @default(now())
   updated_at DateTime @default(now())

@@ -50,7 +50,7 @@ export default async function Messages({ conversationUserId }: { conversationUse
   return (
     <div className={`card shadow-sm`}>
       <div className="card-header bg-white border-end px-4 py-3">
-        <h4 className="card-title">{ conversation.first_name } { conversation.last_name }</h4>
+        <h4 className="card-title">{ conversation.name }</h4>
       </div>
       <div className="card-body">
         <div className={`${styles.messages__list}`}>
@@ -59,7 +59,7 @@ export default async function Messages({ conversationUserId }: { conversationUse
               <div 
                 key={message.id}
                 className={`${styles.messages__message} ${message.fromUserId !== 2 ? styles.messages__message_from : styles.messages__message_to} d-flex flex-column `}>
-                  <p className="fw-semibold mb-3">{ message.fromUser.first_name }</p>
+                  <p className="fw-semibold mb-3">{ message.fromUser.name }</p>
                   <div className={`${styles.messages__content} px-5 py-3 bg-secondary`}>
                     { message.message }
                   </div>

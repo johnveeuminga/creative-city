@@ -1,12 +1,10 @@
 import Link from "next/link";
 import React from "react";
 import { About, Blog, Contact, Home, Listing, Pages } from "../Menu";
-import { getServerSession } from "@/lib/server/auth";
 import UserAvatar from "@/components/UserAvatar";
 import UniversalLoadingLink from "@/components/UniversalLoadingLink";
 
 const Header2 = async () => {
-  const session = await getServerSession();
   
   return (
     <header className="header-area header-area-two d-none d-xl-block">

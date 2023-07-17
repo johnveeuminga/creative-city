@@ -2,11 +2,11 @@ import { CognitoJwtVerifier } from "aws-jwt-verify";
 import { CognitoIdTokenPayload, CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
 // import verifier from "../cognito";
 import { cookies } from "next/headers";
+import prisma from "../prisma";
 
 interface User {
   id: string;
   name: string,
-  username: string,
   email: string,
   groups?: string[]
 }
@@ -36,9 +36,16 @@ export async function getServerSession(): Promise<{
   }
 
   try {
-    const decodeTokenReq = decodeToken(token.value, "id")
-    const tokenDecoded = await decodeTokenReq
+    const tokenDecoded = await decodeToken(token.value, "id")
+    // const user = await prisma.user.findFirst({
+    //   where: {
+    //     cognitoId: tokenDecoded.sub,
+    //   }
+    // })
 
+    // if(!user)
+    //   throw new Error("No user found with the cognito ID")
+      
     const res = {
       user: {
         id: tokenDecoded["sub"],

@@ -72,7 +72,7 @@ export default async function AuctionArtworkSinglePage({
           <div className="col-md-5">
             <div className="artwork-heading mb-3">
               <h3>{ artwork.name }</h3>
-              <p>{ artwork.artist.first_name } {artwork.artist.last_name }</p>
+              <p>{ artwork.artist.name }</p>
             </div>
             <ArtworkBiddingBox 
               finished={ auctionHasEnded }

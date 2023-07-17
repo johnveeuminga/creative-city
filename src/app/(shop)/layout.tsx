@@ -7,8 +7,8 @@ export default function ShopLayout({
   children: React.ReactNode
 }) {
   return (
-    <Layout>
+    <>
       {children}
-    </Layout>
+    </>
   )
 }

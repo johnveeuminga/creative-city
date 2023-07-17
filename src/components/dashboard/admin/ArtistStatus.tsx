@@ -9,14 +9,14 @@ interface ArtistStatusProps {
 }
 
 export function ArtistStatus({ artist }: ArtistStatusProps) {
-  const [updatingArtistId, setUpdatingArtistId] = useState(null);
-  const [status, setStatus] = useState(artist.status);
+  const [updatingArtistId, setUpdatingArtistId] = useState<number | null>();
+  const [status, setStatus] = useState('');
   const debouncedStatus = useDebounce(status, 500);
 
   useEffect(() => {
     if (updatingArtistId === artist.id && status !== artist.status) {
-      fetch("/api/artists/updateStatus", {
-        method: "POST",
+      fetch(`/api/artists/${artist.id}/status`, {
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
