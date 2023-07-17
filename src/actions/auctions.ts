@@ -9,6 +9,7 @@ import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import Artwork from '@/components/Artwork';
 import { DateTime } from 'luxon';
+import { NextResponse } from 'next/server';
 
 
 export async function createAuction(params: Prisma.AuctionCreateInput)  {
@@ -142,6 +143,35 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
   } catch(err: any) {
     return {
       error: err.message,
+    }
+  }
+}
+
+export async function doRegisterArtworkToAuction(artworkIds: number[], auctionId: number) {
+  try {
+    const session = await getServerSession()
+
+    // TODO: Check for capability here.
+    if(!session.user)
+      throw new Error('Error')
+
+    await prisma.artwork.updateMany({
+      where: {
+        id: {
+          in: artworkIds,
+        }
+      },
+      data: {
+        auction_id: auctionId,
+      }
+    })
+
+    return {
+      success: true
+    }
+  } catch {
+    return {
+      error: "Something went wrong"
     }
   }
 }

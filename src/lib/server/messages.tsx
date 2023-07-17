@@ -50,5 +50,7 @@ export async function getUniqueMessagesOfUser(id: string) {
       latestMessageCreatedAt DESC
   `
 
+  console.log(result)
+
   return result
 }

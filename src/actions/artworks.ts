@@ -1,6 +1,7 @@
 'use server'
 
 import prisma from "@/lib/prisma";
+import { getServerSession } from "@/lib/server/auth";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 
@@ -12,7 +13,7 @@ export async function handleOnClick(id: string) {
   });
 }
 
-export async function doCreateArtwork(name: string, description: string, userId: number, shortDescription: string, material: string, dimensions: string, weight: number, {
+export async function doCreateArtwork(name: string, description: string, shortDescription: string, material: string, dimensions: string, weight: number, {
   files,
   type,
   price,
@@ -21,6 +22,11 @@ export async function doCreateArtwork(name: string, description: string, userId:
   type: 'auction' | 'bidding'
   price: number
 } = { files: [], type: 'bidding', price: 0 }) {
+  const server = await getServerSession()
+
+  if(!server.user)
+    throw new Error("Unauthorized")
+
   try {
     const media: Prisma.ArtworkMediaCreateWithoutArtworkInput[] = files.map(f => ({
       filePath: f
@@ -34,7 +40,7 @@ export async function doCreateArtwork(name: string, description: string, userId:
       dimensions,
       weight,
       artist: {
-        connect: { id: userId }
+        connect: { id: parseInt(server.user.id) }
       },
       media: {
         create: media

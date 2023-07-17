@@ -8,7 +8,7 @@ import { upload } from "@/lib/client/s3-upload";
 import { useDropzone } from "react-dropzone";
 import Dropzone, { FileWithPreview } from "./dropzone/Dropzone";
 
-export default function ArtworkForm({ data }: { data: any }) {
+export default function ArtworkForm() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -36,7 +36,6 @@ export default function ArtworkForm({ data }: { data: any }) {
         await doCreateArtwork(
           name,
           description,
-          data.id,
           shortDescription,
           material,
           dimensions,
@@ -79,6 +78,16 @@ export default function ArtworkForm({ data }: { data: any }) {
             />
           </div>
           <div className="mb-3">
+            <label className="form-label fw-semibold">Short Description:</label>
+            <textarea
+              rows={10}
+              className="form-control"
+              value={shortDescription}
+              onChange={(e) => setShortDescription(e.target.value)}
+              required
+            />
+          </div>
+          <div className="mb-3">
             <label className="form-label fw-semibold">Description:</label>
             <textarea
               className="form-control"
@@ -87,16 +96,6 @@ export default function ArtworkForm({ data }: { data: any }) {
               onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
-          <div className="mb-3">
-            <label className="form-label fw-semibold">Short Description:</label>
-            <input
-              type="text"
-              className="form-control"
-              value={shortDescription}
-              onChange={(e) => setShortDescription(e.target.value)}
-              required
-            />
-          </div>{" "}
           <div className="mb-3">
             <label className="form-label fw-semibold">Material:</label>
             <input

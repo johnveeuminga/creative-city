@@ -111,9 +111,11 @@ export async function AuctionDetails({ id, page = 1 }: {
               {
                 session.user && session.user.groups?.indexOf("artist") !== -1 &&
                   <div className="actions mt-4">
-                    <button className="btn btn-outline-primary text-white d-block w-100">
-                      <strong>REGISTER YOUR ARTWORK</strong>
-                    </button>
+                    <Link 
+                      href={`/auctions/${auction.id}/register`}
+                      className="btn btn-outline-light py-2 text-white d-block w-100">
+                      <strong>REGISTER YOUR PIECE</strong>
+                    </Link>
                   </div>
               }
             </div> 

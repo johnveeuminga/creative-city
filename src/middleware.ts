@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decodeToken } from "./lib/server/auth";
+import { decodeToken } from "./lib/server/cognito";
 
 export async function middleware(request: NextRequest) {
   if(request.nextUrl.pathname.startsWith('/api')) {

@@ -98,7 +98,7 @@ export function ArtworkBiddingBox({ artwork, finished = false }: {
               <button 
                 disabled={isPending}
                 onClick={() => handleBidClicked()}
-                className="btn btn-primary btn-lg fw-bold">
+                className="btn btn-outline-light btn-lg fw-bold">
                 PLACE BID
               </button>
             </div>

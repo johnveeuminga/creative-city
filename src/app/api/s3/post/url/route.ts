@@ -1,4 +1,4 @@
-import { decodeToken, getServerSession } from "@/lib/server/auth";
+import { getServerSession } from "@/lib/server/auth";
 import { S3Client } from "@aws-sdk/client-s3";
 import { createPresignedPost } from "@aws-sdk/s3-presigned-post";
 import { Conditions } from "@aws-sdk/s3-presigned-post/dist-types/types";

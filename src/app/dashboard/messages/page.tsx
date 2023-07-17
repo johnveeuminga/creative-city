@@ -1,15 +1,23 @@
 import Messages from "@/components/dashboard/Message"
+import { getServerSession } from "@/lib/server/auth"
 import { getUniqueMessagesOfUser } from "@/lib/server/messages"
 import styles from '@/styles/components/dashboard-messages.module.scss'
 import { DateTime } from "luxon"
 import Image from "next/image"
 import Link from "next/link"
+import { redirect } from "next/navigation"
 import React from "react"
 
 export default async function MessagesPage({
   searchParams: { conversationUserId }
 }: { searchParams: { conversationUserId: string }}) {
-  const res = await getUniqueMessagesOfUser('2')
+  const { user } = await getServerSession()
+  
+  if(!user)
+    redirect("/401")
+
+
+  const res = await getUniqueMessagesOfUser('22')
 
   const TimeAgo = (conversationTime: Date) => {
     const now = DateTime.now()
@@ -65,7 +73,7 @@ export default async function MessagesPage({
                       <div className="details ms-5 text-end">
                         { TimeAgo(conversation.latestMessageCreatedAt) }
                         {
-                            conversation.latestMessageUserId != 2 && !conversation.isRead &&
+                            conversation.latestMessageUserId !== parseInt(user.id) && !conversation.isRead &&
                             <div className={styles.indicator}></div>
                         }
                       </div>

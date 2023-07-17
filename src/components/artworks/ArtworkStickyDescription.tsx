@@ -61,7 +61,6 @@ export default function ArtworkStickyDescription({ artwork }: { artwork: Artwork
                 className="btn btn-outline-primary">
                 Buy Now
               </button>
-              <p>Artwork not in stock</p>
           </div>
       }
       {

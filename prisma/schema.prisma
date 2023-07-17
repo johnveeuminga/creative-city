@@ -91,6 +91,8 @@ model Artwork {
   material            String
   dimensions          String
   weight              Float
+  auctionApproved     Boolean @default(false)
+  isAuction           Boolean @default(false)
 }
 
 model ArtworkPurchase {

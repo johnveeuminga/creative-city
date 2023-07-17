@@ -2,20 +2,27 @@ import prisma from "@/lib/prisma";
 import { ConversationUser } from "@/lib/server/messages";
 import styles from "@/styles/components/dashboard-messages.module.scss"
 import MessageForm from "./MessageForm";
+import { getServerSession } from "@/lib/server/auth";
+import { redirect } from "next/navigation";
 
 export default async function Messages({ conversationUserId }: { conversationUserId: number }) {
+  const { user } = await getServerSession()
+
+  if(!user)
+    redirect("/401")
+
   const messagePromise = prisma.message.findMany({
     where: {
       OR: [
         {
           AND: [
             { fromUserId: Number(conversationUserId) },
-            { toUserId: 2 }
+            { toUserId: parseInt(user.id) }
           ],
         }, 
         {
           AND: [
-            { fromUserId: 2 },
+            { fromUserId: parseInt(user.id) },
             { toUserId: Number(conversationUserId) }
           ]
         }
@@ -37,10 +44,11 @@ export default async function Messages({ conversationUserId }: { conversationUse
 
   const [messages, conversation] = await Promise.all([messagePromise, userPromise])
 
+
   prisma.message.updateMany({
     where: {
       fromUserId: Number(conversationUserId),
-      toUserId: 2,
+      toUserId: parseInt(user.id),
     },
     data: {
       isRead: true
@@ -58,7 +66,7 @@ export default async function Messages({ conversationUserId }: { conversationUse
             messages && messages.map(message => (
               <div 
                 key={message.id}
-                className={`${styles.messages__message} ${message.fromUserId !== 2 ? styles.messages__message_from : styles.messages__message_to} d-flex flex-column `}>
+                className={`${styles.messages__message} ${message.fromUserId !== parseInt(user.id) ? styles.messages__message_from : styles.messages__message_to} d-flex flex-column `}>
                   <p className="fw-semibold mb-3">{ message.fromUser.name }</p>
                   <div className={`${styles.messages__content} px-5 py-3 bg-secondary`}>
                     { message.message }

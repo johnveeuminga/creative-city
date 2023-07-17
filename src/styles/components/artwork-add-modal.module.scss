@@ -1,0 +1,8 @@
+.artwork {
+  cursor: pointer;
+  transition: all .2s ease;
+
+  &:hover {
+    background-color: rgba(#eee, .3);
+  }
+}

@@ -1,5 +1,5 @@
 import prisma from "@/lib/prisma";
-import { decodeToken } from "@/lib/server/auth";
+import { decodeToken } from "@/lib/server/cognito";
 import { NextRequest, NextResponse } from "next/server";
 import { json } from "stream/consumers";
 

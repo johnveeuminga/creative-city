@@ -6,13 +6,6 @@ import { PageToolbar } from "@/components/layout/dashboard/PageToolbar";
 const prisma = new PrismaClient();
 
 export default async function CreateArtwork() {
-  const user = await await prisma.user.findUnique({
-    where: {
-      id: 2,
-    },
-  });
-
-  console.log(user);
   return (
     <>
       <PageToolbar
@@ -30,7 +23,7 @@ export default async function CreateArtwork() {
             }
           ]}
          />
-      <ArtworkForm data={user} />
+      <ArtworkForm />
     </>
   );
 }

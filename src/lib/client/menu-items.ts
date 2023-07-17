@@ -28,6 +28,7 @@ export const UserMenuItems: {
     {
       name: 'My Purchases',
       icon: 'ti-receipt',
+      href: '/dashboard/purchases',
     },
     {
       name: 'My Biddings',

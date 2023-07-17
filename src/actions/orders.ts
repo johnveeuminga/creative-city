@@ -59,7 +59,7 @@ export async function doCreateInvoice(artworkId: string) {
     data: {
       artworkId: parseInt(artworkId),
       xendItRefId: externalID,
-      userId: 2,
+      userId: parseInt(session.user.id),
     }
   })
 
