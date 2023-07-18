@@ -4,17 +4,18 @@ import React, { useState, useEffect } from "react";
 import ArtworkCard from "./ArtworkCard";
 import Link from "next/link";
 import styles from "../../styles/artwork-page.module.scss";
+import { ArtworkWithArtistAndMedia } from "@/types/types";
 
-export default function ArtworkCardGrid({ artworks }) {
+export default function ArtworkCardGrid({ artworks }: { artworks: ArtworkWithArtistAndMedia[] }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(0);
   const [filteredArtworks, setFilteredArtworks] = useState(artworks);
 
   const applyFilters = () => {
     setFilteredArtworks(
       artworks.filter(
-        (artwork) => artwork.price >= minPrice && artwork.price <= maxPrice
+        (artwork) => ( artwork.price && artwork.price >= minPrice ) && artwork.price <= maxPrice
       )
     );
   };
@@ -126,7 +127,7 @@ export default function ArtworkCardGrid({ artworks }) {
                       className="form-control"
                       placeholder="Min"
                       value={minPrice}
-                      onChange={(e) => setMinPrice(e.target.value)}
+                      onChange={(e) => setMinPrice(parseFloat(e.target.value))}
                     />
                   </div>
                   <div className="mx-1">
@@ -135,7 +136,7 @@ export default function ArtworkCardGrid({ artworks }) {
                       className="form-control"
                       placeholder="Max"
                       value={maxPrice}
-                      onChange={(e) => setMaxPrice(e.target.value)}
+                      onChange={(e) => setMaxPrice(parseFloat(e.target.value))}
                     />
                   </div>
                 </div>

@@ -3,8 +3,9 @@ import React from "react";
 import styles from "../../styles/artwork-page.module.scss";
 import Link from "next/link";
 import MoneyFormat from "../MoneyFormat";
+import { ArtworkWithArtist, ArtworkWithArtistAndMedia } from "@/types/types";
 
-export default function ArtworkCard({ artwork }) {
+export default function ArtworkCard({ artwork }: { artwork: ArtworkWithArtistAndMedia }) {
   console.log(artwork)
   return (
     <Link
@@ -23,7 +24,7 @@ export default function ArtworkCard({ artwork }) {
         <div className="artwork__content px-1 py-2">
           <h4 className="fw-semibold text-primary">{artwork.name}</h4>
           <p className="mb-0">
-            {artwork.artist.first_name} {artwork.artist.last_name}
+            {artwork.artist.name} 
           </p>
           <p className="fw-semibold">
             <MoneyFormat value={artwork.price?.toString() ?? ""} />

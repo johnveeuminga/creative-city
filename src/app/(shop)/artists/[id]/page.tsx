@@ -17,7 +17,13 @@ export default async function ArtistProfile({
     include: {
       user: {
         include: {
-          artworks: true, // Include artworks related to this user
+          artworks: {
+            include: {
+              media: {
+                take: 1,
+              }
+            }
+          }, // Include artworks related to this user
         },
         
       },
@@ -108,7 +114,7 @@ export default async function ArtistProfile({
             <div className={`${styles.artwork}`} key={artwork.id}>
               <div className={styles.artworkImage}>
                 <Image
-                  src={artwork.image || "https://via.placeholder.com/150"}
+                  src={artwork.media.length ? `${process.env.NEXT_PUBLIC_S3_URL}/${artwork.media[0].filePath}` : "https://via.placeholder.com/150"}
                   alt={artwork.name} // I assume the artwork's title is in the `name` field
                   layout="responsive"
                   width={200}
