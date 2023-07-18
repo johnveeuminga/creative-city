@@ -21,8 +21,7 @@ export default function ArtistForm() {
     e.preventDefault();
     try {
       await axios.post("/api/artists/register", {
-        firstName,
-        lastName,
+        name: `${firstName} ${lastName}`,
         email,
         nickname,
         myStory,
