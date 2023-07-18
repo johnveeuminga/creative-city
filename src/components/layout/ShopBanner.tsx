@@ -3,7 +3,7 @@ import styles from '@/styles/components/banner.module.scss'
 
 export default function ShopBanner() {
   return (
-    <div className="shop-banner bg-secondary d-flex align-items-center position-relative bg-white">
+    <div className="shop-banner bg-secondary d-flex align-items-center position-relative">
       <div className={`${styles.pattern} w-100`}></div>
       <div className="container">
         <div className="content w-50">
