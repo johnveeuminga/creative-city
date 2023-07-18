@@ -1,0 +1,82 @@
+.avatar {
+  width: 45px;
+  height: 45px;
+  flex-grow: 1;
+  max-width: 45px;
+  flex-basis: 45px;
+  flex-shrink: 0;
+}
+
+.conversation {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all .2s ease;
+
+  &:hover {
+    background-color: var(--bs-gray-200);
+  }
+}
+
+.conversation__selected {
+  background-color: var(--bs-gray-200);
+}
+
+.preview {
+  color: var(--bs-gray-600);
+  height: 1.5em;
+  overflow: hidden;
+}
+
+.time {
+  color: var(--bs-gray-600);
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: var(--bs-red);
+  display: block;
+  margin-left: auto;
+}
+
+.messages__list {
+  height: 800px;
+  max-height: 800px;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 2em;
+  border-top: 1px solid var(--bs-gray-200);
+  border-bottom: 1px solid var(--bs-gray-200);
+  overflow-y: scroll;
+}
+
+.messages__message {
+  margin-bottom: 2.5em;
+  max-width: 400px;
+
+
+}
+
+.messages__message_to {
+  align-items: flex-end;
+  margin-left: auto;
+
+  &__content {
+    background-color: var(--bs-primary);
+    color: #fff;
+  }
+}
+
+.messages__message_from {
+  align-items: flex-start;
+  margin-right: auto;
+}
+
+.messages__content {
+  margin-bottom: 0;
+}

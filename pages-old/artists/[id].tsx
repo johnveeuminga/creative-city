@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import prisma from '../../src/lib/prisma'
 import styles from './ArtistProfile.module.css'
 
-export default function ArtistProfile({ artist }) {
+export default function ArtistProfile({ artist }: { artist: any }) {
   const router = useRouter()
 
   if (router.isFallback) {
@@ -80,20 +80,20 @@ export default function ArtistProfile({ artist }) {
   )
 }
 
-export async function getServerSideProps({ params }) {
-  const artist = await prisma.artist.findUnique({
-    where: {
-      id: Number(params.id),
-    },
-    select: {
-      id: true,
-      nickname: true,
-      myStory: true,
-      myBio: true
-    },
-  });
+// export async function getServerSideProps({ params }) {
+//   const artist = await prisma.artist.findUnique({
+//     where: {
+//       id: Number(params.id),
+//     },
+//     select: {
+//       id: true,
+//       nickname: true,
+//       myStory: true,
+//       myBio: true
+//     },
+//   });
 
-  return {
-    props: { artist },
-  };
-}
+//   return {
+//     props: { artist },
+//   };
+// }

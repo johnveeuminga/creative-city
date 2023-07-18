@@ -1,4 +1,4 @@
-import { decodeToken, getServerSession } from '@/lib/server/auth';
+import { getServerSession } from '@/lib/server/auth';
 import { cookies } from 'next/dist/client/components/headers';
 import { NextRequest, NextResponse } from 'next/server';
 

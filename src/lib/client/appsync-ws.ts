@@ -104,6 +104,7 @@ const useAppSync = ({
   return {
     sendMessage,
     lastMessage,
+    webSocket,
   }
 }
 

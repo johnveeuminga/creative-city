@@ -1,33 +1,46 @@
 "use client";
-import React, { useState, useTransition } from "react";
+import React, { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { doDeleteArtwork, doEditArtwork } from "@/actions/artworks";
+import { Artwork } from "@prisma/client";
 
-export default function EditArtworkForm({ artwork }) {
+export default function EditArtworkForm({ artwork }: { artwork: Artwork | null }) {
   const router = useRouter();
-  const [name, setName] = useState(artwork.name);
-  const [description, setDescription] = useState(artwork.description);
+
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const [isPending, startTransition] = useTransition();
 
+  useEffect(() => {
+    if(artwork) {
+      setName(artwork.name);
+      setDescription(artwork.description)
+    }
+  }, [artwork])
+
   const handleEdit = async (name: string, description: string) => {
-    startTransition(async () => {
-      try {
-        await doEditArtwork(name, description, artwork.id);
-      } catch (err) {
-        console.log(err);
-      }
-    });
+    if(artwork) {
+      startTransition(async () => {
+        try {
+          await doEditArtwork(name, description, artwork.id);
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    }
   };
 
   const handleDelete = async () => {
-    startTransition(async () => {
-      try {
-        await doDeleteArtwork(artwork.id);
-        router.push(`/dashboard/artworks/`);
-      } catch (err) {
-        console.log(err);
-      }
-    });
+    if(artwork) {
+      startTransition(async () => {
+        try {
+          await doDeleteArtwork(artwork.id);
+          router.push(`/dashboard/artworks/`);
+        } catch (err) {
+          console.log(err);
+        }
+      });
+    }
   };
 
   return (

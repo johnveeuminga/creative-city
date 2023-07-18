@@ -1,13 +1,10 @@
-import { CognitoJwtVerifier } from "aws-jwt-verify";
-import { CognitoIdTokenPayload, CognitoJwtPayload } from "aws-jwt-verify/jwt-model";
-import { cookies } from "next/dist/client/components/headers";
-import verifier from "../cognito";
-import { NextRequest } from "next/server";
+import { cookies } from "next/headers";
+import prisma from "../prisma";
+import { decodeToken } from "./cognito";
 
-interface User {
+export interface User {
   id: string;
   name: string,
-  username: string,
   email: string,
   groups?: string[]
 }
@@ -37,15 +34,21 @@ export async function getServerSession(): Promise<{
   }
 
   try {
-    const decodeTokenReq = decodeToken(token.value, "id")
-    const tokenDecoded = await decodeTokenReq
+    const tokenDecoded = await decodeToken(token.value, "id")
+    const user = await prisma.user.findFirst({
+      where: {
+        cognitoId: tokenDecoded.sub,
+      }
+    })
 
-    const res = {
+    if(!user)
+      throw new Error("User not found")
+      
+    const res  = {
       user: {
-        id: tokenDecoded["sub"],
-        name: tokenDecoded["name"],
-        username: tokenDecoded["username"],
-        email: tokenDecoded["email"],
+        id: user.id.toString(),
+        name: user.name,
+        email: user.email,
         groups: tokenDecoded['cognito:groups'] ?? [],
       }, 
       isAuthenticated: true,
@@ -60,34 +63,6 @@ export async function getServerSession(): Promise<{
 
     return res
   }
-}
-
-type JWTDecodeResponse = CognitoIdTokenPayload & {
-  name: string,
-  username: string,
-  email: string,
-  groups: string
-};
-
-
-export async function decodeToken(token: string, tokenUse: "id" | "access" = "id"): Promise<JWTDecodeResponse> {
-  if(!process.env.COGNITO_USER_POOL_ID || !process.env.COGNITO_CLIENT_ID)
-    throw("No user pool ID or user pool ID configured")
-
-  try {
-    const payload = await verifier.verify(token) as JWTDecodeResponse;
-
-
-    return payload
-  } catch(err) {
-    console.log(err);
-    throw("Token is not valid")
-  }
-}
-
-export async function decodeToken2(token: string) { 
-  const jwk = await fetch("https://cognito-idp.ap-southeast-2.amazonaws.com/ap-southeast-2_XNxfV9r2F/.well-known/jwks.json");
-  const res = await jwk.json()
 }
 
 export function buildUrl(endpoint: string, {

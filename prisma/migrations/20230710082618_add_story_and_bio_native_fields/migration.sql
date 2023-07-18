@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE `Artist` MODIFY `myStory` LONGTEXT NULL,
+    MODIFY `myBio` LONGTEXT NULL;

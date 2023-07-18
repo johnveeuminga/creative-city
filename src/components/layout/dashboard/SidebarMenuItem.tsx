@@ -11,16 +11,36 @@ export default function SidebarMenuItem({
 }) {
   const route = usePathname();
 
+  const isActive = (path: string, exact = false): boolean => {
+    if(!path)
+      return false
+
+    return !exact ? route.includes(path) : route === path;
+  }
+
   return(
     <li 
       key={item.name}
-      className="dashboard-sidebar__menu-item">
-      <Link 
-        className={item.href == route ? 'active' : ''}
-        href={item.href ?? "#"}>
-        {item.icon && <i className={`ti ${item.icon}`}></i>}
-        { item.name }
-      </Link>
+      className="dashboard-sidebar__menu-item fw-semibold ">
+        {
+          item.as == 'link' || ! item.as && 
+            <Link 
+              className={isActive(item.href ?? "", !! item.exactPathMatch) ? 'active' : ''}
+              prefetch={item.prefetch ?? true}
+              href={item.href ?? "#"}>
+              {item.icon && <i className={`ti ${item.icon} me-2`}></i>}
+              { item.name }
+            </Link>
+        }
+        {
+          item.as == 'a' && item.href &&
+            <a 
+              href={item.href}
+              className={isActive(item.href ?? "", item.exactPathMatch) ? 'active' : ''}>
+              {item.icon && <i className={`ti ${item.icon} me-2`}></i>}
+              { item.name }
+            </a>
+        }
     </li>
   )
 }

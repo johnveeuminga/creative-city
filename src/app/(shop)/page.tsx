@@ -8,8 +8,8 @@ export default async function Index() {
     <div className="shop-index">
       <ShopBanner />
       <FeaturedArtworks />
-      <FeaturedArtists />
       <LiveAuctions />
+      <FeaturedArtists />
     </div>
   )
 }

@@ -3,10 +3,11 @@ const path = require('path')
 
 const nextConfig = {
   images: {
-    domains: ['via.placeholder.com'], // Add the hostname here
+    domains: ['via.placeholder.com', 'cloudflare-ipfs.com', 'creative-city.s3.ap-southeast-1.amazonaws.com'], // Add the hostname here
   },
   experimental: {
-    serverActions: true
+    serverActions: true,
+    serverActionsBodySizeLimit: '4mb',
   }
 }
 

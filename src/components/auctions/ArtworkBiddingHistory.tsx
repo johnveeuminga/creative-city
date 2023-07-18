@@ -1,60 +1,36 @@
-'use client'
 
-import { useAppSync } from "@/lib/client/appsync-ws"
-import { useEffect, useState, useTransition } from "react"
-import { NumericFormat } from "react-number-format"
+import prisma from "@/lib/prisma"
+import { ArtworkWithBids } from "@/types/types"
+import React from "react"
+import ArtworkBiddingHistoryBox from "./ArtworkBiddingHistoryBox"
 
 
-export default function ArtworkBiddingHistory({
+export default async function ArtworkBiddingHistory({
   auctionId,
-  artworkId,
+  artwork,
 }: {
   auctionId: string,
-  artworkId: string,
+  artwork: ArtworkWithBids,
 }) {
-  const { 
-    sendMessage,
-    lastMessage,
-  } = useAppSync({
-    channelName: `auction.${auctionId}.artwork.${artworkId}.bid`
+  const bids = await prisma.bid.findMany({
+    where: {
+      artwork: {
+        id: artwork.id,
+        auction_id: parseInt(auctionId)
+      }
+    },
+    orderBy: {
+      createdAt: 'desc'
+    },
+    take: 5,
   })
-  const [messages, setMessages] = useState<any[]>([])
-
-  useEffect(() => {
-    if(lastMessage) {
-      const message = JSON.parse(lastMessage.data)
-      const data = JSON.parse(message.payload.data.subscribe.data)
-      setMessages((state) =>  {
-        const newState = [ 
-          data,
-          ...state,
-        ]
-
-        return newState.slice(0, 5);
-      })
-      
-    }
-  }, [lastMessage]);
 
   return (
-    <div className="card artwork-bidding-history">
-      <div className="card-body">
-        <h5 className="mb-3 card-title">Recent Bid History </h5>
-        {
-          messages.map((message, key) => (
-            <div 
-              key={key}
-              className="artwork-bidding py-3 d-flex justify-content-between">
-                <div><strong><NumericFormat thousandSeparator={true} displayType="text" value={message.amount} prefix="Php "/></strong></div>
-                <div>10 mins ago</div>
-            </div>
-          ))
-        }
-        {
-          !messages.length &&
-            <p>No recent bids for this item yet.</p>
-        }
-      </div>
-    </div>
+    <React.Suspense fallback={<p>Fetching Suspense</p>}>
+      <ArtworkBiddingHistoryBox 
+        auctionId={auctionId}
+        artworkId={artwork.id.toString()}
+        bids={bids} />
+    </React.Suspense>
   )
 }

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { decodeToken, isAuthenticated } from "./lib/server/auth";
+import { decodeToken } from "./lib/server/cognito";
 
 export async function middleware(request: NextRequest) {
   if(request.nextUrl.pathname.startsWith('/api')) {
@@ -14,10 +14,22 @@ export async function middleware(request: NextRequest) {
 
     return response;
   } else if (request.nextUrl.pathname.startsWith('/dashboard')) {
-    const authenticated = await isAuthenticated(request)
+    const cookieToken = request.cookies.get('idToken');
 
-    if(!authenticated)
-      return NextResponse.redirect(`${process.env.APP_URL}`)
+    if(!cookieToken || !cookieToken.value)
+      return NextResponse.redirect(process.env.APP_URL ?? "/")
+
+    try {
+      await decodeToken(cookieToken.value)
+
+      return NextResponse.next();
+    } catch(err) {
+      const response = NextResponse.redirect(process.env.APP_URL ?? "/");
+      response.cookies.set('authToken', '');
+      response.cookies.set('refreshToken', '');
+      response.cookies.set('idToken', '');
+      return response;
+    }
   }
 
   return NextResponse.next();

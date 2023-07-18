@@ -1,6 +1,24 @@
 .gallery {
   height: 440px;
+  display: grid;
 }
+
+
+.gallery-images {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+
+  > div {
+    position: relative;
+  }
+}
+
+.gallery-images__third {
+  grid-column: span 2;
+}
+
 
 .slider {
   height: 100%;

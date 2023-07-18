@@ -1,100 +1,167 @@
-/* ArtistProfile.module.css */
 .container {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  
-  .title {
-    font-size: 2em;
-    color: #333;
-  }
-  
-  .follow {
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .tab-container {
-    display: flex;
-    margin-bottom: 20px;
-  }
-  
-  .tab {
-    padding: 10px 20px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  .tab.active {
-    color: #333;
-    border-bottom: 2px solid #333;
-  }
-  
-  .text {
-    color: #666;
-  }
-  
-  .sidebar {
-    width: 300px;
-    padding: 20px;
-    border-left: 1px solid #ddd;
-  }
-  
-  .sidebar .filter-section {
-    margin-bottom: 20px;
-  }
-  
-  .artist-photo {
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    margin-bottom: 20px;
-    object-fit: cover;
-  }
-  
-  .artwork {
-    display: flex;
-    margin-bottom: 20px;
-  }
-  
-  .artwork img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    margin-right: 10px;
-  }
-  
-  .artwork-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  
-  .artwork-title {
-    font-size: 1.2em;
-    color: #333;
-  }
-  
-  .artwork-year {
-    font-size: 1em;
-    color: #999;
-  }
-  
-  .artwork-price {
-    font-size: 1em;
-    color: #666;
-  }
-  
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.title {
+  font-size: 2em;
+  color: #333;
+  margin-left: 20px;
+}
+
+.follow {
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.tabContainer {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  color: #666;
+}
+
+.tab.active {
+  color: #333;
+  border-bottom: 2px solid #333;
+}
+
+.sidebar {
+  width: 300px;
+  padding: 20px;
+  border-left: 1px solid #ddd;
+  margin-left: auto;
+  background-color: #f9f9f9;
+}
+
+.filterSection {
+  margin-bottom: 20px;
+}
+
+.filterSection h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.filterSection p {
+  margin: 5px 0;
+  color: #666;
+}
+
+.artistPhoto {
+  width: 200px;
+  height: 200px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+}
+
+.artworksContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+}
+
+.artwork {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.artworkImage {
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+  position: relative;
+}
+
+.artworkImage img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.artworkInfo {
+  flex: 1;
+  padding: 10px;
+}
+
+.artworkTitle {
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.artworkYear {
+  font-size: 14px;
+  color: #999;
+}
+
+.artworkPrice {
+  font-size: 14px;
+  color: #666;
+}
+
+.artistDetails {
+  margin-bottom: 20px;
+}
+
+.thumbnail-meta {
+  padding: 10px;
+}
+
+.status {
+  padding: 6px 12px;
+  background-color: #00b894;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.artworkDescription {
+  margin-bottom: 10px;
+}
+
+.phone-meta {
+  margin-bottom: 10px;
+}
+
+.artworkMeta ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.artworkMeta ul li {
+  margin-bottom: 6px;
+}
+
+.artworkMeta ul li span {
+  font-size: 14px;
+  color: #666;
+}

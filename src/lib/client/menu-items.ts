@@ -21,12 +21,19 @@ export const UserMenuItems: {
   role: 'user',
   items: [
     {
+      href: '/dashboard/messages',
+      name: 'Messages',
+      icon: 'ti-email',
+    },
+    {
       name: 'My Purchases',
       icon: 'ti-receipt',
+      href: '/dashboard/purchases',
     },
     {
       name: 'My Biddings',
       icon: 'ti-money',
+      href: '/dashboard/biddings'
     },
   ]
 }
@@ -65,6 +72,7 @@ export const AdminMenuItems: {
     {
       name: 'Artists',
       icon: 'ti-id-badge',
+      href: '/dashboard/artists',
       priority: 20,
       prefetch: false,
     },
@@ -77,6 +85,7 @@ export const AdminMenuItems: {
     {
       name: 'Artworks',
       icon: 'ti-gallery',
+      href: '/dashboard/artworks',
       priority: 12
     },
   ]
@@ -86,22 +95,29 @@ export function getMenuItems(roles: Array<string> = []): MenuItem[] {
   let items: Array<MenuItem> = []
 
   if(roles.indexOf('admin') === -1) {
-    roles.forEach(role => {
-      switch(role) {
-        case 'artist':
-          items = [
-            ...items,
-            ...ArtistMenuItems.items,
-          ]
-          break;
-        case 'user':
-          items = [
-            ...items,
-            ...UserMenuItems.items,
-          ]
-          break;
-      }
-    });
+    if(roles.length)
+      roles.forEach(role => {
+        switch(role) {
+          case 'artist':
+            items = [
+              ...items,
+              ...ArtistMenuItems.items,
+            ]
+            break;
+          // case 'user':
+          //   items = [
+          //     ...items,
+          //     ...UserMenuItems.items,
+          //   ]
+          //   break;
+        }
+      });
+    else {
+      items = [
+        ...items,
+        ...UserMenuItems.items,
+      ]
+    }
   } else {
     items = [
       ...items,
@@ -170,6 +186,7 @@ export interface MenuItem {
   type?: MenuType;
   as?: 'link' | 'a',
   exactPathMatch?: boolean;
+  badge?: string;
 }
 
 type MenuType = "divider" | "link";

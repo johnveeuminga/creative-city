@@ -12,7 +12,7 @@ export default function ArtistsPage() {
         <section className="artists-section py-5 d-flex ">
           <div className="artists-sidebar">
             <div className="artists-aggregation">
-              <p>1,083 Artists</p> // replace this with actual data
+              <p>1,083 Artists</p> 
             </div>
           </div>  
           <div className="artists-content">

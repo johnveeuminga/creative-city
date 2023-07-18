@@ -4,15 +4,27 @@ $quicksand: 'Quicksand', sans-serif;
 
 $mulish: 'Mulish', sans-serif;
 
-$font-family-sans-serif: 
-"Work Sans", -apple-system, 
-"Segoe UI", Roboto, "Helvetica Neue", 
-"Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+// $font-family-sans-serif: 
+// "Poppins", -apple-system, 
+// "Segoe UI", Roboto, "Helvetica Neue", 
+// "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
 
-$primary-color: #515DCD;
-$secondary-color: #F8E23A;
+$primary-color: #272727;
+$secondary-color: #F3F3F3;
 $tertiary-color: #FE3434;
 $brown: #4b4743;
+
+$body-color: #272727;
+$body-bg: #fff;
+
+$btn-border-radius: 0;
+$btn-border-radius-lg: 0;
+
+
+$card-border-color: transparent;
+$card-bg: #fff;
+$card-border-radius: 0;
+$card-inner-border-radius: 0;
 
 $primary: $primary-color;
 $secondary: $secondary-color;
@@ -34,13 +46,13 @@ $base-themes: (
   "brown": $brown,
 );
 
-$container-max-widths: (
-  sm: 540px,
-  md: 980px,
-  lg: 1280px,
-  xl: 1440px,
-  xxl: 1630px
-);
+// $container-max-widths: (
+//   sm: 540px,
+//   md: 980px,
+//   lg: 1280px,
+//   xl: 1440px,
+//   xxl: 1630px
+// );
 
 $headings-font-family: var(--font-tajawal);
 
@@ -68,6 +80,8 @@ $sidebar-height: 60px;
 $input-focus-box-shadow: none;
 $input-focus-border-color:  none;
 $input-font-size: .925em;
+$input-border-radius: 0;
+$input-border-radius-lg: 0;
 // $input-color: var(--bs-gray-700);
 // $input-bg: var(--bs-gray-200);
 // $input-border-color: $input-bg;
@@ -77,3 +91,7 @@ $auctions-sidebar-width: 300px;
 
 // Buttons
 $btn-font-weight: 600;
+
+// Modal
+$modal-content-border-radius: 0;
+$modal-content-border-color: transparent;

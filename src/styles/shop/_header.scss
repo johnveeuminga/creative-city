@@ -1,15 +1,35 @@
-.header {
-  padding-top: 1.5em;
-  padding-bottom: 1.5em;
+.shop-header {
+  padding-top: .25em;
+  padding-bottom: .25em;
+  background-color: rgba(#fff, .05);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 90;
+  transition: .2s ease;
 
   .nav-item {
-    &:not(:last-of-type) {
-      margin-right: 3em;
-    }
+    margin-right: 3em;
   }
 
   .nav-link {
-    font-weight: 600;
+    // font-weight: 600;
+    text-transform: uppercase;
+    font-size:.875em;
     color: var(--bs-primary);
+    letter-spacing: 2px;
   }
+
+  .logo {
+    transition: .2s ease;
+  }
+
+  &.scrolled {
+    background-color: white !important;
+    .logo {
+      width: 80px;
+      height: 80px;
+    }
+  }
+
 }

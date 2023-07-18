@@ -1,4 +1,7 @@
 .shop-banner {
+  h1{
+    font-size: 60px;
+  }
   &__yellow-bg {
     content: '';
     display: block;
@@ -13,7 +16,7 @@
     background-color: var(--bs-primary);
   }
 
-  height: 1000px;
+  height: 100vh;
   position: relative;
   overflow: hidden;
 

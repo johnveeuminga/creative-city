@@ -7,17 +7,21 @@ import { getServerSession } from "@/lib/server/auth";
 import { gql } from "@apollo/client";
 import { Prisma } from "@prisma/client";
 import { revalidatePath } from "next/cache";
-import { CognitoIdentityClient, GetIdCommand, GetIdCommandInput } from "@aws-sdk/client-cognito-identity"
+import Artwork from '@/components/Artwork';
+import { DateTime } from 'luxon';
+import { NextResponse } from 'next/server';
 
 
 export async function createAuction(params: Prisma.AuctionCreateInput)  {
   try {
     const auction = await prisma.auction.create({
       data: params
-    });
-    return auction;
+    })
+
+    revalidatePath('/dashboard/auctions')
+    return auction
   } catch(err) {
-    console.log(err);
+    throw new Error("There was an error when creating the auction")
   }
 }
 
@@ -28,53 +32,76 @@ export type artworkBidInput = {
 export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
   const { user } = await getServerSession();
 
-  if(!user || (user.groups?.indexOf('artist') == -1 && user.groups?.indexOf('admin') == -1))
+  if(!user)
     return {
       error: "Unauthorized",
     }
+
+  const artwork = await prisma.artwork.findFirst({
+    where: {
+      id
+    }
+  })
+
+  if(!artwork || !artwork.minimum_bid)
+    throw new Error("Artwork Not Found")
+
+  if(amount < artwork.minimum_bid)
+    throw new Error("Amount is less than minimum bid");
   
   try {
-    // Gets the current highest bid.
-    const highestBid = await prisma.artwork.findFirst({
-      where: {
-        id,
-      }
-    }).highest_bid({
-      include: {
-        bid: true,
-        artwork: true,
-      }
-    });
+    const result = await prisma.$transaction(async (tx) => {
+      // Gets the current highest bid.
+      let highestBid = await tx.artworkHighestBid.findFirst({
+        where: {
+          artworkId: artwork.id,
+        },
+        include: {
+          artwork: true,
+          bid: true,
+        }
+      });
 
-    if(!highestBid)
-      // TODO: Create a new error for better error returns.
-      throw new Error("Artwork has not been setup for auction");
+      // Create bid.
+      const bid = await tx.bid.create({
+        data: {
+          amount: amount,
+          artworkId: id,
+          userId: parseInt(user.id),
+        },
+      });
 
-    // Extract min bid amount.
-    const currentBidAmount = highestBid.bid ? highestBid.bid.amount : (highestBid.artwork.minimum_bid ?? 1);
-
-    if(amount > currentBidAmount) {
-      const result = await prisma.$transaction(async (tx) => {
-        // Create bid.
-        const bid = await tx.bid.create({
+      if(!highestBid) {
+        // If there is no highest bid, we create one
+        highestBid = await tx.artworkHighestBid.create({
           data: {
-            amount: amount,
-            artwork_id: id,
-            user_id: user.id,
+            bidId: bid.id,
+            artworkId: id,
+            version: 1
           },
-        });
+          include: {
+            bid: true,
+            artwork: true
+          }
+        })
+      } else {
+        // If the amount is lesser than the current highest bid found,
+        // we throw an error specifiying that they have the lowest bid.
+        if(amount <= highestBid.bid.amount)
+          throw new Error("The amount you entered is lower than the current highest bid")
 
         // Check if the version from the highest bid is still the same. If it's not, this means that
-        // sometime that this query is running, the version has been updated. Proceed if the same
+        // sometime that this query is running, the version has been updated. Proceed if the version
+        // is the same.
         const highestBidVersion = await tx.artworkHighestBid.updateMany({
           data: {
-            bid_id: bid.id,
+            bidId: bid.id,
             version: {
               increment: 1
             }
           }, 
           where: {
-            artwork_id: highestBid.artwork_id,
+            artworkId: highestBid.artworkId,
             version: highestBid.version,
           }
         })
@@ -85,41 +112,66 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
         if (highestBidVersion.count === 0) {
           throw new Error("The amount you entered is lower than the current highest bid")
         }
+      }
 
-        return {
-          ...highestBid,
-          bid,
-        };
+      return {
+        ...highestBid,
+        bid,
+      };
+    });
 
-        
-      });
+    const mutation = gql`mutation PublishData($data: AWSJSON!, $channelName: String!) {
+      publish(data: $data, name: $channelName) {
+        data
+        name
+      }
+    }`
 
-      const mutation = gql`mutation PublishData($data: AWSJSON!, $channelName: String!) {
-        publish(data: $data, name: $channelName) {
-          data
-          name
-        }
-      }`
+    await getClient().mutate({
+      mutation: mutation,
+      variables: {
+        data: JSON.stringify({
+          "amount": result.bid.amount.toString(),
+          "createdAt": DateTime.fromJSDate(result.bid.createdAt).toFormat("LLL dd, yyyy hh:mm:ss a"),
+        }),
+        channelName: `auction.${result.artwork.auction_id}.artwork.${result.artwork.id}.bid`.toString(),
+      },
+    })
+    revalidatePath("/auctions/[id]")
 
-      await getClient().mutate({
-        mutation: mutation,
-        variables: {
-          data: JSON.stringify({
-            "amount": result.bid.amount.toString(),
-          }),
-          channelName: `auction.${highestBid.artwork.auction_id}.artwork.${highestBid.artwork.id}.bid`.toString(),
-        },
-      })
-      revalidatePath("/auctions/[id]")
-
-      return result;
-    } else {
-      // TODO: Create a new error for better error returns.
-      throw new Error("Your bid is lower or equal to the current highest bid");
-    }
+    return result;
   } catch(err: any) {
     return {
       error: err.message,
+    }
+  }
+}
+
+export async function doRegisterArtworkToAuction(artworkIds: number[], auctionId: number) {
+  try {
+    const session = await getServerSession()
+
+    // TODO: Check for capability here.
+    if(!session.user)
+      throw new Error('Error')
+
+    await prisma.artwork.updateMany({
+      where: {
+        id: {
+          in: artworkIds,
+        }
+      },
+      data: {
+        auction_id: auctionId,
+      }
+    })
+
+    return {
+      success: true
+    }
+  } catch {
+    return {
+      error: "Something went wrong"
     }
   }
 }

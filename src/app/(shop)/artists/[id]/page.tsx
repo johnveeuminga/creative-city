@@ -1,68 +1,105 @@
-import styles from './ArtistProfile.module.css';
-import Link from 'next/link';
-import prisma from "@/lib/prisma"
-import Image from "next/image"
-import { redirect } from "next/navigation"
-import { relative } from "path"
+import styles from "./ArtistProfile.module.css";
+import Link from "next/link";
+import prisma from "@/lib/prisma";
+import Image from "next/image";
 
-export default async function ArtistProfile({ 
-    params: {
-        id: artistId
-    }
+export default async function ArtistProfile({
+  params: { id: artistId },
 }: {
-    params: {
-      id: string
-    }
-  }) 
-{
-    const artist = await prisma.artist.findFirst({
-        where: {
-          id: parseInt(artistId)
-        },
+  params: {
+    id: string;
+  };
+}) {
+  const artist = await prisma.artist.findFirst({
+    where: {
+      id: parseInt(artistId),
+    },
+    include: {
+      user: {
         include: {
-          user: true,
-        }
-      })
+          artworks: {
+            include: {
+              media: {
+                take: 1,
+              }
+            }
+          }, // Include artworks related to this user
+        },
+        
+      },
+    },
+  });
 
-    // Placeholder for artworks
-    // const artworks = artist.artworks || []
-    const artworks = [
-        { id: 1, title: 'Artwork 1', year: 2020, price: 'Price on request', image: 'https://via.placeholder.com/150' },
-        { id: 2, title: 'Artwork 2', year: 2021, price: 'Price on request', image: 'https://via.placeholder.com/150' },
-        // ... other artworks ...
-      ];
+  const artworkCount = await prisma.artwork.count({
+    where: {
+      artist_id: artist?.user.id,
+    },
+  });
 
   return (
     <div className={styles.container}>
       <div>
-        <div className={styles.header}>
-          <Image
-            src={'https://via.placeholder.com/200'}
-            // src={artist.image || 'https://via.placeholder.com/200'}
-            alt={'test'}
-            className={styles.artistPhoto}
-            width={200}
-            height={200}
-          />
-          <div>
-            <h1 className={styles.title}>{artist?.user.first_name} {artist?.user.last_name}</h1>
-
-            {/* <p>{artist.nationality}, b. {artist.birthYear}</p>
-            <p>{artist.followers} Followers</p> */}
-
-            <p>{'Filipino'}, B. {'1997'}</p>
-            <p>{69} Followers</p>
-
-            <button className={styles.follow}>Follow</button>
+        <div className="col col-md-9 col-lg-7 col-xl-5">
+          <div className="card" style={{ borderRadius: "15px" }}>
+            <div className="card-body p-4">
+              <div className="d-flex text-black">
+                <div className="flex-shrink-0">
+                  <img
+                    src={artist?.avatar_path ?? ""}
+                    alt="Generic placeholder image"
+                    className="img-fluid"
+                    style={{ width: "180px", borderRadius: "10px" }}
+                  />
+                </div>
+                <div className="flex-grow-1 ms-3">
+                  <h5 className="mb-1">
+                    {artist?.user.name}
+                  </h5>
+                  <p className="mb-2 pb-1" style={{ color: "#2b2a2a" }}>
+                    Artist
+                  </p>
+                  <div
+                    className="d-flex justify-content-start rounded-3 p-2 mb-2"
+                    style={{ backgroundColor: "#efefef" }}
+                  >
+                    <div>
+                      <p className="small text-muted mb-1">Artworks</p>
+                      <p className="mb-0">{ artworkCount }</p>
+                    </div>
+                    <div className="px-3">
+                      <p className="small text-muted mb-1">Followers</p>
+                      <p className="mb-0">976</p>
+                    </div>
+                    <div>
+                      <p className="small text-muted mb-1">Articles</p>
+                      <p className="mb-0">41</p>
+                    </div>
+                  </div>
+                  <div className="d-flex pt-1">
+                    <button
+                      type="button"
+                      className="btn btn-outline-primary me-1 flex-grow-1"
+                    >
+                      Chat
+                    </button>
+                    <button
+                      type="button"
+                      className="btn btn-primary flex-grow-1"
+                    >
+                      Follow
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Artist's story and bio */}
         <div className={styles.artistDetails}>
-          <h2>My Story</h2>
-          <p>{artist.myStory}</p>
-          <h2>My Bio</h2>
-          <p>{artist.myBio}</p>
+          <h5>My Story</h5>
+          <p>{artist?.myStory}</p>
+          <h5>My Bio</h5>
+          <p>{artist?.myBio}</p>
         </div>
 
         <div className={styles.tabContainer}>
@@ -72,30 +109,39 @@ export default async function ArtistProfile({
           {/* ... other tabs ... */}
         </div>
 
-        {/* Replace this section depending on the active tab */}
-        <div>
-          {artworks.map(artwork => (
-            <div className={styles.artwork} key={artwork.id}>
-              <Image
-                src={artwork.image || 'https://via.placeholder.com/150'}
-                alt={artwork.title}
-                width={150}
-                height={150}
-              />
+        <div className={styles.artworksContainer}>
+          {artist?.user.artworks.map((artwork) => (
+            <div className={`${styles.artwork}`} key={artwork.id}>
+              <div className={styles.artworkImage}>
+                <Image
+                  src={artwork.media.length ? `${process.env.NEXT_PUBLIC_S3_URL}/${artwork.media[0].filePath}` : "https://via.placeholder.com/150"}
+                  alt={artwork.name} // I assume the artwork's title is in the `name` field
+                  layout="responsive"
+                  width={200}
+                  height={200}
+                  objectFit="cover"
+                  objectPosition="center"
+                />
+              </div>
               <div className={styles.artworkInfo}>
-                <p className={styles.artworkTitle}>{artwork.title}</p>
-                <p className={styles.artworkYear}>{artwork.year}</p>
-                <p className={styles.artworkPrice}>{artwork.price}</p>
+                <h3 className={styles.artworkTitle}>
+                  <Link href="/listing-details-1">{artwork.name}</Link>{" "}
+                  {/* Adjusted to `name` */}
+                </h3>
+                <p className={styles.artworkYear}>Unknown Year</p>{" "}
+                {/* I don't see a `year` field in your `Artwork` model */}
+                <p className={styles.artworkPrice}>{artwork.price}</p>{" "}
+                {/* Adjusted to `price` */}
               </div>
             </div>
           ))}
         </div>
-      </div>
 
-      {/* Sidebar */}
+
+      </div>
+      {/* 
       <div className={styles.sidebar}>
         <div className={styles.filterSection}>
-          {/* Filter options */}
           <h2>Filter by</h2>
           <p>Keyword Search</p>
           <p>Rarity</p>
@@ -108,7 +154,7 @@ export default async function ArtistProfile({
           <p>Time Period</p>
           <p>Color</p>
         </div>
-      </div>
+      </div> */}
     </div>
-  )
+  );
 }

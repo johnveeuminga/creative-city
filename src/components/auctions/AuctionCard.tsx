@@ -10,25 +10,26 @@ export default function AuctionCard({ auction }: {
 }) {
   return (
     <Link 
-      className="d-block"
+      className="d-block text-decoration-none"
       href={`auctions/${auction.id}`}>
       <div className="auction-card card">
-        <div className="card-img-top position-relative">
-          <Image 
+        {/* <div className="card-img-top position-relative"> */}
+          {/* <Image 
             fill={true}
+            style={{ objectFit: 'cover' }}
             src="/assets/images/listing/listing-grid-1.jpg" 
-            alt="" />
-        </div>
+            alt="" /> */}
+        {/* </div> */}
         <div className="card-body">
-          <h5 className="card-title">{ auction.name }</h5>
+          <h3 className="card-title mb-3">{ auction.name }</h3>
           <div 
             className="auction-card__description"
             dangerouslySetInnerHTML={{
             __html: auction.description
           }}></div>
           <div className="auction-card__details">
-            <p>Starts: { DateTime.fromJSDate(auction.start_date).toFormat('LLLL dd, yyyy hh:mm a')  }</p>
-            <p>Ends: { DateTime.fromJSDate(auction.end_date).toFormat('LLLL dd, yyyy hh:mm a') }</p>
+            <p className="mb-0">Starts: { DateTime.fromJSDate(auction.start_date).toFormat('LLLL dd, yyyy hh:mm a')  }</p>
+            <p className="mb-3">Ends: { DateTime.fromJSDate(auction.end_date).toFormat('LLLL dd, yyyy hh:mm a') }</p>
             <p><strong>76</strong> artworks posted</p>
           </div>
         </div>

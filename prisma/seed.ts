@@ -1,49 +1,52 @@
-import { Auction, Prisma, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
+import { parseArgs } from 'node:util'
 
 const prisma = new PrismaClient();
 
-const data: Prisma.AuctionCreateInput[] = [
-  {
-    name: "Auction 1",
-    description: "Auction Sample 1",
-    start_date: new Date(2023, 5, 8, 8, 0),
-    end_date: new Date(2023, 5, 31, 11, 59),
-    artworks: {
-      createMany: {
-        data: [
-          { name: "Artwork 1", description: "Artwork Sample 1" },
-          { name: "Artwork 2", description: "Artwork Sample 2" },
-        ],
-      },
-    },
-    artist: {
-      create: {
-        first_name: "John",
-        last_name: "Doe",
-        email: "john@example.com",
-        artworks: {
-          create: [
-            { name: "John's Artwork 1", description: "John's Artwork Sample 1" },
-            { name: "John's Artwork 2", description: "John's Artwork Sample 2" },
-          ],
-        },
-      },
-    },
+type Option = {
+  type: 'boolean' | 'string', // required
+  short?: string, // optional
+  multiple?: boolean, // optional, default `false`
+};
+
+type Options = {
+  [key: string]: Option 
+}
+
+const options: Options = {
+  seeder: { 
+    type: 'string'
   },
-  // Add more auction entries here if needed
-];
+}
+
+async function runSpecificSeeder(seeder: string) {
+  try {
+    const seed = await import(`./seeders/${seeder}.seeder.ts`)
+
+    await seed.default.seed()
+  } catch(e) {
+    console.log(e)
+  }
+}
 
 async function seed() {
-  await prisma.auction.createMany({
-    data,
-  });
+  const {
+    values: { seeder }
+  } = parseArgs({ options });
+
+  if(seeder) {
+    await runSpecificSeeder(seeder.toString())
+  } else {
+    const defaultSeeder = await import('./seeders/database.seeder')
+    defaultSeeder.default.seed();
+  }
 }
 
 seed()
   .then(async () => {
     await prisma.$disconnect();
   })
-  .catch(async (e) => {
+  .catch(async (e) =>     {
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);

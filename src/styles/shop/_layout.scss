@@ -3,11 +3,18 @@
 }
 
 .shop-index-section {
-  padding-top: 4em;
-  padding-bottom: 4em;
+  padding-top: 3em;
 
   &__title {
     font-size: 3em;
-    font-weight: 700;
+    // font-weight: 700;
   }
+}
+
+.shop-content {
+  margin-top: 160px;
+}
+
+.shop-banner {
+  margin-top: -160px;
 }
