@@ -14,6 +14,7 @@ export default async function LiveAuctionsGrid() {
     }
   })
 
+
   return (
     <div className="live-auctions-grid py-3">
       <div className="row">

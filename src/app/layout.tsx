@@ -1,6 +1,6 @@
 import '@/styles/styles.scss'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { Archivo, Lora, Playfair_Display, Poppins, Tajawal, Work_Sans } from 'next/font/google'
+import { Archivo, Lora, Playfair_Display, Poppins, Tajawal, Texturina, Work_Sans } from 'next/font/google'
 import SessionProvider from '../components/layout/providers/SessionProvider'
 
 const font = Archivo({
@@ -10,7 +10,7 @@ const font = Archivo({
   variable: '--font-poppins' 
 })
 
-const headingFont = Lora({
+const headingFont = Texturina({
   subsets: ['latin'],
   variable: '--font-tajawal',
   weight: ['400', '500', '700'],

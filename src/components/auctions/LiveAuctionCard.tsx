@@ -22,6 +22,7 @@ export default function LiveAuctionCard({
     setHydrated(true)
   }, [])
 
+  
   const DateDetails = ({ startDate, endDate }: { startDate: Date, endDate: Date }) => {
     const now = DateTime.now()
     const date = DateTime.fromJSDate(startDate)
@@ -74,6 +75,7 @@ export default function LiveAuctionCard({
     )
   }
 
+
   return (
     <Link 
       href={`/auctions/${auction.id}`}
@@ -81,7 +83,21 @@ export default function LiveAuctionCard({
       <div className="live-auction-card card shadow-sm overflow-hidden">
         <div className={`${styles.gallery} position-relative`}>
           <div className={`${styles['gallery-images']}`}>
-            <div className="one">
+            {
+              auction.artworks.map((artwork, index) => (
+                <div
+                    key={artwork.id}
+                    className={`gallery-image ${index == 2 ? styles['gallery-images__third']: 'gallery-image--' + index}`}>
+                      <Image 
+                        fill={true}
+                        style={{ objectPosition: "center", objectFit: "cover"}}
+                        src={artwork.media.length ?  `${process.env.NEXT_PUBLIC_S3_URL}/${artwork.media[0].filePath}`:  "/assets/images/features/features-1.jpg" }
+                        alt='Gallery 1'
+                      /> 
+                </div>
+              ))
+            }
+            {/* <div className="one">
               <Image 
                 fill={true}
                 style={{ objectPosition: "center", objectFit: "cover"}}
@@ -102,7 +118,7 @@ export default function LiveAuctionCard({
                   style={{ objectPosition: "center", objectFit: "cover"}}
                   src={"/assets/images/gallery-3.png"}
                   alt='Gallery 1' />
-            </div>
+            </div> */}
           </div> 
           
           <div className={`${styles.timer} timer position-absolute mx-auto d-flex align-items-center justify-content-center`}>

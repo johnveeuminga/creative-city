@@ -6,7 +6,6 @@ export default async function FeaturedArtworksGrid() {
     take: 4,
     where: {
       auction_id: null,
-      inStock: true,
     },
     include: {
       artist: true,

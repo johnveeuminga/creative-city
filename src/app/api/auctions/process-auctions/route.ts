@@ -1,5 +1,7 @@
 import prisma from "@/lib/prisma";
-import { Auction } from "@prisma/client";
+import xendit from "@/lib/xendit";
+import { HighestBidWithArtworkAndUser } from "@/types/types";
+import { Artwork, ArtworkPurchase, Auction, User } from "@prisma/client";
 import { NextResponse } from "next/server";
 
 export async function GET() {
@@ -80,7 +82,14 @@ const processAuction = async(auction: Auction): Promise<{
       })
     })
 
-    await Promise.all(promises)
+    const orderPromises: Promise<any>[] = highestBids.map(highestBid => {
+      return createPurchaseOrders({ highestBid })
+    })
+
+    await Promise.all([
+      ...promises,
+      ...orderPromises,
+    ])
 
     return {
       processed: true
@@ -90,5 +99,55 @@ const processAuction = async(auction: Auction): Promise<{
     return {
       processed: false
     }
+  }
+}
+
+async function createPurchaseOrders({
+  highestBid
+}: { highestBid: HighestBidWithArtworkAndUser }): Promise<{ artworkPurchase: ArtworkPurchase }> {
+  console.log("Creating Purchase Order")
+  const { artwork, bid } = highestBid
+  const { user } = bid
+
+  const x = xendit;
+  const { 
+    Invoice
+  } = x
+
+  const i = new Invoice({})
+
+  const externalID = `bcc-${new Date().getTime()}-${artwork.id}`;
+
+  const invoice = await i.createInvoice({
+    externalID,
+    payerEmail: user.email,
+    amount: bid.amount + (bid.amount * .10),
+    items: [
+      {
+        name: artwork.name,
+        quantity: 1,
+        price: artwork.price
+      }
+    ],
+    fees: [
+      {
+        type: 'Convenience Fee',
+        value: bid.amount * .10,
+      }
+    ]
+  }) as any
+
+
+  const artworkPurchase = await prisma.artworkPurchase.create({
+    data: {
+      artworkId: artwork.id,
+      xendItRefId: externalID,
+      userId: user.id,
+      url: invoice.invoice_url,
+    }
+  })
+
+  return {
+    artworkPurchase,
   }
 }

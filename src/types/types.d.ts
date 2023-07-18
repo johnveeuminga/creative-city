@@ -65,3 +65,14 @@ export type ArtistWithUserAndArtworkCount = Prisma.ArtistGetPayload<{
     },
   }
 }>
+
+export type HighestBidWithArtworkAndUser = Prisma.ArtworkHighestBidGetPayload<{
+  include: {
+    artwork: true,
+    bid: {
+      include: {
+        user: true,
+      }
+    }
+  }
+}>

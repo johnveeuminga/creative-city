@@ -102,6 +102,7 @@ model ArtworkPurchase {
   userId              Int
   user                User    @relation(fields: [userId], references: [id])
   xendItRefId         String
+  url                 String?
   paymentStatus       PaymentStatus @default(value: PENDING)
   isDraft             Boolean @default(false)               
   createdAt           DateTime @default(now())

@@ -33,6 +33,7 @@ export const UserMenuItems: {
     {
       name: 'My Biddings',
       icon: 'ti-money',
+      href: '/dashboard/biddings'
     },
   ]
 }

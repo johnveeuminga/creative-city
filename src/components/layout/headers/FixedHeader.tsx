@@ -25,7 +25,7 @@ export default function FixedHeader({ children }: { children: React.ReactNode })
   }, [pathname, searchParams])
 
   return (
-    <div className={`fixed-header shop-header border-bottom${navScrolled ? ' bg-white scrolled': ''}`}>
+    <div className={`fixed-header bg-white shop-header border-bottom${navScrolled ? ' scrolled': ''}`}>
       { children } 
     </div>
   )
