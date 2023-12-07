@@ -1,8 +1,9 @@
+import prisma from "@/lib/prisma";
 import AuctionCard from "./AuctionCard";
 import { getAuctions, getOngoingAuctions } from "@/lib/server/auctions";
 
 export default async function AuctionsGrid() {
-  const auctions = await getOngoingAuctions({
+  const auctions = await prisma.auction.findMany({
     orderBy: {
       start_date: 'asc',
     }

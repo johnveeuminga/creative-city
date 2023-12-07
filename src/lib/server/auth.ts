@@ -78,3 +78,18 @@ export function buildUrl(endpoint: string, {
 
   return `${cognitoBaseUrl}/${endpoint}?response_type=code&client_id=${cognitoAppId}&redirect_uri=${redirect_uri}`;
 }
+
+export async function isAuthenticated(req: NextRequest): Promise<boolean> {
+  const idToken = req.cookies.get('idToken')
+
+  if(!idToken || !idToken.value)
+    return false
+
+  try {
+    await decodeToken(idToken.value, "id")
+
+    return true
+  } catch {
+    return false
+  }
+}

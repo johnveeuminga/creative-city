@@ -63,12 +63,12 @@ export default async function AuctionArtworksGrid({
                 className="d-block text-decoration-none"
                 href={`/auctions/${artwork.auction_id}/artwork/${artwork.id}`}>
                 <div className="card auctions-artwork-card">
-                  <div className="card-img-top">
-                  <Image 
-                    fill={true}
-                    style={{ objectFit: 'cover' }}
-                    src="/assets/images/listing/listing-grid-1.jpg" 
-                    alt="" />
+                  <div className="card-img-top" style={{ height: 400 }}>
+                    <Image 
+                      fill={true}
+                      style={{ objectFit: 'cover', objectPosition: 'top' }}
+                      src={artwork.media.length ?  `${process.env.NEXT_PUBLIC_S3_URL}/${artwork.media[0].filePath}`:  "/assets/images/features/features-1.jpg" }
+                      alt="" />
                   </div>
                   <div className="card-body">
                     <h4 className="card-title text-decoration-none fw-bold mb-4">{ artwork.name }</h4>

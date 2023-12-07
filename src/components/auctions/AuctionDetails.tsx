@@ -25,8 +25,16 @@ export async function AuctionDetails({ id, page = 1 }: {
       artworks: {
         take: 10,
         skip: currPage * 10,
+        orderBy: {
+          id: 'desc',
+        },
         include: {
           bids: true,
+          media: {
+            orderBy: {
+              id: 'desc'
+            }
+          },
           highest_bid: {
             include: {
               bid: true

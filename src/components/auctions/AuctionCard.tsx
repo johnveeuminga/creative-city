@@ -13,13 +13,13 @@ export default function AuctionCard({ auction }: {
       className="d-block text-decoration-none"
       href={`auctions/${auction.id}`}>
       <div className="auction-card card">
-        <div className="card-img-top position-relative">
-          <Image 
+        {/* <div className="card-img-top position-relative"> */}
+          {/* <Image 
             fill={true}
             style={{ objectFit: 'cover' }}
             src="/assets/images/listing/listing-grid-1.jpg" 
-            alt="" />
-        </div>
+            alt="" /> */}
+        {/* </div> */}
         <div className="card-body">
           <h3 className="card-title mb-3">{ auction.name }</h3>
           <div 

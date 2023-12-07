@@ -8,7 +8,6 @@ import { redirect } from "next/navigation";
 import { Suspense } from "react";
 
 
-
 export default async function ArtworksPage() {
   const server = await getServerSession()
 

@@ -6,17 +6,18 @@ export default function ShopBanner() {
     <div className="shop-banner bg-secondary d-flex align-items-center position-relative">
       <div className={`${styles.pattern} w-100`}></div>
       <div className="container">
-        <div className="content w-50">
+        <div className="content w-50 mt-5">
           <h1 className={`mb-5 fw-bold`}>Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices non sem sed mattis. Donec finibus, ex suscipit efficitur facilisis, magna dui blandit urna, eget ultrices erat urna luctus neque. </p>
         </div>
       </div>
       <div 
-        style={{ position: 'absolute', right: '0', top: '110px', width: '40%'}}
+        style={{ position: 'absolute', right: '0', top: '110px', width: '45%', height: '100%'}}
         className="bg-image">
-        <picture>
+        <picture className='h-100'>
           <img 
-            className='w-100'
+            className='w-100 h-100'
+            style={{ objectFit: 'cover', objectPosition: 'top left' }}
             src="/assets/images/banner-transparent.png" 
             alt="" />
         </picture>

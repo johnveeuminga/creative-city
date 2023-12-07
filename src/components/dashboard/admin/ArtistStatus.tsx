@@ -10,7 +10,7 @@ interface ArtistStatusProps {
 
 export function ArtistStatus({ artist }: ArtistStatusProps) {
   const [updatingArtistId, setUpdatingArtistId] = useState<number | null>();
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState(artist.status);
   const debouncedStatus = useDebounce(status, 500);
 
   useEffect(() => {
