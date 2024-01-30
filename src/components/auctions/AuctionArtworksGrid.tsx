@@ -4,10 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { getHighestBid } from "@/lib/server/artworks";
 import MoneyFormat from "../MoneyFormat";
-import { ArtworkWithBids } from "@/types/types";
+import { ArtworkAuctionWithArtworkAndBids, ArtworkWithBids } from "@/types/types";
+import { Artwork, ArtworkAuction } from "@prisma/client";
+import { DateTime } from "luxon";
+import { toMedDate } from "@/lib/dates";
 
 
-export default async function AuctionArtworksGrid({ 
+export default function AuctionArtworksGrid({ 
   artworks = [],
   auctionId,
   auctionEnded = false
@@ -33,31 +36,33 @@ export default async function AuctionArtworksGrid({
     )
   }
 
-  const CurrentBid = ({ artwork }: { artwork: ArtworkWithBids }) => {
+  const CurrentBid = ({ artwork }:  { artwork: ArtworkAuctionWithArtworkAndBids }) => {
     return (
       <>
         {
           !! artwork.bids.length &&
           <p className="text-decoration-none">
-            Current Bid: <strong><MoneyFormat value={ getHighestBid(artwork).toString() } /></strong>
+            Current Bid: <br /><strong><MoneyFormat value={ getHighestBid(artwork).toString() } /></strong>
           </p>  
         } 
-        { artwork.minimum_bid && !artwork.bids.length &&
+        { artwork.artwork.minimum_bid && !artwork.bids.length &&
           <p>
-            Bid starts at: <strong><MoneyFormat value={ artwork.minimum_bid.toString() } /></strong>
+            Starting Bid: <br/><strong><MoneyFormat value={ artwork.artwork.minimum_bid.toString() } /></strong>
           </p>
         } 
       </>
     )
   }
 
+  console.log(artworks);
+
   return (
     <>
       <div className="row">
       {
-        artworks.map(artwork => (
+        artworks.map(( artwork:  ArtworkAuctionWithArtworkAndBids ) => (
           <div 
-            key={artwork.id}
+            key={artwork.artwork.id}
             className="col-lg-4 col-md-6 col-12 mb-5">
               <Link
                 className="d-block text-decoration-none"
@@ -67,11 +72,11 @@ export default async function AuctionArtworksGrid({
                     <Image 
                       fill={true}
                       style={{ objectFit: 'cover', objectPosition: 'top' }}
-                      src={artwork.media.length ?  `${process.env.NEXT_PUBLIC_S3_URL}/${artwork.media[0].filePath}`:  "/assets/images/features/features-1.jpg" }
+                      src={artwork.artwork.media.length ?  `${process.env.NEXT_PUBLIC_S3_URL}/${artwork.artwork.media[0].filePath}`:  "/assets/images/features/features-1.jpg" }
                       alt="" />
                   </div>
                   <div className="card-body">
-                    <h4 className="card-title text-decoration-none fw-bold mb-4">{ artwork.name }</h4>
+                    <h4 className="card-title text-decoration-none fw-bold mb-4">{ artwork.artwork.name }</h4>
                     <div className="artwork-details">
                       {
                         auctionEnded &&
@@ -79,7 +84,11 @@ export default async function AuctionArtworksGrid({
                       }
                       {
                         !!! auctionEnded &&
+                        <>
                           <CurrentBid artwork={ artwork } /> 
+                          <p>Bidding Starts: <br/> <strong>{ toMedDate(artwork.startDateTime) }</strong></p>
+                          <p>Bidding Ends: <br/> <strong>{ toMedDate(artwork.endDateTime) }</strong></p>
+                        </>
                       }
                     </div>
                   </div>

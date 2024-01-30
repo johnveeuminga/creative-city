@@ -76,3 +76,20 @@ export type HighestBidWithArtworkAndUser = Prisma.ArtworkHighestBidGetPayload<{
     }
   }
 }>
+
+export type ArtworkAuctionWithArtworkAndBids = Prisma.ArtworkAuctionGetPayload<{
+  include: {
+    bids: true,
+    artwork: {
+      include: {
+        media: true
+      }
+    }
+  }
+}>;
+
+export type ArtworkAuctionWithBids = Prisma.ArtworkAuctionGetPayload<{
+  include: {
+    bids: true,
+  } 
+}>;

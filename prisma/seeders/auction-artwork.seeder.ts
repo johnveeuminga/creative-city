@@ -27,22 +27,22 @@ export default class AuctionArtworkSeeder extends Seeder {
             id: faker.number.int({ min: 1, max: 10 })
           }
         },
-        auction: {
-          connect: {
-            id: faker.number.int({ min: 1, max: 10 })
-          }
-        },
-        minimum_bid: minBid,
-        bids: {
-          create: {
-            amount: minBid + 20,
-            user: {
-              connect: {
-                id: faker.number.int({ min: 1, max: 10 })
-              }
-            }
-          }
-        }
+        // auctions: {
+        //   connect: {
+        //     id: faker.number.int({ min: 1, max: 10 })
+        //   }
+        // },
+        // minimum_bid: minBid,
+        // bids: {
+        //   create: {
+        //     amount: minBid + 20,
+        //     user: {
+        //       connect: {
+        //         id: faker.number.int({ min: 1, max: 10 })
+        //       }
+        //     }
+        //   }
+        // }
       }
     })
 

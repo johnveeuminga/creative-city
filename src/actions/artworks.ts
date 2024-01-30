@@ -13,15 +13,22 @@ export async function handleOnClick(id: string) {
   });
 }
 
-export async function doCreateArtwork(name: string, description: string, shortDescription: string, material: string, dimensions: string, weight: number, {
-  files,
-  type,
-  price,
-}: {
-  files: string[],
-  type: 'auction' | 'bidding'
-  price: number
-} = { files: [], type: 'bidding', price: 0 }) {
+export async function doCreateArtwork(
+  name: string, 
+  description: string, 
+  shortDescription: string,
+  material: string, 
+  dimensions: string, 
+  weight: number, 
+  {
+    files,
+    type,
+    price,
+  }: {
+    files: string[],
+    type: 'auction' | 'bidding'
+    price: number
+  } = { files: [], type: 'bidding', price: 0 }) {
   const server = await getServerSession()
 
   if(!server.user)
@@ -47,10 +54,9 @@ export async function doCreateArtwork(name: string, description: string, shortDe
       }
     }
 
-    if (type == 'auction')
-      data.minimum_bid = price
-    else
-      data.price = price
+    if(type === 'auction') {  
+      data.isAuction = true;
+    }
 
     await prisma.artwork.create({
       data,

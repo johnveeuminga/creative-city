@@ -30,14 +30,9 @@ export async function AuctionDetails({ id, page = 1 }: {
         },
         include: {
           bids: true,
-          media: {
-            orderBy: {
-              id: 'desc'
-            }
-          },
-          highest_bid: {
+          artwork: {
             include: {
-              bid: true
+              media: true
             }
           },
         }

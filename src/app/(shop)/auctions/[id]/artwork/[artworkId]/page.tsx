@@ -19,7 +19,7 @@ export default async function AuctionArtworkSinglePage({
     artworkId: string,
   }
 }) {
-  const artwork = await prisma.artwork.findFirst({
+  const auctionArtwork = await prisma.artworkAuction.findFirst({
     where: {
       id: parseInt(artworkId),
       auction_id: parseInt(auctionId),
@@ -30,21 +30,26 @@ export default async function AuctionArtworkSinglePage({
           createdAt: 'desc',
         }
       },
-      artist: true,
       auction: true,
-      highest_bid: {
+      artwork: {
         include: {
-          bid: true
+          artist: true,
+          media: true,
         }
       },
-      media: true,
     }
   })
 
-  if(!artwork || !artwork.auction)
+
+ 
+  if(!auctionArtwork || !auctionArtwork.auction)
     redirect("/")
 
-  const auctionHasEnded = checkIfAuctionHasEnded(artwork.auction.start_date, artwork.auction.end_date)
+  const { 
+    artwork
+  } = auctionArtwork;
+
+  const auctionHasEnded = checkIfAuctionHasEnded(auctionArtwork.startDateTime, auctionArtwork.endDateTime)
 
   const media = artwork.media.length ?
     `${process.env.NEXT_PUBLIC_S3_URL}/${artwork.media[0].filePath}` :
@@ -77,7 +82,7 @@ export default async function AuctionArtworkSinglePage({
             </div> */}
             <div 
               dangerouslySetInnerHTML={{ __html: artwork.description }}
-              className="auction-artwork-single-description mb-5">
+              className="auction-artwork-single-description mb-5 mt-3">
             </div>
           </div>
           <div className="col-md-5">
@@ -86,14 +91,15 @@ export default async function AuctionArtworkSinglePage({
               <p>{ artwork.artist.name }</p>
             </div>
             <ArtworkBiddingBox 
+              bids={auctionArtwork.bids}
               finished={ auctionHasEnded }
-              artwork={ artwork } />
+              artworkAuction={ auctionArtwork } />
             <div className="artwork-bidding-history-container my-3">
-              <React.Suspense fallback={<p>Loading</p>}>
+              {/* <React.Suspense fallback={<p>Loading</p>}>
                 <ArtworkBiddingHistory 
                   auctionId={auctionId}
                   artwork={artwork} />
-              </React.Suspense>
+              </React.Suspense> */}
             </div>
           </div>
         </div>

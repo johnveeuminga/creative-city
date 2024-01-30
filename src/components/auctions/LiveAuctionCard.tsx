@@ -84,14 +84,14 @@ export default function LiveAuctionCard({
         <div className={`${styles.gallery} position-relative`}>
           <div className={`${styles['gallery-images']}`}>
             {
-              auction.artworks.map((artwork, index) => (
+              auction.artworks.map((auctionArtwork, index) => (
                 <div
-                    key={artwork.id}
+                    key={auctionArtwork.artwork_id}
                     className={`gallery-image ${index == 2 ? styles['gallery-images__third']: 'gallery-image--' + index}`}>
                       <Image 
                         fill={true}
                         style={{ objectPosition: "center", objectFit: "cover"}}
-                        src={artwork.media.length ?  `${process.env.NEXT_PUBLIC_S3_URL}/${artwork.media[0].filePath}`:  "/assets/images/features/features-1.jpg" }
+                        src={auctionArtwork.artwork.media.length ? `${process.env.NEXT_PUBLIC_S3_URL}/${auctionArtwork.artwork.media[0].filePath}`:  "/assets/images/features/features-1.jpg" }
                         alt='Gallery 1'
                       /> 
                 </div>

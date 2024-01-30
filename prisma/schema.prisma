@@ -78,10 +78,6 @@ model Artwork {
   updated_at          DateTime @default(now())
   artist              User     @relation(fields: [artist_id], references: [id])
   artist_id           Int
-  auction             Auction? @relation(fields: [auction_id], references: [id])
-  auction_id          Int?
-  bids                Bid[]
-  highest_bid         ArtworkHighestBid?
   minimum_bid         Float?
   media               ArtworkMedia[]
   price               Float?
@@ -91,8 +87,20 @@ model Artwork {
   material            String
   dimensions          String
   weight              Float
-  auctionApproved     Boolean @default(false)
   isAuction           Boolean @default(false)
+  auctions            ArtworkAuction[]
+}
+
+model ArtworkAuction {
+  id Int @id @default(autoincrement())
+  artwork_id Int
+  artwork Artwork @relation(fields: [artwork_id], references: [id])
+  auction_id Int
+  auction Auction @relation(fields: [auction_id], references: [id])
+  bids    Bid[]
+  approvedAt    DateTime
+  startDateTime DateTime
+  endDateTime   DateTime
 }
 
 model ArtworkPurchase {
@@ -118,7 +126,7 @@ model Auction {
   updated_at  DateTime  @default(now())
   start_date  DateTime
   end_date    DateTime
-  artworks    Artwork[]
+  artworks    ArtworkAuction[]
   artist      Artist?   @relation(fields: [artistId], references: [id])
   artistId    Int?
   isProcessed Boolean   @default(false)
@@ -129,7 +137,7 @@ model Bid {
   user                User               @relation(fields: [userId], references: [id])
   userId              Int
   amount              Float
-  artwork             Artwork            @relation(fields: [artworkId], references: [id])
+  artwork             ArtworkAuction            @relation(fields: [artworkId], references: [id])
   artworkId           Int
   highest_bid_artwork ArtworkHighestBid?
   createdAt           DateTime           @default(now())
@@ -137,7 +145,6 @@ model Bid {
 }
 
 model ArtworkHighestBid {
-  artwork   Artwork @relation(fields: [artworkId], references: [id])
   artworkId Int     @id @unique
   bid       Bid     @relation(fields: [bidId], references: [id])
   bidId     Int     @unique

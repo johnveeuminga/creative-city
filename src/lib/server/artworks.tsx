@@ -1,13 +1,13 @@
-import { ArtworkWithBids } from "@/types/types";
+import { ArtworkAuctionWithArtworkAndBids, ArtworkAuctionWithBids, ArtworkWithBids } from "@/types/types";
 
-export function getHighestBid(artwork: ArtworkWithBids) {
+export function getHighestBid(artwork: ArtworkAuctionWithArtworkAndBids) {
   const max = artwork.bids.map(artwork => artwork.amount)
     .reduce((prev: number, current: number) => {
     if(!prev)
       return current;
 
     return current > prev ? current : prev;
-  }, artwork.minimum_bid ?? 0);
+  }, artwork.artwork.minimum_bid ?? 0);
 
   return max;
 }

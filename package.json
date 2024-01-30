@@ -14,14 +14,14 @@
   "dependencies": {
     "@ant-design/react-slick": "^1.0.1",
     "@apollo/client": "^3.8.0-beta.4",
-    "@apollo/experimental-nextjs-app-support": "^0.2.2",
+    "@apollo/experimental-nextjs-app-support": "^0.6.0",
     "@aws-amplify/api": "^5.3.0",
     "@aws-sdk/client-appsync": "^3.354.0",
     "@aws-sdk/client-cognito-identity": "^3.354.0",
     "@aws-sdk/client-s3": "^3.367.0",
     "@aws-sdk/s3-presigned-post": "^3.367.0",
     "@aws-sdk/signature-v4-crt": "^3.363.0",
-    "@prisma/client": "^4.16.2",
+    "@prisma/client": "^5.8.1",
     "@types/react": "^18.2.8",
     "@types/react-dom": "18.2.4",
     "@types/react-slick": "^0.23.10",
@@ -69,9 +69,12 @@
     "@types/node": "^20.2.5",
     "@types/react-datepicker": "^4.11.2",
     "@types/uuid": "^9.0.2",
-    "prisma": "^4.16.2",
+    "prisma": "^5.8.1",
     "sass": "^1.62.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.6"
+  },
+  "volta": {
+    "node": "18.19.0"
   }
 }

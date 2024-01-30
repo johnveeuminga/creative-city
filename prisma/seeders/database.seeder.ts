@@ -7,6 +7,6 @@ export default class DatabaseSeeder extends Seeder {
   static async seed() {
     await ArtistSeeder.seed();
     await AuctionSeeder.seed();
-    await AuctionArtworkSeeder.seed();
+    // await AuctionArtworkSeeder.seed();
   }
 }

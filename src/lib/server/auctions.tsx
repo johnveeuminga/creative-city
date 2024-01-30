@@ -15,7 +15,11 @@ export type AuctionWithArtworkCount = Prisma.AuctionGetPayload<{
     },
     artworks: {
       include: {
-        media: true,
+        artwork: {
+          include: {
+            media: true,
+          }
+        }
       }
     }
   }
@@ -43,9 +47,13 @@ export async function getOngoingAuctions(params: Prisma.AuctionFindManyArgs = {}
           id: 'desc'
         },
         include: {
-          media: {
-            orderBy: {
-              id: 'desc'
+          artwork: {
+            include: {
+              media: {
+                orderBy: {
+                  id: 'desc'
+                }
+              }
             }
           },
         }

@@ -6,6 +6,8 @@ export default function MoneyFormat({ value }: { value: string }) {
   return (
     <NumericFormat 
       thousandSeparator={true}
+      decimalScale={2}
+      fixedDecimalScale
       displayType="text" 
       value={value} 
       prefix="Php " />

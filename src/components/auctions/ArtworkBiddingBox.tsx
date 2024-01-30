@@ -5,20 +5,27 @@ import { getHighestBid } from "@/lib/server/artworks"
 import { useState, useTransition } from "react"
 import { bidOnAnArtwork } from "@/actions/auctions"
 import { 
+  ArtworkAuctionWithArtworkAndBids,
   ArtworkWithAuctionBidAndHighestBid, 
 } from "@/types/types"
 import MoneyFormat from "../MoneyFormat"
 import { DateTime } from "luxon"
+import { Artwork } from "@prisma/client"
+import { toMedDate } from "@/lib/dates"
 
-export function ArtworkBiddingBox({ artwork, finished = false }: {
-  artwork: ArtworkWithAuctionBidAndHighestBid,
-  finished?: boolean
+export function ArtworkBiddingBox({ artworkAuction, finished = false, bids = [] }: {
+  artworkAuction: ArtworkAuctionWithArtworkAndBids,
+  finished?: boolean,
+  bids: Array<any>,
 }) {
   const [bid, setBid] = useState<number| null>(0);
-  const [highestBid, setHighestBid] = useState<number>(getHighestBid(artwork));
+  const [highestBid, setHighestBid] = useState<number>(0);
+  // const [highestBid, setHighestBid] = useState<number>(getHighestBid(artwork));
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isPending, startTransition] = useTransition();
+
+  const { artwork } = artworkAuction;
 
   
   function handleBidClicked() {
@@ -49,7 +56,7 @@ export function ArtworkBiddingBox({ artwork, finished = false }: {
     <div className="bidding-box">
       <div className="bidding-box__current-details">
         {
-          !finished && !! artwork.bids.length &&
+          !finished && !! bids.length &&
             <>
               <p className="mb-0"><small>Current Price</small></p>
               <p className="bidding-box__current-price">
@@ -60,7 +67,7 @@ export function ArtworkBiddingBox({ artwork, finished = false }: {
             </>
         }
         {
-          !finished && !!!artwork.bids.length &&
+          !finished && !!! bids.length &&
             <>
               <p className="mb-0"><small>Minimum Bid</small></p>
               <p className="bidding-box__current-price">
@@ -70,20 +77,20 @@ export function ArtworkBiddingBox({ artwork, finished = false }: {
               </p>
             </>
         }
-        {
+        {/* {
           finished && artwork.highest_bid &&
             <>
               <h5 className="fs-1 mb-4 fw-bold">Sold for <MoneyFormat value={ artwork.highest_bid.bid.amount.toString() } /></h5>
               <p>Live auction ended <strong>{ DateTime.fromJSDate(artwork?.auction?.end_date ?? new Date()).toFormat('LLL dd yyyy hh:mm:ss a') }</strong></p>
             </>
-        }
+        } */}
       </div>
       {
         !finished &&
         <>
-          <div className="bidding-box__bid my-5">
+          <div className="bidding-box__bid my-3">
             <div className="mb-3">
-              <label className="mb-2" htmlFor="">Your bid</label>
+              <label className="mb-2" htmlFor="">Your Bid:</label>
               <div className="input-group">
                 <span className="input-group-text">₱</span>
                 <input 
@@ -94,7 +101,7 @@ export function ArtworkBiddingBox({ artwork, finished = false }: {
                   className="form-control" />
               </div>
             </div>
-            <div className="d-grid">
+            <div className="d-grid mb-4">
               <button 
                 disabled={isPending}
                 onClick={() => handleBidClicked()}
@@ -102,6 +109,10 @@ export function ArtworkBiddingBox({ artwork, finished = false }: {
                 PLACE BID
               </button>
             </div>
+            <p>
+              Bidding period: <br />
+              { toMedDate(artworkAuction.startDateTime) } - { toMedDate(artworkAuction.endDateTime) }
+            </p>
           </div>
         </>
       }
