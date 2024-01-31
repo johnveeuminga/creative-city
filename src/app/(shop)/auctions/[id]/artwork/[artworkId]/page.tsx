@@ -1,6 +1,7 @@
 import { ArtworkBiddingBox } from "@/components/auctions/ArtworkBiddingBox"
 import { checkIfAuctionHasEnded } from "@/lib/client/auction-helpers"
 import prisma from "@/lib/prisma"
+import { getServerSession } from "@/lib/server/auth"
 import { redirect } from "next/navigation"
 import React from "react"
 
@@ -15,7 +16,7 @@ export default async function AuctionArtworkSinglePage({
     artworkId: string,
   }
 }) {
-  const auctionArtwork = await prisma.artworkAuction.findFirst({
+  const auctionArtworkData = prisma.artworkAuction.findFirst({
     where: {
       id: parseInt(artworkId),
       auction_id: parseInt(auctionId),
@@ -41,7 +42,9 @@ export default async function AuctionArtworkSinglePage({
     }
   })
 
+  const userData = getServerSession();
 
+  const [auctionArtwork, user] = await Promise.all([auctionArtworkData, userData]);
  
   if(!auctionArtwork || !auctionArtwork.auction)
     redirect("/")
@@ -77,6 +80,13 @@ export default async function AuctionArtworkSinglePage({
               <h3>{ artwork.name }</h3>
               <p>{ artwork.artist.name }</p>
             </div>
+            {
+              user.user && 
+              auctionArtwork.highestBid &&
+              auctionArtwork.highestBid.bid.userId === parseInt(user.user?.id) &&
+                <p className="fw-bold text-success">You currently own the highest bid.</p>
+            }
+            <p></p>
             <ArtworkBiddingBox 
               bids={auctionArtwork.bids}
               finished={ auctionHasEnded }

@@ -9,10 +9,11 @@ import MoneyFormat from "../MoneyFormat"
 import { toMedDate } from "@/lib/dates"
 import { getHighestBid } from "@/lib/utils/artworks"
 
-export function ArtworkBiddingBox({ artworkAuction, finished = false, bids = [] }: {
+export function ArtworkBiddingBox({ artworkAuction, finished = false, bids = [], highestBidOwned = false }: {
   artworkAuction: ArtworkAuctionWithArtworkAndBidsAndHighestBids,
   finished?: boolean,
   bids: Array<any>,
+  highestBidOwned?: boolean
 }) {
   const [bid, setBid] = useState<string>("");
   const [highestBid, setHighestBid] = useState<number>(getHighestBid(artworkAuction));
@@ -56,6 +57,9 @@ export function ArtworkBiddingBox({ artworkAuction, finished = false, bids = [] 
               <h4 className="fw-bold">
                 <MoneyFormat value={ highestBid } />
               </h4>
+              {
+                
+              }
             </div>
             <div className="bidding-box__bid my-3">
               <div className="mb-3">

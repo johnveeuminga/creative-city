@@ -10,31 +10,28 @@ export default async function BiddingsPage() {
   if(!user)
     redirect("/401")
 
-
-  const biddings = await prisma.bid.findMany({
-    distinct: ['artworkId'],
-    include: {
-      artwork: {
-        include: {
-          auction: true,
-          purchase: {
-            take: 1,
-            orderBy: {
-              id: 'desc'
-            }
-          },
-        }
-      },
-    },
+  const biddings = await prisma.artworkAuction.findMany({
     where: {
-      userId: Number(user.id)
+      bids: {
+        some: {
+          userId: Number(user.id)
+        }
+      }
     },
-    orderBy: {
-      id: 'desc'
+    include: {
+      auction: true,
+      artwork: true,
+      bids: {
+        where: {
+          userId: Number(user.id)
+        },
+        orderBy: {
+          amount: 'desc'
+        },
+        take: 1
+      }
     }
-  })
-
-
+  });
 
   return (
     <>
@@ -57,14 +54,14 @@ export default async function BiddingsPage() {
                   <tr key={bid.id}>
                     <td>{ bid.id }</td>
                     <td>{ bid.artwork.name }</td>
-                    <td>{ bid.artwork.auction?.name }</td>
-                    <td><MoneyFormat value={bid.amount.toString()}/></td>
+                    <td>{ bid.auction?.name }</td>
                     <td>
-                      {
-                        bid.artwork.purchase[0].paymentStatus  == 'PENDING' ?
-                          <a href={bid.artwork.purchase[0].url ?? ""} target="_blank">Proceed to Payment</a> :
-                          <p className="mb-0">{bid.artwork.purchase[0].paymentStatus}</p>
-                      } 
+                      { 
+                        bid.bids.length &&
+                          <MoneyFormat value={ bid.bids[0].amount} />
+                      }
+                    </td>
+                    <td>
                     </td>
                   </tr>
                 ))
