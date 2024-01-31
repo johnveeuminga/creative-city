@@ -32,33 +32,53 @@ export type artworkBidInput = {
 export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
   const { user } = await getServerSession();
 
+  const now = DateTime.now().toJSDate();
+
   if(!user)
     return {
       error: "Unauthorized",
     }
 
-  const artwork = await prisma.artwork.findFirst({
+  const artworkAuction = await prisma.artworkAuction.findFirst({
     where: {
       id
+    },
+    include: {
+      artwork: true,
     }
   })
 
-  if(!artwork || !artwork.minimum_bid)
-    throw new Error("Artwork Not Found")
+  if(!artworkAuction || !artworkAuction.artwork)
+    return {
+      error: "Artwork auction was not found"
+    }
 
-  if(amount < artwork.minimum_bid)
-    throw new Error("Amount is less than minimum bid");
-  
+  if(!artworkAuction.artwork.minimum_bid)
+    return {
+      error: "Artwork auction has no minimum bid"
+    }
+
+  if(amount < artworkAuction.artwork.minimum_bid)
+    return {
+      error: "Amount is less than minimum bid"
+    }
+
+  if(now < artworkAuction.startDateTime)
+    return { error: "Bidding has not started yet" }
+
+  if(now > artworkAuction.endDateTime)
+    return { error: "Bidding has already ended" }
+
   try {
     const result = await prisma.$transaction(async (tx) => {
       // Gets the current highest bid.
       let highestBid = await tx.artworkHighestBid.findFirst({
         where: {
-          artworkId: artwork.id,
+          artworkAuctionId: artworkAuction.id,
         },
         include: {
-          artwork: true,
           bid: true,
+          artworkAuction: true
         }
       });
 
@@ -66,7 +86,7 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
       const bid = await tx.bid.create({
         data: {
           amount: amount,
-          artworkId: id,
+          artworkAuctionId: id,
           userId: parseInt(user.id),
         },
       });
@@ -76,12 +96,16 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
         highestBid = await tx.artworkHighestBid.create({
           data: {
             bidId: bid.id,
-            artworkId: id,
+            artworkAuctionId: id,
             version: 1
           },
           include: {
             bid: true,
-            artwork: true
+            artworkAuction: {
+              include: {
+                artwork: true
+              },
+            }
           }
         })
       } else {
@@ -101,7 +125,7 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
             }
           }, 
           where: {
-            artworkId: highestBid.artworkId,
+            artworkAuctionId: highestBid.artworkAuctionId,
             version: highestBid.version,
           }
         })
@@ -134,7 +158,7 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
           "amount": result.bid.amount.toString(),
           "createdAt": DateTime.fromJSDate(result.bid.createdAt).toFormat("LLL dd, yyyy hh:mm:ss a"),
         }),
-        channelName: `auction.${result.artwork.auction_id}.artwork.${result.artwork.id}.bid`.toString(),
+        channelName: `auction.${result.artworkAuctionId}.artwork.${result.artworkAuction.id}.bid`.toString(),
       },
     })
     revalidatePath("/auctions/[id]")

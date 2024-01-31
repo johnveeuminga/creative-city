@@ -93,3 +93,34 @@ export type ArtworkAuctionWithBids = Prisma.ArtworkAuctionGetPayload<{
     bids: true,
   } 
 }>;
+
+export type ArtworkAuctionWithArtworkAndHighestBid = Prisma.ArtworkAuctionGetPayload<{
+  include: {
+    artwork: {
+      include: {
+        media: true
+      }
+    },
+    highestBid: {
+      include: {
+        bid: true,
+      }
+    },
+  }
+}>
+
+export type ArtworkAuctionWithArtworkAndBidsAndHighestBids = Prisma.ArtworkAuctionGetPayload<{
+  include: {
+    artwork: {
+      include: {
+        media: true
+      }
+    },
+    bids: true,
+    highestBid: {
+      include: {
+        bid: true,
+      }
+    },
+  }
+}>

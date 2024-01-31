@@ -1,12 +1,8 @@
 import { ArtworkBiddingBox } from "@/components/auctions/ArtworkBiddingBox"
-import ArtworkBiddingHistory from "@/components/auctions/ArtworkBiddingHistory"
-import { checkIfAuctionHasEnded, checkIfAuctionIsOngoing } from "@/lib/client/auction-helpers"
+import { checkIfAuctionHasEnded } from "@/lib/client/auction-helpers"
 import prisma from "@/lib/prisma"
-import Image from "next/image"
 import { redirect } from "next/navigation"
-import { relative } from "path"
 import React from "react"
-import { NumericFormat } from "react-number-format"
 
 export default async function AuctionArtworkSinglePage({
   params: {
@@ -31,6 +27,11 @@ export default async function AuctionArtworkSinglePage({
         }
       },
       auction: true,
+      highestBid: {
+        include: {
+          bid: true
+        }
+      },
       artwork: {
         include: {
           artist: true,
@@ -66,20 +67,6 @@ export default async function AuctionArtworkSinglePage({
                 src={media} 
                 className="w-100"/>
             </picture>
-            {/* <div className="image-container mb-3" style={{
-              width: "100%",
-              height: 600,
-              position: 'relative',
-            }}>
-              <Image 
-                fill={true}
-                alt={artwork.name}
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                }}
-                src={media}/>
-            </div> */}
             <div 
               dangerouslySetInnerHTML={{ __html: artwork.description }}
               className="auction-artwork-single-description mb-5 mt-3">

@@ -29,7 +29,11 @@ export async function AuctionDetails({ id, page = 1 }: {
           id: 'desc',
         },
         include: {
-          bids: true,
+          highestBid: {
+            include: {
+              bid: true,
+            }
+          },
           artwork: {
             include: {
               media: true

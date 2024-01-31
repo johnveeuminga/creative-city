@@ -2,7 +2,7 @@
 
 import { NumericFormat } from "react-number-format"
 
-export default function MoneyFormat({ value }: { value: string }) {
+export default function MoneyFormat({ value }: { value: string | number }) {
   return (
     <NumericFormat 
       thousandSeparator={true}

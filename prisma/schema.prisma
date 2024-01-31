@@ -92,12 +92,13 @@ model Artwork {
 }
 
 model ArtworkAuction {
-  id Int @id @default(autoincrement())
-  artwork_id Int
-  artwork Artwork @relation(fields: [artwork_id], references: [id])
-  auction_id Int
-  auction Auction @relation(fields: [auction_id], references: [id])
-  bids    Bid[]
+  id            Int @id @default(autoincrement())
+  artwork_id    Int
+  artwork       Artwork @relation(fields: [artwork_id], references: [id])
+  auction_id    Int
+  auction       Auction @relation(fields: [auction_id], references: [id])
+  bids          Bid[]
+  highestBid    ArtworkHighestBid?
   approvedAt    DateTime
   startDateTime DateTime
   endDateTime   DateTime
@@ -137,19 +138,20 @@ model Bid {
   user                User               @relation(fields: [userId], references: [id])
   userId              Int
   amount              Float
-  artwork             ArtworkAuction            @relation(fields: [artworkId], references: [id])
-  artworkId           Int
-  highest_bid_artwork ArtworkHighestBid?
+  artworkAuction      ArtworkAuction     @relation(fields: [artworkAuctionId], references: [id])
+  artworkAuctionId    Int
+  artworkHighestBid   ArtworkHighestBid?
   createdAt           DateTime           @default(now())
   updatedAt           DateTime           @default(now())
 }
 
 model ArtworkHighestBid {
-  artworkId Int     @id @unique
-  bid       Bid     @relation(fields: [bidId], references: [id])
-  bidId     Int     @unique
-  processed Boolean @default(false)
-  version   Int     @default(1)
+  artworkAuctionId Int             @id @unique
+  artworkAuction   ArtworkAuction  @relation(fields: [artworkAuctionId], references: [id])
+  bidId            Int             @unique
+  bid              Bid             @relation(fields: [bidId], references: [id])
+  processed        Boolean         @default(false)
+  version          Int             @default(1)
 }
 
 model ArtworkMedia {

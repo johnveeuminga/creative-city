@@ -1,42 +1,36 @@
 'use client'
 
-import { NumericFormat } from "react-number-format"
-import { getHighestBid } from "@/lib/server/artworks"
 import { useState, useTransition } from "react"
 import { bidOnAnArtwork } from "@/actions/auctions"
 import { 
-  ArtworkAuctionWithArtworkAndBids,
-  ArtworkWithAuctionBidAndHighestBid, 
+  ArtworkAuctionWithArtworkAndBidsAndHighestBids,
 } from "@/types/types"
 import MoneyFormat from "../MoneyFormat"
-import { DateTime } from "luxon"
-import { Artwork } from "@prisma/client"
 import { toMedDate } from "@/lib/dates"
+import { getHighestBid } from "@/lib/utils/artworks"
 
 export function ArtworkBiddingBox({ artworkAuction, finished = false, bids = [] }: {
-  artworkAuction: ArtworkAuctionWithArtworkAndBids,
+  artworkAuction: ArtworkAuctionWithArtworkAndBidsAndHighestBids,
   finished?: boolean,
   bids: Array<any>,
 }) {
-  const [bid, setBid] = useState<number| null>(0);
-  const [highestBid, setHighestBid] = useState<number>(0);
-  // const [highestBid, setHighestBid] = useState<number>(getHighestBid(artwork));
+  const [bid, setBid] = useState<string>("");
+  const [highestBid, setHighestBid] = useState<number>(getHighestBid(artworkAuction));
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  const { artwork } = artworkAuction;
-
-  
   function handleBidClicked() {
     startTransition(async () => {
-      if(!bid) {
+      const amount = parseFloat(bid)
+
+      if(!bid && isNaN(amount)) {
         setErrorMessage("Please enter a valid bid amount.")
         return
       }
 
-      const res: any = await bidOnAnArtwork(artwork.id, {
-        amount: bid,
+      const res: any = await bidOnAnArtwork(artworkAuction.id, {
+        amount,
       });
 
       if(res.error) {
@@ -44,83 +38,77 @@ export function ArtworkBiddingBox({ artworkAuction, finished = false, bids = [] 
         setSuccessMessage("");
       }
       else {
-        setBid(0);
-        setSuccessMessage("Bid successfuly placed");
+        setBid("");
+        setSuccessMessage("Your bid has been successfuly placed.");
         setErrorMessage("");
         setHighestBid(res.bid.amount)
       }
-    })
+    });
   }
 
   return (
     <div className="bidding-box">
-      <div className="bidding-box__current-details">
-        {
-          !finished && !! bids.length &&
-            <>
-              <p className="mb-0"><small>Current Price</small></p>
-              <p className="bidding-box__current-price">
-                <strong>
-                  <NumericFormat thousandSeparator={true} value={highestBid} displayType="text" prefix="Php "/>
-                </strong>
-              </p>
-            </>
-        }
-        {
-          !finished && !!! bids.length &&
-            <>
-              <p className="mb-0"><small>Minimum Bid</small></p>
-              <p className="bidding-box__current-price">
-                <strong>
-                  <NumericFormat thousandSeparator={true} value={highestBid} displayType="text" prefix="Php "/>
-                </strong>
-              </p>
-            </>
-        }
-        {/* {
-          finished && artwork.highest_bid &&
-            <>
-              <h5 className="fs-1 mb-4 fw-bold">Sold for <MoneyFormat value={ artwork.highest_bid.bid.amount.toString() } /></h5>
-              <p>Live auction ended <strong>{ DateTime.fromJSDate(artwork?.auction?.end_date ?? new Date()).toFormat('LLL dd yyyy hh:mm:ss a') }</strong></p>
-            </>
-        } */}
-      </div>
       {
-        !finished &&
-        <>
-          <div className="bidding-box__bid my-3">
-            <div className="mb-3">
-              <label className="mb-2" htmlFor="">Your Bid:</label>
-              <div className="input-group">
-                <span className="input-group-text">₱</span>
-                <input 
-                  value={bid ?? 0}
-                  onChange={(e) => setBid(parseFloat(e.target.value))}
-                  min={highestBid + 1} 
-                  type="number"
-                  className="form-control" />
+        ! finished &&
+          <>
+            <div className="bidding-box__current-details mb-4">
+              <p className="mb-2">{ artworkAuction.bids.length ? "Current Bid" : "Starting Bid"} </p>
+              <h4 className="fw-bold">
+                <MoneyFormat value={ highestBid } />
+              </h4>
+            </div>
+            <div className="bidding-box__bid my-3">
+              <div className="mb-3">
+                <label className="mb-2" htmlFor="bid">Your Bid:</label>
+                <div className="input-group">
+                  <span className="input-group-text">₱</span>
+                  <input 
+                    id="bid"
+                    value={bid}
+                    onChange={(e) => setBid(e.target.value)}
+                    min={highestBid + 1} 
+                    type="number"
+                    className="form-control" />
+                </div>
               </div>
+              <div className="d-grid mb-4">
+                <button 
+                  disabled={isPending}
+                  onClick={() => handleBidClicked()}
+                  className="btn btn-primary btn-lg fw-bold">
+                  PLACE BID
+                </button>
+              </div>
+              <p>
+                Bidding period: <br />
+                { toMedDate(artworkAuction.startDateTime) } - { toMedDate(artworkAuction.endDateTime) }
+              </p>
             </div>
-            <div className="d-grid mb-4">
-              <button 
-                disabled={isPending}
-                onClick={() => handleBidClicked()}
-                className="btn btn-primary btn-lg fw-bold">
-                PLACE BID
-              </button>
+          </>
+      }
+      {
+        finished &&
+          <div className="bidding-box__finished">
+            <p className="mb-2">The bidding period has ended. </p>
+            <div className="border-bottom py-3">
+              <small className="fw-semibold d-block mb-1">Bidding Ended:</small>
+              {toMedDate(artworkAuction.endDateTime)}
             </div>
-            <p>
-              Bidding period: <br />
-              { toMedDate(artworkAuction.startDateTime) } - { toMedDate(artworkAuction.endDateTime) }
-            </p>
-          </div>
-        </>
+            <div className="border-bottom py-3">
+              <p className="mb-2">
+                <small className="fw-semibold d-block mb-1">Sold for:</small>
+              </p>
+              <h4>
+                <MoneyFormat value={highestBid}/>
+              </h4>
+            </div>
+          </div> 
       }
       {/* TODO: Handle success and error messages better. */}
       {
         successMessage &&
           <div className="success mt-3">
-            <p>
+            <p className="text-success fw-bold">
               Success! {successMessage}
             </p>
           </div>
@@ -128,7 +116,7 @@ export function ArtworkBiddingBox({ artworkAuction, finished = false, bids = [] 
       {
         errorMessage &&
           <div className="error mt-3">
-            <p className="text-danger">* { errorMessage }</p>
+            <p className="text-danger">* { errorMessage } </p>
           </div>
       }
     </div>
