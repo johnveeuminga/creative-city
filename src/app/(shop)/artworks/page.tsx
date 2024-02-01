@@ -9,7 +9,9 @@ import ArtworkCardGrid from "@/components/artworks/ArtworkCardGrid";
 export default async function Page() {
   const artworks = await prisma.artwork.findMany({
     where: {
-      auction_id: null,
+      auctions: {
+        none: {}
+      },
       inStock: true,
       media: {
         some: {},

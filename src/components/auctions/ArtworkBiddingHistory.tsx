@@ -14,8 +14,8 @@ export default async function ArtworkBiddingHistory({
 }) {
   const bids = await prisma.bid.findMany({
     where: {
-      artwork: {
-        id: artwork.id,
+      artworkAuction: {
+        artwork_id: artwork.id,
         auction_id: parseInt(auctionId)
       }
     },

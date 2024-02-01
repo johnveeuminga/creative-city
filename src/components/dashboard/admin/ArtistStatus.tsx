@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useDebounce } from "@/lib/utils";
-import { Artist } from "@prisma/client";
+import { Artist, ArtistStatus as ArtistStatusEnum } from "@prisma/client";
 
 interface ArtistStatusProps {
   artist: Artist;
@@ -36,7 +36,7 @@ export function ArtistStatus({ artist }: ArtistStatusProps) {
     updatingArtistId === artist.id ? (
       <select
         value={status}
-        onChange={(e) => setStatus(e.target.value)}
+        onChange={(e) => setStatus(e.target.value as ArtistStatusEnum)}
       >
         <option value="PENDING">PENDING</option>
         <option value="APPROVED">APPROVED</option>

@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import prisma from "../prisma";
 import { decodeToken } from "./cognito";
+import { NextRequest } from "next/server";
 
 export interface User {
   id: string;

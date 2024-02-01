@@ -11,7 +11,9 @@ export default async function Page({
   const artwork = await prisma.artwork.findFirst({
     where: {
       id: parseInt(id),
-      auction_id: null,
+      auctions: {
+        none: {}
+      }
     },
     include: {
       artist: true,

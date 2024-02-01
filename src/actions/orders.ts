@@ -32,27 +32,27 @@ export async function doCreateInvoice(artworkId: string) {
     Invoice
   } = x
 
-  const i = new Invoice({})
-
   const externalID = `bcc-${new Date().getTime()}-${artworkId}`;
 
-  const invoice = await i.createInvoice({
-    externalID,
-    payerEmail: session.user.email,
-    amount: artwork.price + (artwork.price * .10),
-    items: [
-      {
-        name: artwork.name,
-        quantity: 1,
-        price: artwork.price
-      }
-    ],
-    fees: [
-      {
-        type: 'Convenience Fee',
-        value: artwork.price * .10,
-      }
-    ]
+  const invoice = await Invoice.createInvoice({
+    data: {
+      externalId: externalID,
+      payerEmail: session.user.email,
+      amount: artwork.price + (artwork.price * .10),
+      items: [
+        {
+          name: artwork.name,
+          quantity: 1,
+          price: artwork.price
+        }
+      ],
+      fees: [
+        {
+          type: 'Convenience Fee',
+          value: artwork.price * .10,
+        }
+      ]
+    }
   }) as any
 
   const artworkPurchase = await prisma.artworkPurchase.create({
