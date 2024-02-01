@@ -123,7 +123,7 @@
 }
 
 .auction-artwork-single {
-  .auction-artwork-single-description  {
+  .auction-artwork-single-description {
     p {
       margin-bottom: 1em;
     }
@@ -131,7 +131,7 @@
   .bidding-box {
     padding: 32px;
     border: 1px solid var(--bs-gray-300);
-    background-color: rgba($primary-color, .1);
+    background-color: rgba(#fff, 1);
 
     p {
       color: var(--bs-gray-900);

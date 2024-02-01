@@ -9,11 +9,23 @@ export default async function AuctionRegisterArtwork({ id }: { id: number }) {
   if(!session.user)
     return redirect('401')
 
-  const artworks = await prisma.artwork.findMany({
+  const auctionData = prisma.auction.findFirst({
     where: {
-      auction_id: null,
+      id,
+    },
+  });
+
+  const artworksData = prisma.artwork.findMany({
+    where: {
+      // Include only where auctions are non-existent.
+      auctions: {
+        none: {
+          NOT: {
+            approvedAt: null
+          }
+        },
+      },
       isAuction: true,
-      auctionApproved: false,
       artist_id: parseInt(session.user.id),
     },
     include: {
@@ -21,11 +33,14 @@ export default async function AuctionRegisterArtwork({ id }: { id: number }) {
     }
   })
 
-  console.log(artworks)
+  const [auction, artworks] = await Promise.all([auctionData, artworksData]);
+
+  if(!auction)
+    return
 
   return (
     <AddArtworkModal 
-      auctionId={id}
+      auction={auction}
       artworks={artworks} />
   )
 }

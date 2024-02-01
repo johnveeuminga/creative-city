@@ -99,7 +99,7 @@ model ArtworkAuction {
   auction       Auction @relation(fields: [auction_id], references: [id])
   bids          Bid[]
   highestBid    ArtworkHighestBid?
-  approvedAt    DateTime
+  approvedAt    DateTime?
   startDateTime DateTime
   endDateTime   DateTime
 }

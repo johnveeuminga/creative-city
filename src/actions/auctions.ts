@@ -10,6 +10,7 @@ import { revalidatePath } from "next/cache";
 import Artwork from '@/components/Artwork';
 import { DateTime } from 'luxon';
 import { NextResponse } from 'next/server';
+import { start } from 'repl';
 
 
 export async function createAuction(params: Prisma.AuctionCreateInput)  {
@@ -171,7 +172,10 @@ export async function bidOnAnArtwork(id: number, { amount }: artworkBidInput) {
   }
 }
 
-export async function doRegisterArtworkToAuction(artworkIds: number[], auctionId: number) {
+export async function doRegisterArtworkToAuction(artworkIds: number[], auctionId: number, {
+  startDate,
+  endDate
+}: { startDate?: Date | string | null, endDate?: Date | string | null}) {
   try {
     const session = await getServerSession()
 
@@ -179,21 +183,43 @@ export async function doRegisterArtworkToAuction(artworkIds: number[], auctionId
     if(!session.user)
       throw new Error('Error')
 
-    await prisma.artwork.updateMany({
+    const auction = await prisma.auction.findFirst({
       where: {
-        id: {
-          in: artworkIds,
-        }
-      },
-      data: {
-        auction_id: auctionId,
+        id: auctionId
       }
     })
+
+    if(!auction)
+      return {
+        error: "Auction not found."
+      }
+
+    const startBiddingDate = startDate ?? auction.start_date
+    const endBiddingDate = endDate ?? auction.end_date
+      
+    
+    let promises: Promise<any>[] = [];
+
+    artworkIds.forEach((id: number) => {
+      const promise = prisma.artworkAuction.create({
+        data: {
+          artwork_id: id,
+          startDateTime: startBiddingDate,
+          endDateTime: endBiddingDate,
+          auction_id: auctionId,
+          approvedAt: null
+        }
+      });
+      promises.push(promise);
+    });
+
+    await Promise.all(promises);
 
     return {
       success: true
     }
-  } catch {
+  } catch(e) {
+    console.log(e);
     return {
       error: "Something went wrong"
     }

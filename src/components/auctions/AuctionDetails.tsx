@@ -116,11 +116,11 @@ export async function AuctionDetails({ id, page = 1 }: {
                   <h3 className="mb-4">Auction Has Ended</h3>
               }
               {
-                session.user && session.user.groups?.indexOf("artist") !== -1 &&
+                session.user && session.user.groups?.indexOf("artist") !== -1 && now < DateTime.fromJSDate(auction.end_date) &&
                   <div className="actions mt-4">
                     <Link 
                       href={`/auctions/${auction.id}/register`}
-                      className="btn btn-outline-light py-2 text-white d-block w-100">
+                      className="btn btn-outline-light py-2 d-block w-100">
                       <strong>REGISTER YOUR PIECE</strong>
                     </Link>
                   </div>

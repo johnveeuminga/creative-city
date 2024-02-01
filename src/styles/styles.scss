@@ -105,6 +105,10 @@ $theme-colors: map-merge($theme-colors, $base-themes);
 
 @import "~react-quill/dist/quill.snow.css";
 
+@import '~react-datetime-picker/dist/DateTimePicker.css';
+@import '~react-calendar/dist/Calendar.css';
+@import '~react-clock/dist/Clock.css';
+
 
 
 // @import 'mixin';

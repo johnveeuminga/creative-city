@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import React from "react"
 import ShopHeaderSignInButton from "../ShopHeaderSignInButton"
+import Logo from "@/components/Logo"
 
 export default async function ShopNavbar() {
   return (
@@ -10,24 +11,18 @@ export default async function ShopNavbar() {
         <Link 
           className="navbar-brand"
           href={"/"}>
-          <Image 
-            className="logo"
-            width={100}
-            height={100}
-            src="/assets/images/bcc.png"
-            alt="logo" 
-          />
+            <Logo />
         </Link>
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
-              <Link className="nav-link" href="artworks">Arts & Crafts</Link>
+              <Link className="nav-link" href="/artworks">Arts & Crafts</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="auctions">Auctions</Link>
+              <Link className="nav-link" href="/auctions">Auctions</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" href="auctions">Blog</Link>
+              <Link className="nav-link" href="#">Blog</Link>
             </li>
           </ul>
           <div className="actions ms-3">

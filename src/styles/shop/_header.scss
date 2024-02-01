@@ -1,12 +1,12 @@
 .shop-header {
   padding-top: .25em;
   padding-bottom: .25em;
-  background-color: rgba(#fff, .05);
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 90;
   transition: .2s ease;
+  background-color: $body-bg;
 
   .nav-item {
     margin-right: 3em;
@@ -25,7 +25,7 @@
   }
 
   &.scrolled {
-    background-color: white !important;
+    // background-color: $ !important;
     .logo {
       width: 80px;
       height: 80px;

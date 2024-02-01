@@ -8,17 +8,23 @@ import styles from "@/styles/components/artwork-add-modal.module.scss"
 import { doRegisterArtworkToAuction } from "@/actions/auctions";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import DateTimePicker from "react-datetime-picker";
+import DatePicker from "../DatePicker";
+import { DateTime } from "luxon";
+import { Auction } from "@prisma/client";
 
 export default function AddArtworkModal({
   artworks,
-  auctionId
+  auction
 }: {
+  auction: Auction,
   artworks: ArtworkWithMedia[],
-  auctionId: number
 }) {
   const [added, setIsAdded] = useState(false)
   const [artworkIds, setArtworkIds] = useState<Array<number>>([])
   const [isPending, startTransition] = useTransition()
+  const [startDate, setStartDate] = useState<any>(null)
+  const [endDate, setEndDate] = useState<any>(null)
   const router = useRouter()
 
   const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +50,15 @@ export default function AddArtworkModal({
 
   const handleSubmit = () => {
     startTransition(async () => {
-      const res = await doRegisterArtworkToAuction(artworkIds, auctionId)
+      const res = await doRegisterArtworkToAuction(artworkIds, auction.id, {
+        startDate: DateTime.fromFormat(startDate, "yyyy-MM-dd HH:mm").toJSDate(),
+        endDate: DateTime.fromFormat(endDate, "yyyy-MM-dd HH:mm").toJSDate()
+      })
+
+      if(res.error) {
+        console.log(res.error)
+        return;
+      }
       setIsAdded(true)
     })
   }
@@ -67,7 +81,7 @@ export default function AddArtworkModal({
               { artworks.map(artwork => (
                 <div 
                   key={artwork.id}
-                  className={`${styles.artwork} py-2 px-3 d-flex align-items-center`}>
+                  className={`${styles.artwork} py-2 px-3 d-flex align-items-center mb-3`}>
                     <div className="check me-3">
                       <input 
                         onChange={e => handleCheckboxChange(e)}
@@ -94,7 +108,28 @@ export default function AddArtworkModal({
                     </div>
                 </div>
               ))}
-
+              {
+                // Move this to another step.
+                !! artworkIds.length &&
+                <>
+                  <div className="mb-3">
+                    <p className="mb-1"><small>Bidding Starts:</small></p>
+                    <DatePicker
+                      minDate={auction.start_date}
+                      maxDate={auction.end_date}
+                      onChange={(date) => setStartDate(date)}
+                      value={startDate} />
+                  </div>
+                  <div className="mb-3">
+                    <p><small>Bidding Ends:</small></p>
+                    <DatePicker
+                      minDate={startDate ?? auction.start_date}
+                      maxDate={auction.end_date}
+                      onChange={(date) => setEndDate(date)}
+                      value={endDate} />
+                  </div>
+                </>
+              }
               { 
                 !!! artworks.length &&
                   <p className="py-5">No art/craft registered for auction found. <Link className="fw-semibold" href={'/dashboard/artworks/create'}> Create One </Link></p> 

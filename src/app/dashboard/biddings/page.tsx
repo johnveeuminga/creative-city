@@ -2,6 +2,7 @@ import MoneyFormat from "@/components/MoneyFormat"
 import prisma from "@/lib/prisma"
 import { getServerSession } from "@/lib/server/auth"
 import { tr } from "@faker-js/faker"
+import Link from "next/link"
 import { redirect } from "next/navigation"
 
 export default async function BiddingsPage() {
@@ -20,7 +21,15 @@ export default async function BiddingsPage() {
     },
     include: {
       auction: true,
-      artwork: true,
+      artwork: {
+        include: {
+          purchase: {
+            where: {
+              userId: Number(user.id)
+            }
+          }
+        }
+      },
       bids: {
         where: {
           userId: Number(user.id)
@@ -45,7 +54,7 @@ export default async function BiddingsPage() {
                 <th>Art/Craft</th>  
                 <th>Auction</th>
                 <th>Your Highest Bid</th>
-                <th>Purchase Order</th>
+                <th>Invoice</th>
               </tr>
             </thead>
             <tbody>
@@ -62,6 +71,23 @@ export default async function BiddingsPage() {
                       }
                     </td>
                     <td>
+                      {
+                        !! bid.artwork.purchase.length && bid.artwork.purchase[0].paymentStatus !== "PAID" &&
+                          <Link href={bid.artwork.purchase[0].url ?? ""}>
+                            Pay Now
+                          </Link>
+                      }
+                      {
+                        !! bid.artwork.purchase.length && bid.artwork.purchase[0].paymentStatus === "PAID" &&
+                        <p className="mb-0">
+                          INVOICE PAID <br/>
+                          Ref ID: <strong>{ bid.artwork.purchase[0].xendItRefId }</strong>
+                        </p>
+                      }
+                      {
+                        ! bid.artwork.purchase.length &&
+                          <p className="mb-0">Generating Invoice</p>
+                      }
                     </td>
                   </tr>
                 ))
