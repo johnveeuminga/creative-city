@@ -1,4 +1,6 @@
 import { ArtworkBiddingBox } from "@/components/auctions/ArtworkBiddingBox"
+import ArtworkBiddingHistory from "@/components/auctions/ArtworkBiddingHistory"
+import ArtworkBiddingHistoryBox from "@/components/auctions/ArtworkBiddingHistoryBox"
 import { checkIfAuctionHasEnded } from "@/lib/client/auction-helpers"
 import prisma from "@/lib/prisma"
 import { getServerSession } from "@/lib/server/auth"
@@ -92,11 +94,12 @@ export default async function AuctionArtworkSinglePage({
               finished={ auctionHasEnded }
               artworkAuction={ auctionArtwork } />
             <div className="artwork-bidding-history-container my-3">
-              {/* <React.Suspense fallback={<p>Loading</p>}>
+              <React.Suspense fallback={<p>Loading</p>}>
                 <ArtworkBiddingHistory 
                   auctionId={auctionId}
-                  artwork={artwork} />
-              </React.Suspense> */}
+                  artwork={artwork}
+                />
+              </React.Suspense>
             </div>
           </div>
         </div>

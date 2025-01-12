@@ -25,7 +25,7 @@ export default function DatePicker({
     if(!flatpickrRef.current) {
       flatpickrRef.current = flatpickr(inputRef.current as Node, {
         altFormat: "Y-m-d h:i:S K",
-        enableTime: true,
+        enableTime: false,
         time_24hr: false,
         onChange: (selectedDates, dateStr, instance) => {
           setDate(dateStr);

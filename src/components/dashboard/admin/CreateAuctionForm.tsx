@@ -47,7 +47,7 @@ export default function CreateAuctionForm() {
     }
     startTransition(async () => {
       try {
-        await createAuction(params)
+        await createAuction(params);
 
         router.push("/dashboard/auctions");
       } catch(err) {
@@ -127,7 +127,8 @@ export default function CreateAuctionForm() {
                     }) => (
                       <Datepicker 
                         onChange={onChange}
-                        value={value}/>
+                        value={value}
+                      />
                     )}
                   />
                   <p className='m-2'>

@@ -17,7 +17,7 @@ export default async function MessagesPage({
     redirect("/401")
 
 
-  const res = await getUniqueMessagesOfUser('22')
+  const res = await getUniqueMessagesOfUser('1')
 
   const TimeAgo = (conversationTime: Date) => {
     const now = DateTime.now()

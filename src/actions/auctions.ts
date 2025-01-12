@@ -15,6 +15,8 @@ import { start } from 'repl';
 
 export async function createAuction(params: Prisma.AuctionCreateInput)  {
   try {
+    console.log(params);
+
     const auction = await prisma.auction.create({
       data: params
     })
@@ -22,6 +24,7 @@ export async function createAuction(params: Prisma.AuctionCreateInput)  {
     revalidatePath('/dashboard/auctions')
     return auction
   } catch(err) {
+    console.log(err);
     throw new Error("There was an error when creating the auction")
   }
 }

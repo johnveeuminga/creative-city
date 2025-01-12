@@ -44,7 +44,6 @@ export default async function Messages({ conversationUserId }: { conversationUse
 
   const [messages, conversation] = await Promise.all([messagePromise, userPromise])
 
-
   prisma.message.updateMany({
     where: {
       fromUserId: Number(conversationUserId),
@@ -78,7 +77,7 @@ export default async function Messages({ conversationUserId }: { conversationUse
       </div>
       <div className="card-footer bg-white">
         <MessageForm 
-          fromUserId={2}
+          fromUserId={1}
           toUserId={Number(conversationUserId)} />
       </div>
     </div>

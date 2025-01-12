@@ -7,8 +7,8 @@ export default function ShopBanner() {
       {/* <div className={`${styles.pattern} w-100`}></div> */}
       <div className="container">
         <div className="content w-50 mt-5">
-          <h1 className={`mb-5 fw-bold`}>Lorem Ipsum Dolor Sit Amet, Consectetur Adipiscing Elit.</h1>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ultrices non sem sed mattis. Donec finibus, ex suscipit efficitur facilisis, magna dui blandit urna, eget ultrices erat urna luctus neque. </p>
+          <h1 className={`mb-3 fw-bold`}>A City of creators, a Marketplace of Wonder.</h1>
+          <h4>Discover Exceptional Artists and One-of-a-Kind Creations.</h4>
         </div>
       </div>
       <div 

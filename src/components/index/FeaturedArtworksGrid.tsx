@@ -25,9 +25,13 @@ export default async function FeaturedArtworksGrid() {
             <div 
               key={artwork.id}
               className="col-md-3 align-items-stretch">
-              <ArtworkCard artwork={artwork}/>
+              <ArtworkCard artwork={artwork} />
             </div>
           ))
+        }
+        {
+          !artworks.length && 
+            <p className="py-5 text-center">No artworks</p>
         }
       </div>
     </div>

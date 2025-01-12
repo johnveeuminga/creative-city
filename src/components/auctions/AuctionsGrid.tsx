@@ -12,18 +12,21 @@ export default async function AuctionsGrid() {
   return(
     <div className="row">
       {
-        auctions.length && auctions.map(auction => (
+        auctions.length > 0 && auctions.map(auction => (
           <div 
             key={auction.id}
             className="col-md-4">
               <AuctionCard 
-                auction={auction}/>
+                auction={auction}
+              />
           </div>
         ))
       }
       {
-        ! auctions.length && 
-          <p>No auctions found.</p>
+        !auctions.length && 
+          <div className="col">
+            <p className="py-5 text-center">No auctions found.</p>
+          </div>
       }
     </div>
   )  

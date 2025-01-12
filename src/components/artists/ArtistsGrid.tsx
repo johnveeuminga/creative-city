@@ -7,7 +7,7 @@ export default async function ArtistsGrid() {
   return (
     <div className="row">
       {
-        artists.length && artists.map(artist => (
+        artists.length > 0 && artists.map(artist => (
           <div 
             key={artist.id} 
             className="col-md-3">
@@ -18,7 +18,7 @@ export default async function ArtistsGrid() {
       }
       {
         !artists.length && 
-          <p>No artists found.</p>
+          <p className="py-5 text-center">No artists found.</p>
       }
     </div>
   )

@@ -30,7 +30,6 @@ export async function decodeToken(token: string, tokenUse: "id" | "access" = "id
   try {
     const payload = await verifier.verify(token) as JWTDecodeResponse;
 
-
     return payload
   } catch(err) {
     console.log(err);

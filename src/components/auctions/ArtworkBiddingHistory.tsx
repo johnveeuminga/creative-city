@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma"
 import { ArtworkWithBids } from "@/types/types"
 import React from "react"
 import ArtworkBiddingHistoryBox from "./ArtworkBiddingHistoryBox"
+import { Artwork } from "@prisma/client"
 
 
 export default async function ArtworkBiddingHistory({
@@ -10,7 +11,7 @@ export default async function ArtworkBiddingHistory({
   artwork,
 }: {
   auctionId: string,
-  artwork: ArtworkWithBids,
+  artwork: Artwork,
 }) {
   const bids = await prisma.bid.findMany({
     where: {

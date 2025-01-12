@@ -9,7 +9,7 @@ export default async function AuctionsPage() {
         <div className="header">
           <h2>Auctions</h2> 
         </div>
-        <section className="auctions-section py-5 d-flex ">
+        <section className="auctions-section py-5 flex ">
           {/* <div className="auctions-sidebar">
             <div className="auctions-aggregation">
               <p>1,083 Auctions</p>

@@ -27,6 +27,10 @@ export default async function LiveAuctionsGrid() {
             </div>
           ))
         }
+        {
+          !auctions.length && 
+            <p className="py-5 text-center">No auctions found.</p>
+        }
       </div>
     </div>
   )

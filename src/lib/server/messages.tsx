@@ -42,7 +42,7 @@ export async function getUniqueMessagesOfUser(id: string) {
       )
     INNER JOIN 
       User u ON u.id = c.conversationUserId
-    INNER JOIN
+    LEFT JOIN
       Artist a on a.userId = c.conversationUserId
     WHERE
       t.createdAt = c.latestMessageCreatedAt
